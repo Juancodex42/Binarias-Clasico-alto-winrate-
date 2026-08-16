@@ -1,0 +1,27 @@
+=== TEST 2B: Barbell Campaign Reset with Active In-Flight Trade ===
+
+--- Trades Chronological Order ---
+Trade 1: Pair=EURUSD, Entry=1767348000, Exit=1767434400, Result=WIN, Bet=100.0, PnL=85.0
+Trade 2: Pair=EURUSD, Entry=1767520800, Exit=1767607200, Result=WIN, Bet=185.0, PnL=157.25
+Trade 3: Pair=BTCUSDT, Entry=1767348000, Exit=1767693600, Result=WIN, Bet=100.0, PnL=85.0
+
+--- Equity Curve ---
+Time=1767348000, Equity=1000.0
+Time=1767434400, Equity=1085.0
+Time=1767607200, Equity=1256.475
+Time=1767693600, Equity=1370.7
+
+--- Summary ---
+Total trades: 3
+Wins: 3, Losses: 0, Net PnL: 327.25
+Final Equity: 1370.7
+
+EURUSD Trade 1 (Exit Day 3): Bet=100.0, PnL=85.0
+EURUSD Trade 2 (Exit Day 5 - Reset Trigger): Bet=185.0, PnL=157.25
+BTCUSDT Trade (Exit Day 6 - In Flight): Bet=100.0, PnL=85.0
+
+Sum of all trade PnLs: 327.2500
+Equity gain (Final Equity - 1000.0): 370.7000
+Accounting Discrepancy (Sum of PnLs vs Equity Gain): -43.4500
+
+[FAIL] Discrepancy detected! In-flight trade PnL was wiped out during campaign reset.

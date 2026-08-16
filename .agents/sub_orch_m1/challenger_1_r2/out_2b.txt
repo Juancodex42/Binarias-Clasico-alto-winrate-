@@ -1,0 +1,19 @@
+=== TEST 2B: Barbell Campaign Reset with Active In-Flight Trade ===
+
+--- Trades Chronological Order ---
+Trade 1: Pair=EURUSD, Entry=2000, Exit=3000, Result=WIN, Bet=100.0, PnL=85.0
+Trade 2: Pair=BTCUSDT, Entry=2000, Exit=10000, Result=WIN, Bet=100.0, PnL=85.0
+
+--- Equity Curve ---
+Time=2000, Equity=1000.0
+Time=3000, Equity=1085.0
+Time=10000, Equity=1170.0
+
+--- Summary ---
+Total trades: 2
+Wins: 2, Losses: 0, Net PnL: 170.0
+Final Equity: 1170.0
+
+BTCUSDT in-flight trade exit time: 10000
+BTCUSDT trade PnL recorded in trade list: 85.0
+EURUSD trade 1 PnL: 85.0

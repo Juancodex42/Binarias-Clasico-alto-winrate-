@@ -1,0 +1,676 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-7.4.3, pluggy-1.6.0 -- C:\Users\juanc\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\juanc\Desktop\prueba
+configfile: pytest.ini
+plugins: anyio-3.7.1, locust-2.42.6, asyncio-0.21.1, cov-4.1.0
+asyncio: mode=Mode.STRICT
+collecting ... collected 264 items
+
+tests/test_conftest_integrity.py::test_synthetic_ohlcv_df_fixture PASSED [  0%]
+tests/test_conftest_integrity.py::test_multi_asset_ohlcv_dict_fixture PASSED [  0%]
+tests/test_conftest_integrity.py::test_base_signals_series_fixture PASSED [  1%]
+tests/test_conftest_integrity.py::test_boundary_helpers PASSED           [  1%]
+tests/test_milestone3_features.py::TestMilestone3Features::test_monte_carlo_vectorized_2d_performance PASSED [  1%]
+tests/test_milestone3_features.py::TestMilestone3Features::test_multi_dimensional_search_space_sampling PASSED [  2%]
+tests/test_milestone3_features.py::TestMilestone3Features::test_optuna_strategy_optimizer_execution PASSED [  2%]
+tests/test_milestone3_features.py::TestMilestone3Features::test_parallel_optimizer_joblib PASSED [  3%]
+tests/test_milestone3_features.py::TestMilestone3Features::test_vectorized_binary_simulator_parity FAILED [  3%]
+tests/test_milestone3_features.py::TestMilestone3Features::test_walk_forward_engine_rolling_optuna FAILED [  3%]
+tests/test_milestone3_features.py::TestMilestone3Features::test_wilson_lower_bound_calculation PASSED [  4%]
+tests/test_simulator_integrity.py::TestSimulatorIntegrity::test_calc_hurst_nan_origin_zero_and_near_zero_std PASSED [  4%]
+tests/test_simulator_integrity.py::TestSimulatorIntegrity::test_cusum_monitor_bounds_and_recovery PASSED [  4%]
+tests/test_simulator_integrity.py::TestSimulatorIntegrity::test_frac_diff_fixed_vectorized PASSED [  5%]
+tests/test_simulator_integrity.py::TestSimulatorIntegrity::test_meta_filter_rolling_median PASSED [  5%]
+tests/test_simulator_integrity.py::TestSimulatorIntegrity::test_meta_labeler_timestamp_parsing PASSED [  6%]
+tests/test_simulator_integrity.py::TestSimulatorIntegrity::test_multi_asset_barbell_reset_in_flight_trade_accounting PASSED [  6%]
+tests/test_simulator_integrity.py::TestSimulatorIntegrity::test_multi_asset_barbell_streak_reset_no_corruption PASSED [  6%]
+tests/test_simulator_integrity.py::TestSimulatorIntegrity::test_multi_asset_tie_rule_loss PASSED [  7%]
+tests/test_simulator_integrity.py::TestSimulatorIntegrity::test_multi_asset_tie_rule_return_stake PASSED [  7%]
+tests/test_simulator_integrity.py::TestSimulatorIntegrity::test_regime_detector_no_lookahead PASSED [  7%]
+tests/test_simulator_integrity.py::TestSimulatorIntegrity::test_walk_forward_engine_zero_oos_trades_not_stable PASSED [  8%]
+tests/test_tier1_feature_coverage.py::TestFeature01_BinarySimulatorTieRule::test_f01_single_asset_tie_return_stake PASSED [  8%]
+tests/test_tier1_feature_coverage.py::TestFeature01_BinarySimulatorTieRule::test_f01_single_asset_tie_loss PASSED [  9%]
+tests/test_tier1_feature_coverage.py::TestFeature01_BinarySimulatorTieRule::test_f01_multi_asset_tie_return_stake PASSED [  9%]
+tests/test_tier1_feature_coverage.py::TestFeature01_BinarySimulatorTieRule::test_f01_multi_asset_tie_loss PASSED [  9%]
+tests/test_tier1_feature_coverage.py::TestFeature01_BinarySimulatorTieRule::test_f01_win_rate_effective_tie_exclusion PASSED [ 10%]
+tests/test_tier1_feature_coverage.py::TestFeature02_MultiAssetBarbellStateTracking::test_f02_barbell_mode_initialization PASSED [ 10%]
+tests/test_tier1_feature_coverage.py::TestFeature02_MultiAssetBarbellStateTracking::test_f02_consecutive_wins_capital_compounding PASSED [ 10%]
+tests/test_tier1_feature_coverage.py::TestFeature02_MultiAssetBarbellStateTracking::test_f02_bullet_reset_on_loss PASSED [ 11%]
+tests/test_tier1_feature_coverage.py::TestFeature02_MultiAssetBarbellStateTracking::test_f02_all_bullets_ruined_replenishment PASSED [ 11%]
+tests/test_tier1_feature_coverage.py::TestFeature02_MultiAssetBarbellStateTracking::test_f02_bullet_priority_selection PASSED [ 12%]
+tests/test_tier1_feature_coverage.py::TestFeature03_FracDiffFFTAcceleration::test_f03_frac_diff_fixed_output_shape PASSED [ 12%]
+tests/test_tier1_feature_coverage.py::TestFeature03_FracDiffFFTAcceleration::test_f03_frac_diff_d_zero PASSED [ 12%]
+tests/test_tier1_feature_coverage.py::TestFeature03_FracDiffFFTAcceleration::test_f03_frac_diff_d_one PASSED [ 13%]
+tests/test_tier1_feature_coverage.py::TestFeature03_FracDiffFFTAcceleration::test_f03_frac_diff_fft_performance PASSED [ 13%]
+tests/test_tier1_feature_coverage.py::TestFeature03_FracDiffFFTAcceleration::test_f03_frac_diff_threshold_window_scaling PASSED [ 14%]
+tests/test_tier1_feature_coverage.py::TestFeature04_RegimeDetectorCUSUM::test_f04_regime_detector_fit_and_predict PASSED [ 14%]
+tests/test_tier1_feature_coverage.py::TestFeature04_RegimeDetectorCUSUM::test_f04_regime_detector_should_trade PASSED [ 14%]
+tests/test_tier1_feature_coverage.py::TestFeature04_RegimeDetectorCUSUM::test_f04_cusum_continue_state PASSED [ 15%]
+tests/test_tier1_feature_coverage.py::TestFeature04_RegimeDetectorCUSUM::test_f04_cusum_pause_trigger PASSED [ 15%]
+tests/test_tier1_feature_coverage.py::TestFeature04_RegimeDetectorCUSUM::test_f04_cusum_memory_bounding PASSED [ 15%]
+tests/test_tier1_feature_coverage.py::TestFeature05_MetaLabelerTimestampLeakage::test_f05_metalabeler_ms_timestamp_parsing FAILED [ 16%]
+tests/test_tier1_feature_coverage.py::TestFeature05_MetaLabelerTimestampLeakage::test_f05_metalabeler_ns_s_timestamp_parsing PASSED [ 16%]
+tests/test_tier1_feature_coverage.py::TestFeature05_MetaLabelerTimestampLeakage::test_f05_metalabeler_fit_and_filter PASSED [ 17%]
+tests/test_tier1_feature_coverage.py::TestFeature05_MetaLabelerTimestampLeakage::test_f05_metafilter_rolling_median_natr PASSED [ 17%]
+tests/test_tier1_feature_coverage.py::TestFeature05_MetaLabelerTimestampLeakage::test_f05_metafilter_predict_proba_bounds PASSED [ 17%]
+tests/test_tier1_feature_coverage.py::TestFeature06_WalkForwardEfficiencyMetric::test_f06_wfa_initialization PASSED [ 18%]
+tests/test_tier1_feature_coverage.py::TestFeature06_WalkForwardEfficiencyMetric::test_f06_wfa_run_on_synthetic_data PASSED [ 18%]
+tests/test_tier1_feature_coverage.py::TestFeature06_WalkForwardEfficiencyMetric::test_f06_wfa_stable_windows_counting PASSED [ 18%]
+tests/test_tier1_feature_coverage.py::TestFeature06_WalkForwardEfficiencyMetric::test_f06_wfa_zero_oos_trades_handling PASSED [ 19%]
+tests/test_tier1_feature_coverage.py::TestFeature06_WalkForwardEfficiencyMetric::test_f06_wfa_short_dataset_fallback PASSED [ 19%]
+tests/test_tier1_feature_coverage.py::TestFeature07_TargetExpiryLabelAlignment::test_f07_create_labels_1_candle_shift_call PASSED [ 20%]
+tests/test_tier1_feature_coverage.py::TestFeature07_TargetExpiryLabelAlignment::test_f07_create_labels_1_candle_shift_put PASSED [ 20%]
+tests/test_tier1_feature_coverage.py::TestFeature07_TargetExpiryLabelAlignment::test_f07_multi_candle_expiry_alignment PASSED [ 20%]
+tests/test_tier1_feature_coverage.py::TestFeature07_TargetExpiryLabelAlignment::test_f07_label_dataframe_end_boundary PASSED [ 21%]
+tests/test_tier1_feature_coverage.py::TestFeature07_TargetExpiryLabelAlignment::test_f07_label_simulator_outcome_matching PASSED [ 21%]
+tests/test_tier1_feature_coverage.py::TestFeature08_FeatureScalingThresholdLeakage::test_f08_dynamic_regime_adapter_no_lookahead PASSED [ 21%]
+tests/test_tier1_feature_coverage.py::TestFeature08_FeatureScalingThresholdLeakage::test_f08_dynamic_regime_adapter_adapt_params PASSED [ 22%]
+tests/test_tier1_feature_coverage.py::TestFeature08_FeatureScalingThresholdLeakage::test_f08_volatility_squeeze_features_causality PASSED [ 22%]
+tests/test_tier1_feature_coverage.py::TestFeature08_FeatureScalingThresholdLeakage::test_f08_quantile_clipping_isolation PASSED [ 23%]
+tests/test_tier1_feature_coverage.py::TestFeature08_FeatureScalingThresholdLeakage::test_f08_rolling_volatility_squeeze_calculation PASSED [ 23%]
+tests/test_tier1_feature_coverage.py::TestFeature09_HMMForwardOnlyProbability::test_f09_hmm_observation_matrix_no_leakage PASSED [ 23%]
+tests/test_tier1_feature_coverage.py::TestFeature09_HMMForwardOnlyProbability::test_f09_hmm_get_current_state PASSED [ 24%]
+tests/test_tier1_feature_coverage.py::TestFeature09_HMMForwardOnlyProbability::test_f09_hmm_empty_df_handling PASSED [ 24%]
+tests/test_tier1_feature_coverage.py::TestFeature09_HMMForwardOnlyProbability::test_f09_hmm_regime_report_contents PASSED [ 25%]
+tests/test_tier1_feature_coverage.py::TestFeature09_HMMForwardOnlyProbability::test_f09_hmm_performance_mapping_breakeven PASSED [ 25%]
+tests/test_tier1_feature_coverage.py::TestFeature10_PurgedCVIntegration::test_f10_purged_cv_split_count PASSED [ 25%]
+tests/test_tier1_feature_coverage.py::TestFeature10_PurgedCVIntegration::test_f10_purged_cv_indices_structure PASSED [ 26%]
+tests/test_tier1_feature_coverage.py::TestFeature10_PurgedCVIntegration::test_f10_purge_window_exclusion PASSED [ 26%]
+tests/test_tier1_feature_coverage.py::TestFeature10_PurgedCVIntegration::test_f10_embargo_window_exclusion PASSED [ 26%]
+tests/test_tier1_feature_coverage.py::TestFeature10_PurgedCVIntegration::test_f10_no_train_test_overlap PASSED [ 27%]
+tests/test_tier1_feature_coverage.py::TestFeature11_CapitalStateSplitIsolation::test_f11_simulator_is_oos_capital_independence PASSED [ 27%]
+tests/test_tier1_feature_coverage.py::TestFeature11_CapitalStateSplitIsolation::test_f11_multi_asset_capital_split_isolation PASSED [ 28%]
+tests/test_tier1_feature_coverage.py::TestFeature11_CapitalStateSplitIsolation::test_f11_reinvestment_mode_isolation PASSED [ 28%]
+tests/test_tier1_feature_coverage.py::TestFeature11_CapitalStateSplitIsolation::test_f11_equity_curve_starting_point PASSED [ 28%]
+tests/test_tier1_feature_coverage.py::TestFeature11_CapitalStateSplitIsolation::test_f11_multiple_fold_capital_reset PASSED [ 29%]
+tests/test_tier1_feature_coverage.py::TestFeature12_OptunaFrameworkIntegration::test_f12_capital_optimizer_find_optimal_n PASSED [ 29%]
+tests/test_tier1_feature_coverage.py::TestFeature12_OptunaFrameworkIntegration::test_f12_capital_optimizer_markov_chain PASSED [ 29%]
+tests/test_tier1_feature_coverage.py::TestFeature12_OptunaFrameworkIntegration::test_f12_monte_carlo_simulation PASSED [ 30%]
+tests/test_tier1_feature_coverage.py::TestFeature12_OptunaFrameworkIntegration::test_f12_streak_plan_calculation PASSED [ 30%]
+tests/test_tier1_feature_coverage.py::TestFeature12_OptunaFrameworkIntegration::test_f12_daily_confluence_optimization PASSED [ 31%]
+tests/test_tier1_feature_coverage.py::TestFeature13_MultiDimensionalSearchSpace::test_f13_search_space_structure PASSED [ 31%]
+tests/test_tier1_feature_coverage.py::TestFeature13_MultiDimensionalSearchSpace::test_f13_expiration_range_coverage PASSED [ 31%]
+tests/test_tier1_feature_coverage.py::TestFeature13_MultiDimensionalSearchSpace::test_f13_session_hours_filter_space PASSED [ 32%]
+tests/test_tier1_feature_coverage.py::TestFeature13_MultiDimensionalSearchSpace::test_f13_indicator_parameter_grid PASSED [ 32%]
+tests/test_tier1_feature_coverage.py::TestFeature13_MultiDimensionalSearchSpace::test_f13_grid_combination_count PASSED [ 32%]
+tests/test_tier1_feature_coverage.py::TestFeature14_TrueWalkForwardOptimization::test_f14_parameter_surface_analyzer PASSED [ 33%]
+tests/test_tier1_feature_coverage.py::TestFeature14_TrueWalkForwardOptimization::test_f14_rolling_is_oos_window_generation PASSED [ 33%]
+tests/test_tier1_feature_coverage.py::TestFeature14_TrueWalkForwardOptimization::test_f14_oos_evaluation_with_is_best_params PASSED [ 34%]
+tests/test_tier1_feature_coverage.py::TestFeature14_TrueWalkForwardOptimization::test_f14_walk_forward_efficiency_ratio PASSED [ 34%]
+tests/test_tier1_feature_coverage.py::TestFeature14_TrueWalkForwardOptimization::test_f14_neighbor_rate_variation PASSED [ 34%]
+tests/test_tier1_feature_coverage.py::TestFeature15_BacktestEngineVectorization::test_f15_vectorized_indicator_computation PASSED [ 35%]
+tests/test_tier1_feature_coverage.py::TestFeature15_BacktestEngineVectorization::test_f15_vectorized_trade_outcome_calculation PASSED [ 35%]
+tests/test_tier1_feature_coverage.py::TestFeature15_BacktestEngineVectorization::test_f15_discrete_event_sorting_efficiency PASSED [ 35%]
+tests/test_tier1_feature_coverage.py::TestFeature15_BacktestEngineVectorization::test_f15_vectorized_volatility_squeeze_signals PASSED [ 36%]
+tests/test_tier1_feature_coverage.py::TestFeature15_BacktestEngineVectorization::test_f15_high_throughput_batch_simulation PASSED [ 36%]
+tests/test_tier1_feature_coverage.py::TestFeature16_FormalTestsDirectoryPytestIni::test_f16_pytest_ini_content_verification PASSED [ 37%]
+tests/test_tier1_feature_coverage.py::TestFeature16_FormalTestsDirectoryPytestIni::test_f16_test_discovery_exclusion PASSED [ 37%]
+tests/test_tier1_feature_coverage.py::TestFeature16_FormalTestsDirectoryPytestIni::test_f16_conftest_fixtures_loadable PASSED [ 37%]
+tests/test_tier1_feature_coverage.py::TestFeature16_FormalTestsDirectoryPytestIni::test_f16_conftest_boundary_generators PASSED [ 38%]
+tests/test_tier1_feature_coverage.py::TestFeature16_FormalTestsDirectoryPytestIni::test_f16_test_module_importability PASSED [ 38%]
+tests/test_tier1_feature_coverage.py::TestFeature17_IntegrityCausalityTestSuite::test_f17_zero_lookahead_entry_price PASSED [ 39%]
+tests/test_tier1_feature_coverage.py::TestFeature17_IntegrityCausalityTestSuite::test_f17_zero_lookahead_exit_price PASSED [ 39%]
+tests/test_tier1_feature_coverage.py::TestFeature17_IntegrityCausalityTestSuite::test_f17_indicator_shift_invariance FAILED [ 39%]
+tests/test_tier1_feature_coverage.py::TestFeature17_IntegrityCausalityTestSuite::test_f17_rolling_window_causality PASSED [ 40%]
+tests/test_tier1_feature_coverage.py::TestFeature17_IntegrityCausalityTestSuite::test_f17_meta_filter_causality PASSED [ 40%]
+tests/test_tier1_feature_coverage.py::TestFeature18_ExecutableVerificationScript::test_f18_verification_report_schema PASSED [ 40%]
+tests/test_tier1_feature_coverage.py::TestFeature18_ExecutableVerificationScript::test_f18_wilson_lower_bound_math PASSED [ 41%]
+tests/test_tier1_feature_coverage.py::TestFeature18_ExecutableVerificationScript::test_f18_expected_value_positive_assertion PASSED [ 41%]
+tests/test_tier1_feature_coverage.py::TestFeature18_ExecutableVerificationScript::test_f18_win_rate_threshold_assertion PASSED [ 42%]
+tests/test_tier1_feature_coverage.py::TestFeature18_ExecutableVerificationScript::test_f18_zero_causality_attestation PASSED [ 42%]
+tests/test_tier2_boundary_corner_cases.py::test_f01_tie_rule_empty_signals_and_df PASSED [ 42%]
+tests/test_tier2_boundary_corner_cases.py::test_f01_tie_rule_zero_bet_amount PASSED [ 43%]
+tests/test_tier2_boundary_corner_cases.py::test_f01_tie_rule_100_percent_tie_return_stake PASSED [ 43%]
+tests/test_tier2_boundary_corner_cases.py::test_f01_tie_rule_100_percent_tie_loss PASSED [ 43%]
+tests/test_tier2_boundary_corner_cases.py::test_f01_tie_rule_multi_asset_return_stake_vs_loss PASSED [ 44%]
+tests/test_tier2_boundary_corner_cases.py::test_f01_tie_rule_invalid_parameter_fallback PASSED [ 44%]
+tests/test_tier2_boundary_corner_cases.py::test_f02_barbell_zero_capital_input PASSED [ 45%]
+tests/test_tier2_boundary_corner_cases.py::test_f02_barbell_single_asset_universe PASSED [ 45%]
+tests/test_tier2_boundary_corner_cases.py::test_f02_barbell_empty_universe PASSED [ 45%]
+tests/test_tier2_boundary_corner_cases.py::test_f02_barbell_100_percent_loss_streak_resets PASSED [ 46%]
+tests/test_tier2_boundary_corner_cases.py::test_f02_barbell_campaign_completion_and_bullet_reset PASSED [ 46%]
+tests/test_tier2_boundary_corner_cases.py::test_f02_barbell_overlapping_events_and_bullet_allocation PASSED [ 46%]
+tests/test_tier2_boundary_corner_cases.py::test_f03_fracdiff_d_equals_zero PASSED [ 47%]
+tests/test_tier2_boundary_corner_cases.py::test_f03_fracdiff_d_equals_one PASSED [ 47%]
+tests/test_tier2_boundary_corner_cases.py::test_f03_fracdiff_threshold_extremes PASSED [ 48%]
+tests/test_tier2_boundary_corner_cases.py::test_f03_fracdiff_empty_series PASSED [ 48%]
+tests/test_tier2_boundary_corner_cases.py::test_f03_fracdiff_constant_price_series PASSED [ 48%]
+tests/test_tier2_boundary_corner_cases.py::test_f03_fracdiff_nan_input_handling PASSED [ 49%]
+tests/test_tier2_boundary_corner_cases.py::test_f04_cusum_zero_variance_inputs PASSED [ 49%]
+tests/test_tier2_boundary_corner_cases.py::test_f04_cusum_max_memory_stress_test PASSED [ 50%]
+tests/test_tier2_boundary_corner_cases.py::test_f04_cusum_pause_resume_state_machine PASSED [ 50%]
+tests/test_tier2_boundary_corner_cases.py::test_f04_regime_infinite_returns_and_nan PASSED [ 50%]
+tests/test_tier2_boundary_corner_cases.py::test_f04_regime_unfitted_insufficient_data PASSED [ 51%]
+tests/test_tier2_boundary_corner_cases.py::test_f04_cusum_reset_clears_state PASSED [ 51%]
+tests/test_tier2_boundary_corner_cases.py::test_f05_metalabeler_nanosecond_microsecond_timestamps PASSED [ 51%]
+tests/test_tier2_boundary_corner_cases.py::test_f05_metalabeler_empty_signals_and_results PASSED [ 52%]
+tests/test_tier2_boundary_corner_cases.py::test_f05_metalabeler_short_dataframe_rolling_windows FAILED [ 52%]
+tests/test_tier2_boundary_corner_cases.py::test_f05_metalabeler_unfitted_passthrough PASSED [ 53%]
+tests/test_tier2_boundary_corner_cases.py::test_f05_metalabeler_single_class_target_prevention PASSED [ 53%]
+tests/test_tier2_boundary_corner_cases.py::test_f05_metalabeler_missing_feature_columns_in_predict PASSED [ 53%]
+tests/test_tier2_boundary_corner_cases.py::test_f06_walkforward_zero_trade_windows PASSED [ 54%]
+tests/test_tier2_boundary_corner_cases.py::test_f06_walkforward_single_window_n1 PASSED [ 54%]
+tests/test_tier2_boundary_corner_cases.py::test_f06_walkforward_100_percent_loss_windows PASSED [ 54%]
+tests/test_tier2_boundary_corner_cases.py::test_f06_walkforward_division_by_zero_protection PASSED [ 55%]
+tests/test_tier2_boundary_corner_cases.py::test_f06_walkforward_short_dataframe_boundary PASSED [ 55%]
+tests/test_tier2_boundary_corner_cases.py::test_f06_walkforward_direction_filters FAILED [ 56%]
+tests/test_tier2_boundary_corner_cases.py::test_f07_expiry_labels_zero_expiry_candles PASSED [ 56%]
+tests/test_tier2_boundary_corner_cases.py::test_f07_expiry_labels_max_expiry_exceeding_df_length PASSED [ 56%]
+tests/test_tier2_boundary_corner_cases.py::test_f07_expiry_labels_end_of_series_boundary_shift PASSED [ 57%]
+tests/test_tier2_boundary_corner_cases.py::test_f07_expiry_labels_missing_ohlc_values PASSED [ 57%]
+tests/test_tier2_boundary_corner_cases.py::test_f07_expiry_labels_flat_price_ties PASSED [ 57%]
+tests/test_tier2_boundary_corner_cases.py::test_f07_expiry_labels_signals_with_no_call_put PASSED [ 58%]
+tests/test_tier2_boundary_corner_cases.py::test_f08_feature_scaling_constant_flat_prices PASSED [ 58%]
+tests/test_tier2_boundary_corner_cases.py::test_f08_feature_scaling_extreme_outliers PASSED [ 59%]
+tests/test_tier2_boundary_corner_cases.py::test_f08_feature_scaling_zero_volatility_squeeze PASSED [ 59%]
+tests/test_tier2_boundary_corner_cases.py::test_f08_feature_scaling_short_dataframe_regime_detect PASSED [ 59%]
+tests/test_tier2_boundary_corner_cases.py::test_f08_meta_filter_missing_natr_column PASSED [ 60%]
+tests/test_tier2_boundary_corner_cases.py::test_f08_feature_scaling_adapt_params PASSED [ 60%]
+tests/test_tier2_boundary_corner_cases.py::test_f09_hmm_single_state_configuration PASSED [ 60%]
+tests/test_tier2_boundary_corner_cases.py::test_f09_hmm_uniform_probabilities_constant_input PASSED [ 61%]
+tests/test_tier2_boundary_corner_cases.py::test_f09_hmm_single_row_dataframe FAILED [ 61%]
+tests/test_tier2_boundary_corner_cases.py::test_f09_hmm_unmapped_performance_states PASSED [ 62%]
+tests/test_tier2_boundary_corner_cases.py::test_f09_hmm_get_regime_report_unfitted PASSED [ 62%]
+tests/test_tier2_boundary_corner_cases.py::test_f09_hmm_should_trade_passthrough_unfitted PASSED [ 62%]
+tests/test_tier2_boundary_corner_cases.py::test_f10_purged_cv_samples_less_than_splits PASSED [ 63%]
+tests/test_tier2_boundary_corner_cases.py::test_f10_purged_cv_embargo_larger_than_test_set PASSED [ 63%]
+tests/test_tier2_boundary_corner_cases.py::test_f10_purged_cv_expiry_larger_than_test_size PASSED [ 64%]
+tests/test_tier2_boundary_corner_cases.py::test_f10_purged_cv_single_split PASSED [ 64%]
+tests/test_tier2_boundary_corner_cases.py::test_f10_purged_cv_empty_dataset PASSED [ 64%]
+tests/test_tier2_boundary_corner_cases.py::test_f10_purged_cv_get_n_splits PASSED [ 65%]
+tests/test_tier2_boundary_corner_cases.py::test_f11_capital_split_negative_ev_rejection PASSED [ 65%]
+tests/test_tier2_boundary_corner_cases.py::test_f11_capital_split_zero_winrate_extremes PASSED [ 65%]
+tests/test_tier2_boundary_corner_cases.py::test_f11_capital_split_small_sample_wilson_bound PASSED [ 66%]
+tests/test_tier2_boundary_corner_cases.py::test_f11_capital_split_markov_zero_transition PASSED [ 66%]
+tests/test_tier2_boundary_corner_cases.py::test_f11_capital_split_monte_carlo_zero_risk_capital PASSED [ 67%]
+tests/test_tier2_boundary_corner_cases.py::test_f11_capital_split_binomial_sf_boundaries PASSED [ 67%]
+tests/test_tier2_boundary_corner_cases.py::test_f12_optuna_single_trial_evaluation PASSED [ 67%]
+tests/test_tier2_boundary_corner_cases.py::test_f12_optuna_invalid_hyperparameter_bounds PASSED [ 68%]
+tests/test_tier2_boundary_corner_cases.py::test_f12_optuna_immediate_pruning_zero_trades PASSED [ 68%]
+tests/test_tier2_boundary_corner_cases.py::test_f12_optuna_empty_parameter_dictionary PASSED [ 68%]
+tests/test_tier2_boundary_corner_cases.py::test_f12_optuna_trial_failure_exception_handling PASSED [ 69%]
+tests/test_tier2_boundary_corner_cases.py::test_f12_parameter_surface_analyzer_short_df PASSED [ 69%]
+tests/test_tier2_boundary_corner_cases.py::test_f13_search_space_single_point PASSED [ 70%]
+tests/test_tier2_boundary_corner_cases.py::test_f13_search_space_extreme_expirations_1_to_12 PASSED [ 70%]
+tests/test_tier2_boundary_corner_cases.py::test_f13_search_space_empty_grid_dicts PASSED [ 70%]
+tests/test_tier2_boundary_corner_cases.py::test_f13_search_space_single_row_dataset PASSED [ 71%]
+tests/test_tier2_boundary_corner_cases.py::test_f13_search_space_incompatible_indicator_periods PASSED [ 71%]
+tests/test_tier2_boundary_corner_cases.py::test_f13_search_space_combination_generator PASSED [ 71%]
+tests/test_tier2_boundary_corner_cases.py::test_f14_walkforward_window_size_larger_than_dataset PASSED [ 72%]
+tests/test_tier2_boundary_corner_cases.py::test_f14_walkforward_extreme_train_ratios PASSED [ 72%]
+tests/test_tier2_boundary_corner_cases.py::test_f14_walkforward_single_fold_n1 PASSED [ 73%]
+tests/test_tier2_boundary_corner_cases.py::test_f14_walkforward_output_dictionary_keys PASSED [ 73%]
+tests/test_tier2_boundary_corner_cases.py::test_f14_walkforward_invalid_strategy_object PASSED [ 73%]
+tests/test_tier2_boundary_corner_cases.py::test_f14_walkforward_step_size_boundary PASSED [ 74%]
+tests/test_tier2_boundary_corner_cases.py::test_f15_vectorized_engine_empty_dataframe PASSED [ 74%]
+tests/test_tier2_boundary_corner_cases.py::test_f15_vectorized_engine_one_row_dataframe PASSED [ 75%]
+tests/test_tier2_boundary_corner_cases.py::test_f15_vectorized_engine_all_nan_signal_array PASSED [ 75%]
+tests/test_tier2_boundary_corner_cases.py::test_f15_vectorized_engine_all_hold_signal_array PASSED [ 75%]
+tests/test_tier2_boundary_corner_cases.py::test_f15_vectorized_engine_multi_asset_all_nan_signals PASSED [ 76%]
+tests/test_tier2_boundary_corner_cases.py::test_f15_vectorized_engine_nan_in_ohlcv_columns PASSED [ 76%]
+tests/test_tier2_boundary_corner_cases.py::test_f16_test_harness_missing_test_files PASSED [ 76%]
+tests/test_tier2_boundary_corner_cases.py::test_f16_test_harness_empty_test_function_execution PASSED [ 77%]
+tests/test_tier2_boundary_corner_cases.py::test_f16_test_harness_synthetic_df_extreme_volatility PASSED [ 77%]
+tests/test_tier2_boundary_corner_cases.py::test_f16_test_harness_synthetic_df_nan_ratio_100_percent PASSED [ 78%]
+tests/test_tier2_boundary_corner_cases.py::test_f16_test_harness_synthetic_df_custom_date_freq PASSED [ 78%]
+tests/test_tier2_boundary_corner_cases.py::test_f16_test_harness_boundary_helpers_integrity PASSED [ 78%]
+tests/test_tier2_boundary_corner_cases.py::test_f17_causality_subsecond_lookahead_attempts PASSED [ 79%]
+tests/test_tier2_boundary_corner_cases.py::test_f17_causality_synthetic_lookahead_detection PASSED [ 79%]
+tests/test_tier2_boundary_corner_cases.py::test_f17_causality_shift_lag_feature_leakage_check PASSED [ 79%]
+tests/test_tier2_boundary_corner_cases.py::test_f17_causality_monotonic_timestamp_validation PASSED [ 80%]
+tests/test_tier2_boundary_corner_cases.py::test_f17_causality_timestamp_gap_handling PASSED [ 80%]
+tests/test_tier2_boundary_corner_cases.py::test_f17_causality_slippage_direction_application PASSED [ 81%]
+tests/test_tier2_boundary_corner_cases.py::test_f18_verification_missing_inputs PASSED [ 81%]
+tests/test_tier2_boundary_corner_cases.py::test_f18_verification_exception_handling PASSED [ 81%]
+tests/test_tier2_boundary_corner_cases.py::test_f18_verification_strict_threshold_edge_conditions_winrate_65 PASSED [ 82%]
+tests/test_tier2_boundary_corner_cases.py::test_f18_verification_strict_threshold_edge_conditions_ev_zero PASSED [ 82%]
+tests/test_tier2_boundary_corner_cases.py::test_f18_verification_wilson_lower_bound PASSED [ 82%]
+tests/test_tier2_boundary_corner_cases.py::test_f18_verification_summary_schema_attestation PASSED [ 83%]
+tests/test_tier3_cross_feature_combinations.py::test_fracdiff_hmm_metalabeler_pipeline_integration PASSED [ 83%]
+tests/test_tier3_cross_feature_combinations.py::test_fracdiff_fft_numeric_equivalence_and_regime_stability FAILED [ 84%]
+tests/test_tier3_cross_feature_combinations.py::test_metalabeler_sparse_signal_fallback_in_fracdiff_pipeline PASSED [ 84%]
+tests/test_tier3_cross_feature_combinations.py::test_tie_rule_consistency_single_vs_multi_asset FAILED [ 84%]
+tests/test_tier3_cross_feature_combinations.py::test_multi_asset_barbell_bullet_state_corruption_fix PASSED [ 85%]
+tests/test_tier3_cross_feature_combinations.py::test_barbell_streak_reset_upon_loss_and_campaign_success PASSED [ 85%]
+tests/test_tier3_cross_feature_combinations.py::test_purged_cv_split_integrity_and_embargo PASSED [ 85%]
+tests/test_tier3_cross_feature_combinations.py::test_capital_state_split_isolation_in_is_oos PASSED [ 86%]
+tests/test_tier3_cross_feature_combinations.py::test_walk_forward_engine_with_purged_cv_folds PASSED [ 86%]
+tests/test_tier3_cross_feature_combinations.py::test_optuna_search_space_optimization_flow PASSED [ 87%]
+tests/test_tier3_cross_feature_combinations.py::test_parallel_backtest_vectorization_consistency PASSED [ 87%]
+tests/test_tier3_cross_feature_combinations.py::test_optuna_trial_pruning_and_search_space_bounds PASSED [ 87%]
+tests/test_tier3_cross_feature_combinations.py::test_target_expiry_label_alignment_with_simulator PASSED [ 88%]
+tests/test_tier3_cross_feature_combinations.py::test_feature_scaling_zero_leakage_expanding_window PASSED [ 88%]
+tests/test_tier3_cross_feature_combinations.py::test_causality_zero_cheating_future_mutation PASSED [ 89%]
+tests/test_tier3_cross_feature_combinations.py::test_cusum_monitor_pause_and_resume_dynamics PASSED [ 89%]
+tests/test_tier3_cross_feature_combinations.py::test_dynamic_regime_adapter_adaptation PASSED [ 89%]
+tests/test_tier3_cross_feature_combinations.py::test_binary_ml_meta_filter_adaptive_thresholding PASSED [ 90%]
+tests/test_tier3_cross_feature_combinations.py::test_multi_asset_barbell_parallel_vectorization_equity_match PASSED [ 90%]
+tests/test_tier3_cross_feature_combinations.py::test_multi_asset_barbell_inter_class_correlation_filter FAILED [ 90%]
+tests/test_tier3_cross_feature_combinations.py::test_multi_asset_barbell_capital_exhaustion_recovery PASSED [ 91%]
+tests/test_tier3_cross_feature_combinations.py::test_optuna_walk_forward_purged_cv_integration PASSED [ 91%]
+tests/test_tier3_cross_feature_combinations.py::test_walk_forward_efficiency_calculation_stability PASSED [ 92%]
+tests/test_tier3_cross_feature_combinations.py::test_metalabeler_timestamp_unit_auto_detection PASSED [ 92%]
+tests/test_tier3_cross_feature_combinations.py::test_feature_extraction_reproducibility_deterministic PASSED [ 92%]
+tests/test_tier3_cross_feature_combinations.py::test_capital_optimizer_reproducibility_and_streak_plan PASSED [ 93%]
+tests/test_tier3_cross_feature_combinations.py::test_full_system_pipeline_end_to_end_single_asset PASSED [ 93%]
+tests/test_tier3_cross_feature_combinations.py::test_full_system_pipeline_end_to_end_multi_asset_barbell PASSED [ 93%]
+tests/test_tier3_cross_feature_combinations.py::test_full_system_pipeline_noisy_or_sparse_data_resilience PASSED [ 94%]
+tests/test_tier4_real_world_scenarios.py::test_scenario_1_realistic_multi_asset_barbell_backtest PASSED [ 94%]
+tests/test_tier4_real_world_scenarios.py::test_scenario_2_end_to_end_walk_forward_purged_cv PASSED [ 95%]
+tests/test_tier4_real_world_scenarios.py::test_scenario_3_optuna_bayesian_hyperparameter_tuning PASSED [ 95%]
+tests/test_tier4_real_world_scenarios.py::test_scenario_4_high_volatile_market_regime_adaptation PASSED [ 95%]
+tests/test_tier4_real_world_scenarios.py::test_scenario_5_meta_labeling_probabilistic_filtering_zero_leakage PASSED [ 96%]
+tests/test_tier4_real_world_scenarios.py::test_scenario_6_vectorized_high_throughput_simulation PASSED [ 96%]
+tests/test_tier4_real_world_scenarios.py::test_scenario_7_out_of_sample_empirical_verification_pipeline PASSED [ 96%]
+tests/test_tier4_real_world_scenarios.py::test_scenario_8_stress_testing_extreme_market_crashes_and_zero_vol PASSED [ 97%]
+tests/test_tier4_real_world_scenarios.py::test_scenario_9_complete_system_integration_workflow PASSED [ 97%]
+tests/test_tier4_real_world_scenarios.py::test_scenario_10_multi_timeframe_strategy_confluence PASSED [ 98%]
+test_high_winrate_mechanisms.py::TestHighWinrateMechanisms::test_cusum_monitor PASSED [ 98%]
+test_high_winrate_mechanisms.py::TestHighWinrateMechanisms::test_frac_diff_fixed PASSED [ 98%]
+test_high_winrate_mechanisms.py::TestHighWinrateMechanisms::test_meta_filter_adaptive PASSED [ 99%]
+test_high_winrate_mechanisms.py::TestHighWinrateMechanisms::test_meta_labeler_instantiation PASSED [ 99%]
+test_high_winrate_mechanisms.py::TestHighWinrateMechanisms::test_regime_detector_instantiation PASSED [100%]
+
+================================== FAILURES ===================================
+_______ TestMilestone3Features.test_vectorized_binary_simulator_parity ________
+
+self = <tests.test_milestone3_features.TestMilestone3Features testMethod=test_vectorized_binary_simulator_parity>
+
+    def test_vectorized_binary_simulator_parity(self):
+        strat = DummyStrategy()
+        params = {"rsi_period": 14}
+        pre = strat.prepare_data(self.df)
+        sigs = strat.generate_signals(self.df, params=params, precomputed=pre)
+    
+        # Standard simulator
+        sim_standard = BinarySimulator().run(self.df, sigs, expiry_candles=2, payout=0.85)
+        sum_standard = sim_standard["summary"]
+    
+        # Vectorized simulator
+        sum_fast = VectorizedBinarySimulator.run_fast(self.df, sigs, expiry_candles=2, payout=0.85)["summary"]
+    
+>       self.assertEqual(sum_fast["total_trades"], sum_standard["total_trades"])
+E       AssertionError: 228 != 147
+
+tests\test_milestone3_features.py:177: AssertionError
+_______ TestMilestone3Features.test_walk_forward_engine_rolling_optuna ________
+
+self = <tests.test_milestone3_features.TestMilestone3Features testMethod=test_walk_forward_engine_rolling_optuna>
+
+    def test_walk_forward_engine_rolling_optuna(self):
+        wfe = WalkForwardEngine(
+            n_windows=3,
+            train_ratio=0.60,
+            n_trials_per_window=5,
+            min_is_trades=3,
+            min_oos_trades=2,
+            target_winrate=0.60
+        )
+    
+        def dummy_space(trial):
+            return {
+                "rsi_period": trial.suggest_int("rsi_period", 5, 25),
+                "wick_ratio": trial.suggest_float("wick_ratio", 0.1, 0.5)
+            }
+    
+        res = wfe.run_wfa(
+            df=self.df,
+            strat_class=DummyStrategy,
+            param_space_fn=dummy_space,
+            expiry=2,
+            payout=0.85
+        )
+    
+        self.assertIn("wfe", res)
+        self.assertIn("mean_is_wr", res)
+        self.assertIn("mean_oos_wr", res)
+        self.assertIn("global_oos_wr", res)
+        self.assertIn("global_oos_wr_wilson_low", res)
+        self.assertIn("global_oos_ev", res)
+        self.assertIn("stable_windows", res)
+        self.assertIn("window_results", res)
+    
+>       self.assertGreaterEqual(res["total_windows_tested"], 1)
+E       AssertionError: 0 not greater than or equal to 1
+
+tests\test_milestone3_features.py:156: AssertionError
+_ TestFeature05_MetaLabelerTimestampLeakage.test_f05_metalabeler_ms_timestamp_parsing _
+
+self = <tests.test_tier1_feature_coverage.TestFeature05_MetaLabelerTimestampLeakage object at 0x000001BE7B420150>
+
+    def test_f05_metalabeler_ms_timestamp_parsing(self):
+        # Create millisecond timestamps
+        ms_times = pd.date_range('2024-01-01', periods=100, freq='1min').astype('int64') // 10**6
+        df = pd.DataFrame({
+            'open': np.linspace(100, 110, 100),
+            'high': np.linspace(101, 111, 100),
+            'low': np.linspace(99, 109, 100),
+            'close': np.linspace(100.5, 110.5, 100),
+            'volume': np.full(100, 1000.0),
+            'open_time': ms_times
+        })
+        labeler = MetaLabeler()
+        signal_indices = df.index[::5]
+>       context = labeler._extract_context_features(df, signal_indices)
+
+tests\test_tier1_feature_coverage.py:331: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+engine\ml_engine\meta_labeler.py:43: in _extract_context_features
+    context[col] = base_features.loc[signal_indices, col]
+..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexing.py:1097: in __getitem__
+    return self._getitem_tuple(key)
+..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexing.py:1280: in _getitem_tuple
+    return self._getitem_lowerdim(tup)
+..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexing.py:1024: in _getitem_lowerdim
+    return getattr(section, self.name)[new_key]
+..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexing.py:1103: in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexing.py:1332: in _getitem_axis
+    return self._getitem_iterable(key, axis=axis)
+..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexing.py:1272: in _getitem_iterable
+    keyarr, indexer = self._get_listlike_indexer(key, axis)
+..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexing.py:1462: in _get_listlike_indexer
+    keyarr, indexer = ax._get_indexer_strict(key, axis_name)
+..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py:5877: in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = DatetimeIndex(['2023-01-01 00:00:00', '2023-01-01 00:05:00',
+               '2023-01-01 00:10:00', '2023-01-01 00:15:0...:05:00',
+               '2023-01-01 08:10:00', '2023-01-01 08:15:00'],
+              dtype='datetime64[ns]', freq='5T')
+key = RangeIndex(start=0, stop=100, step=5)
+indexer = array([-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+       -1, -1, -1], dtype=int64)
+axis_name = 'index'
+
+    def _raise_if_missing(self, key, indexer, axis_name: str_t) -> None:
+        """
+        Check that indexer can be used to return a result.
+    
+        e.g. at least one element was found,
+        unless the list of keys was actually empty.
+    
+        Parameters
+        ----------
+        key : list-like
+            Targeted labels (only used to show correct error message).
+        indexer: array-like of booleans
+            Indices corresponding to the key,
+            (with -1 indicating not found).
+        axis_name : str
+    
+        Raises
+        ------
+        KeyError
+            If at least one key was requested but none was found.
+        """
+        if len(key) == 0:
+            return
+    
+        # Count missing values
+        missing_mask = indexer < 0
+        nmissing = missing_mask.sum()
+    
+        if nmissing:
+            # TODO: remove special-case; this is just to keep exception
+            #  message tests from raising while debugging
+            use_interval_msg = is_interval_dtype(self.dtype) or (
+                is_categorical_dtype(self.dtype)
+                # "Index" has no attribute "categories"  [attr-defined]
+                and is_interval_dtype(
+                    self.categories.dtype  # type: ignore[attr-defined]
+                )
+            )
+    
+            if nmissing == len(indexer):
+                if use_interval_msg:
+                    key = list(key)
+>               raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+E               KeyError: 'None of [RangeIndex(start=0, stop=100, step=5)] are in the [index]'
+
+..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py:5938: KeyError
+_ TestFeature17_IntegrityCausalityTestSuite.test_f17_indicator_shift_invariance _
+
+self = <tests.test_tier1_feature_coverage.TestFeature17_IntegrityCausalityTestSuite object at 0x000001BE7B442D50>
+synthetic_ohlcv_df =                            open        high  ...  Volume      open_time
+2024-01-01 00:00:00  100.305000  100.474968  .... 2098.0  1704097080000
+2024-01-01 08:19:00  106.968334  107.097961  ...  1336.0  1704097140000
+
+[500 rows x 11 columns]
+
+    def test_f17_indicator_shift_invariance(self, synthetic_ohlcv_df):
+        extractor = BinaryFeatureExtractor()
+        feat_orig = extractor.extract_features(synthetic_ohlcv_df)
+    
+        df_shifted = synthetic_ohlcv_df.shift(5).iloc[5:]
+        feat_shifted = extractor.extract_features(df_shifted)
+    
+        # Realigned features must match
+        val_orig = feat_orig.loc[feat_shifted.index, 'natr'].values
+        val_shifted = feat_shifted['natr'].values
+>       np.testing.assert_allclose(val_orig, val_shifted, rtol=1e-5)
+
+tests\test_tier1_feature_coverage.py:1050: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+args = (<function assert_allclose.<locals>.compare at 0x000001BE707B2FC0>, array([0.        , 0.        , 0.        , 0.     ...9, 0.00630512, 0.0061662 , 0.00610516, 0.0062692 ,
+       0.00609792, 0.00649664, 0.00545673, 0.00538719, 0.00580626]))
+kwds = {'equal_nan': True, 'err_msg': '', 'header': 'Not equal to tolerance rtol=1e-05, atol=0', 'verbose': True}
+
+    @wraps(func)
+    def inner(*args, **kwds):
+        with self._recreate_cm():
+>           return func(*args, **kwds)
+E           AssertionError: 
+E           Not equal to tolerance rtol=1e-05, atol=0
+E           
+E           Mismatched elements: 487 / 495 (98.4%)
+E           Max absolute difference: 0.0056843
+E           Max relative difference: 0.45053062
+E            x: array([0.      , 0.      , 0.      , 0.      , 0.      , 0.      ,
+E                  0.      , 0.      , 0.005024, 0.005557, 0.005567, 0.005684,
+E                  0.005221, 0.005405, 0.005839, 0.005727, 0.005473, 0.005361,...
+E            y: array([0.      , 0.      , 0.      , 0.      , 0.      , 0.      ,
+E                  0.      , 0.      , 0.      , 0.      , 0.      , 0.      ,
+E                  0.      , 0.005024, 0.005557, 0.005567, 0.005684, 0.005221,...
+
+..\..\AppData\Local\Programs\Python\Python311\Lib\contextlib.py:81: AssertionError
+____________ test_f05_metalabeler_short_dataframe_rolling_windows _____________
+
+    def test_f05_metalabeler_short_dataframe_rolling_windows():
+        labeler = MetaLabeler()
+        df_short = generate_synthetic_ohlcv(n_rows=15)
+        idx = df_short.index[5:10]
+    
+        context = labeler._extract_context_features(df_short, idx)
+>       assert not context.empty
+E       assert not True
+E        +  where True = Empty DataFrame\nColumns: []\nIndex: [].empty
+
+tests\test_tier2_boundary_corner_cases.py:387: AssertionError
+___________________ test_f06_walkforward_direction_filters ____________________
+
+    def test_f06_walkforward_direction_filters():
+        engine = WalkForwardEngine(n_windows=2)
+        df = generate_synthetic_ohlcv(n_rows=500)
+    
+        res_call = engine.run_wfa(df, AlwaysWinStrategy(), base_params={"direction_filter": "CALL_ONLY"})
+        res_put = engine.run_wfa(df, AlwaysWinStrategy(), base_params={"direction_filter": "PUT_ONLY"})
+    
+>       assert res_call['total_windows_tested'] == 2
+E       assert 0 == 2
+
+tests\test_tier2_boundary_corner_cases.py:508: AssertionError
+______________________ test_f09_hmm_single_row_dataframe ______________________
+
+    def test_f09_hmm_single_row_dataframe():
+        detector = RegimeDetector()
+        detector.is_fitted = True
+    
+        class DummyHMM:
+            def predict(self, obs):
+                return np.array([0])
+        detector.model = DummyHMM()
+    
+        df_1row = generate_synthetic_ohlcv(n_rows=1)
+>       state = detector.get_current_state(df_1row)
+
+tests\test_tier2_boundary_corner_cases.py:661: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+engine\ml_engine\regime_detector.py:176: in get_current_state
+    states = self.predict_forward(obs)
+engine\ml_engine\regime_detector.py:124: in predict_forward
+    probs = self.predict_forward_proba(obs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <engine.ml_engine.regime_detector.RegimeDetector object at 0x000001BE7FB27810>
+obs = array([[0. , 0. , 0.5]])
+
+    def predict_forward_proba(self, obs: np.ndarray) -> np.ndarray:
+        """
+        Calcula la matriz de probabilidades de estado filtradas forward-only P(S_t = k | O_{1:t}).
+        Elimina estrictamente el lookahead bias y la fuga por suavizado (Viterbi/Forward-Backward).
+        """
+        if not self.is_fitted or self.model is None:
+            return np.zeros((len(obs), self.n_states))
+    
+        n_samples, n_components = obs.shape[0], self.n_states
+        if n_samples == 0:
+            return np.empty((0, n_components))
+    
+        from scipy.special import logsumexp
+    
+>       log_frameprob = self.model._compute_log_likelihood(obs)
+E       AttributeError: 'DummyHMM' object has no attribute '_compute_log_likelihood'
+
+engine\ml_engine\regime_detector.py:108: AttributeError
+_________ test_fracdiff_fft_numeric_equivalence_and_regime_stability __________
+
+synthetic_ohlcv_df =                            open        high  ...  Volume      open_time
+2024-01-01 00:00:00  100.305000  100.474968  .... 2098.0  1704097080000
+2024-01-01 08:19:00  106.968334  107.097961  ...  1336.0  1704097140000
+
+[500 rows x 11 columns]
+
+    def test_fracdiff_fft_numeric_equivalence_and_regime_stability(synthetic_ohlcv_df):
+        """
+        Verifies that frac_diff_fixed using FFT convolve returns bounded stationary
+        series across d=0.3 and d=0.5 without introducing NaNs in the tail.
+        """
+        series = synthetic_ohlcv_df['close']
+        ffd_03 = frac_diff_fixed(series, d=0.3)
+        ffd_05 = frac_diff_fixed(series, d=0.5)
+    
+        assert len(ffd_03) == len(series)
+        assert len(ffd_05) == len(series)
+>       assert not np.isnan(ffd_03.iloc[-100:]).any()
+E       AssertionError: assert not True
+E        +  where True = <bound method NDFrame._add_numeric_operations.<locals>.any of 2024-01-01 06:40:00     True\n2024-01-01 06:41:00     True\n2024-01-01 06:42:00     True\n2024-01-01 06:43:00     True\n2024-01-01 06:44:00     True\n                       ...  \n2024-01-01 08:15:00     True\n2024-01-01 08:16:00     True\n2024-01-01 08:17:00     True\n2024-01-01 08:18:00     True\n2024-01-01 08:19:00    False\nFreq: T, Length: 100, dtype: bool>()
+E        +    where <bound method NDFrame._add_numeric_operations.<locals>.any of 2024-01-01 06:40:00     True\n2024-01-01 06:41:00     True\n2024-01-01 06:42:00     True\n2024-01-01 06:43:00     True\n2024-01-01 06:44:00     True\n                       ...  \n2024-01-01 08:15:00     True\n2024-01-01 08:16:00     True\n2024-01-01 08:17:00     True\n2024-01-01 08:18:00     True\n2024-01-01 08:19:00    False\nFreq: T, Length: 100, dtype: bool> = 2024-01-01 06:40:00     True\n2024-01-01 06:41:00     True\n2024-01-01 06:42:00     True\n2024-01-01 06:43:00     True\n2024-01-01 06:44:00     True\n                       ...  \n2024-01-01 08:15:00     True\n2024-01-01 08:16:00     True\n2024-01-01 08:17:00     True\n2024-01-01 08:18:00     True\n2024-01-01 08:19:00    False\nFreq: T, Length: 100, dtype: bool.any
+E        +      where 2024-01-01 06:40:00     True\n2024-01-01 06:41:00     True\n2024-01-01 06:42:00     True\n2024-01-01 06:43:00     True\n2024-01-01 06:44:00     True\n                       ...  \n2024-01-01 08:15:00     True\n2024-01-01 08:16:00     True\n2024-01-01 08:17:00     True\n2024-01-01 08:18:00     True\n2024-01-01 08:19:00    False\nFreq: T, Length: 100, dtype: bool = <ufunc 'isnan'>(2024-01-01 06:40:00         NaN\n2024-01-01 06:41:00         NaN\n2024-01-01 06:42:00         NaN\n2024-01-01 06:43:00         NaN\n2024-01-01 06:44:00         NaN\n                         ...   \n2024-01-01 08:15:00         NaN\n2024-01-01 08:16:00         NaN\n2024-01-01 08:17:00         NaN\n2024-01-01 08:18:00         NaN\n2024-01-01 08:19:00    12.34594\nFreq: T, Length: 100, dtype: float64)
+E        +        where <ufunc 'isnan'> = np.isnan
+
+tests\test_tier3_cross_feature_combinations.py:88: AssertionError
+_______________ test_tie_rule_consistency_single_vs_multi_asset _______________
+
+synthetic_ohlcv_df =                            open        high  ...  Volume      open_time
+2024-01-01 00:00:00  100.305000  100.474968  .... 2098.0  1704097080000
+2024-01-01 08:19:00  106.968334  107.097961  ...  1336.0  1704097140000
+
+[500 rows x 11 columns]
+
+    def test_tie_rule_consistency_single_vs_multi_asset(synthetic_ohlcv_df):
+        """
+        Verifies tie_rule='RETURN_STAKE' vs 'LOSS' consistency between single-asset
+        and multi-asset simulator runs when exit_price equals entry_price.
+        """
+        df = synthetic_ohlcv_df.copy()
+        # Force close prices to equal open prices for exact tie scenario
+        df['close'] = df['open']
+        signals = pd.Series(index=df.index, dtype=object)
+        signals.iloc[10] = 'CALL'
+        signals.iloc[50] = 'PUT'
+    
+        sim = BinarySimulator()
+    
+        # Single-asset run: RETURN_STAKE
+        res_single_return = sim.run(df, signals, expiry_candles=1, tie_rule='RETURN_STAKE', payout=0.85)
+        assert res_single_return['summary']['ties'] == 2
+        assert res_single_return['summary']['wins'] == 0
+        assert res_single_return['summary']['losses'] == 0
+        assert res_single_return['summary']['net_pnl'] == 0.0
+    
+        # Single-asset run: LOSS
+        res_single_loss = sim.run(df, signals, expiry_candles=1, tie_rule='LOSS', payout=0.85)
+        assert res_single_loss['summary']['ties'] == 0
+        assert res_single_loss['summary']['losses'] == 2
+    
+        # Multi-asset run: RETURN_STAKE vs LOSS
+        universe_data = {'EURUSD': df}
+        signals_list = [
+            {'time': int(df.iloc[10]['open_time']), 'direction': 'CALL'},
+            {'time': int(df.iloc[50]['open_time']), 'direction': 'PUT'}
+        ]
+        signals_by_pair = {'EURUSD': signals_list}
+    
+        res_multi_return = sim.run_multi_asset(universe_data, signals_by_pair, expiry_candles=1, tie_rule='RETURN_STAKE', mode='SIMPLE')
+>       assert res_multi_return['summary']['ties'] == 2
+E       assert 1 == 2
+
+tests\test_tier3_cross_feature_combinations.py:156: AssertionError
+___________ test_multi_asset_barbell_inter_class_correlation_filter ___________
+
+multi_asset_ohlcv_dict = {'EURUSD':                          open      high  ...  Volume      open_time
+2024-01-01 00:00:00  1.117802  1.250383... 615.0  1704097080000
+2024-01-01 08:19:00  171.672653  171.827372  ...   366.0  1704097140000
+
+[500 rows x 11 columns]}
+
+    def test_multi_asset_barbell_inter_class_correlation_filter(multi_asset_ohlcv_dict):
+        """
+        Verifies Inter-Class Correlation Filter blocking duplicate same-day signals for asset class.
+        """
+        sim = BinarySimulator()
+    
+        # Create two pairs belonging to same class (e.g. Forex: EURUSD and GBPUSD)
+        df_eur = multi_asset_ohlcv_dict['EURUSD']
+        df_gbp = multi_asset_ohlcv_dict['GBPUSD']
+    
+        same_time = int(df_eur.iloc[20]['open_time'])
+    
+        signals_by_pair = {
+            'EURUSD': [{'time': same_time, 'direction': 'CALL'}],
+            'GBPUSD': [{'time': same_time, 'direction': 'CALL'}]
+        }
+    
+        res = sim.run_multi_asset({'EURUSD': df_eur, 'GBPUSD': df_gbp}, signals_by_pair, mode='BARBELL')
+    
+        # Inter-class filter blocks duplicate signal of same asset class on same day
+>       assert res['summary']['total_trades'] == 1
+E       assert 2 == 1
+
+tests\test_tier3_cross_feature_combinations.py:554: AssertionError
+============================== warnings summary ===============================
+tests/test_milestone3_features.py::TestMilestone3Features::test_optuna_strategy_optimizer_execution
+  C:\Users\juanc\AppData\Local\Programs\Python\Python311\Lib\site-packages\optuna\_experimental.py:33: ExperimentalWarning: Argument ``multivariate`` is an experimental feature. The interface can change in the future.
+    optuna_warn(
+
+tests/test_milestone3_features.py::TestMilestone3Features::test_optuna_strategy_optimizer_execution
+  C:\Users\juanc\AppData\Local\Programs\Python\Python311\Lib\site-packages\optuna\_experimental.py:33: ExperimentalWarning: Argument ``group`` is an experimental feature. The interface can change in the future.
+    optuna_warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_milestone3_features.py::TestMilestone3Features::test_vectorized_binary_simulator_parity
+FAILED tests/test_milestone3_features.py::TestMilestone3Features::test_walk_forward_engine_rolling_optuna
+FAILED tests/test_tier1_feature_coverage.py::TestFeature05_MetaLabelerTimestampLeakage::test_f05_metalabeler_ms_timestamp_parsing
+FAILED tests/test_tier1_feature_coverage.py::TestFeature17_IntegrityCausalityTestSuite::test_f17_indicator_shift_invariance
+FAILED tests/test_tier2_boundary_corner_cases.py::test_f05_metalabeler_short_dataframe_rolling_windows
+FAILED tests/test_tier2_boundary_corner_cases.py::test_f06_walkforward_direction_filters
+FAILED tests/test_tier2_boundary_corner_cases.py::test_f09_hmm_single_row_dataframe
+FAILED tests/test_tier3_cross_feature_combinations.py::test_fracdiff_fft_numeric_equivalence_and_regime_stability
+FAILED tests/test_tier3_cross_feature_combinations.py::test_tie_rule_consistency_single_vs_multi_asset
+FAILED tests/test_tier3_cross_feature_combinations.py::test_multi_asset_barbell_inter_class_correlation_filter
+=========== 10 failed, 254 passed, 2 warnings in 2081.95s (0:34:41) ===========

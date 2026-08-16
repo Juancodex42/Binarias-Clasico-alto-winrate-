@@ -1,0 +1,25 @@
+=== STARTING STRESS TESTS FOR MILESTONE 2 ===
+
+--- Test 1: HMM Forward Probabilities Causality ---
+Max diff T=350 vs T=400 (first 350 rows): 0.000000000000000000e+00
+Max diff T=350 vs T=500 (first 350 rows): 0.000000000000000000e+00
+Max diff T=350 vs T=600 (first 350 rows): 0.000000000000000000e+00
+Max diff T=400 vs T=600 (first 400 rows): 0.000000000000000000e+00
+RESULT Test 1 (HMM Causality): PASS
+
+--- Test 2: Label Creation 1-Candle Expiry Alignment with BinarySimulator ---
+Total Test 2 mismatches/failures: 154
+  FAIL DETAIL: Signal index 110 in labels but not in simulator trades
+  FAIL DETAIL: Signal index 111 in labels but not in simulator trades
+  FAIL DETAIL: Signal index 117 in labels but not in simulator trades
+  FAIL DETAIL: Signal index 122 in labels but not in simulator trades
+  FAIL DETAIL: Signal index 123 in labels but not in simulator trades
+RESULT Test 2 (Label Expiry Alignment): FAIL
+
+--- Test 3: Purged CV Embargo Eliminates IS/OOS Trade Overlap ---
+Total Test 3 failures: 0
+RESULT Test 3 (Purged CV Embargo): PASS
+
+==========================================
+FINAL MILESTONE 2 VERDICT: FAIL
+==========================================

@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binarias Simulator - Simulador de Opciones Binarias</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="apple-touch-icon" href="/static/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://unpkg.com/lightweight-charts@4/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar or Header for Tabs -->
+        <header class="app-header">
+            <div class="logo">
+                <h1>Binarias <span>Simulator</span></h1>
+            </div>
+            
+            <!-- Selector de Modo Híbrido -->
+            <div class="mode-switch-container">
+                <button class="mode-btn active" id="mode-smart" data-mode="smart">⚡ Modo Inteligente (Piloto Automático)</button>
+                <button class="mode-btn" id="mode-advanced" data-mode="advanced">⚙️ Modo Avanzado (Manual)</button>
+            </div>
+            
+            <nav class="tabs-nav" style="display: none;">
+                <button class="tab-btn" data-tab="dashboard">Mercado</button>
+                <button class="tab-btn" data-tab="backtest">Backtest</button>
+                <button class="tab-btn" data-tab="resultados" id="btn-resultados">Resultados</button>
+                <button class="tab-btn" data-tab="estadisticas" id="btn-estadisticas" disabled>Estadísticas</button>
+                <button class="tab-btn" data-tab="optimizador" id="btn-optimizador" disabled>Optimizador</button>
+            </nav>
+        </header>
+
+        <main class="content-area">
+            <!-- Pestaña 0: Tablero Inteligente (Simple Mode) -->
+            <section id="smart-dashboard" class="tab-pane active">
+                <div class="smart-grid">
+                    <!-- Control Bar Horizontal de Optimización -->
+                    <div class="smart-sidebar glass-card">
+                        <div class="smart-header-row">
+                            <div class="smart-title-area">
+                                <h2>⚡ Optimización Inteligente</h2>
+                                <p class="section-desc">
+                                    Ingresa los datos de tu capital y el motor cuantitativo evaluará la estrategia óptima usando algoritmos genéticos y simulaciones Monte Carlo, protegiendo tu capital base con ganancias de arbitraje P2P externo.
+                                </p>
+                            </div>
+                            <div class="smart-action-area">
+                                <button type="button" class="btn-primary" id="btn-smart-run">
+                                    ⚡ Auto-Optimizar Estrategia
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="smart-inputs-container">
+                            <!-- Universo de Activos -->
+                            <div class="smart-universe-wrapper">
+                                <label class="smart-input-label">Universo de Activos (Selecciona al menos 3)</label>
+                                <div class="smart-universe-select">
+                                    <label><input type="checkbox" name="smart-universe" value="WTI" checked> WTI <span class="asset-wr-badge"></span></label>
+                                    <label><input type="checkbox" name="smart-universe" value="NASDAQ" checked> NASDAQ <span class="asset-wr-badge"></span></label>
+                                    <label><input type="checkbox" name="smart-universe" value="GBPJPY" checked> GBPJPY <span class="asset-wr-badge"></span></label>
+                                    <label><input type="checkbox" name="smart-universe" value="XAUUSD" checked> XAUUSD <span class="asset-wr-badge"></span></label>
+                                    <label><input type="checkbox" name="smart-universe" value="DOGEUSDT" checked> DOGEUSDT <span class="asset-wr-badge"></span></label>
+                                    <label><input type="checkbox" name="smart-universe" value="ADAUSDT" checked> ADAUSDT <span class="asset-wr-badge"></span></label>
+                                    <label><input type="checkbox" name="smart-universe" value="BTCUSDT" checked> BTCUSDT <span class="asset-wr-badge"></span></label>
+                                    <label><input type="checkbox" name="smart-universe" value="BNBUSDT" checked> BNBUSDT <span class="asset-wr-badge"></span></label>
+                                    <label><input type="checkbox" name="smart-universe" value="ETHUSDT"> ETHUSDT <span class="asset-wr-badge"></span></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Preset Selector Barbell (Punto 4) -->
+                            <div class="smart-preset-wrapper" style="grid-column: span 3; margin-bottom: 12px;">
+                                <label class="smart-input-label" style="color: #58a6ff; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                                    🎯 Estrategia de Disparo y Presupuesto de Campaña (Configuración Óptima)
+                                    <span class="tooltip">?
+                                        <span class="tooltip-text" style="width: 360px; text-align: left; padding: 10px;">
+                                            <strong>¿Por qué 6 Balas de $33.33 con Racha N=3?</strong><br>
+                                            Es la estrategia matemáticamente más rápida, robusta y equilibrada.<br><br>
+                                            • <strong>6 Intentos de $33.33</strong> financiada por el 20% de ganancia de arbitraje ($200).<br>
+                                            • <strong>Probabilidad de éxito de la campaña: 98.6%</strong>.<br>
+                                            • <strong>Retorno por racha victoriosa: +$177.70 netos</strong>.<br>
+                                            • Puedes modificar manualmente las balas o la racha (N) en los controles numéricos inferiores en cualquier momento.
+                                        </span>
+                                    </span>
+                                </label>
+                                <select id="smart-preset-select" class="form-control" style="background: #161b22; color: #58a6ff; border: 1px solid #58a6ff; font-weight: bold; font-size: 0.88rem; padding: 8px; border-radius: 6px; width: 100%; cursor: pointer;">
+                                    <option value="preset_33_6" selected>🚀 [MÁXIMA EFICIENCIA QUANT] 6 Balas de $33.33 / Mes (Rachas N=3) ➔ Meta: Duplicación +100% de Patrimonio</option>
+                                    <option value="preset_25_8">⚡ [Conservador / 8 Intentos] 8 Balas de $25.00 / Mes (Rachas N=3) ➔ Meta: Duplicación +100% de Patrimonio</option>
+                                    <option value="preset_200_1">🎯 [Retorno Directo / 1 Intento] 1 Bala de $200 / Mes (Racha N=3) ➔ Ganancia: +$1,066.33 (Capital Final: $2,066 USDT)</option>
+                                </select>
+                            </div>
+
+                            <!-- Inputs Numéricos en Fila Grid -->
+                            <div class="smart-numeric-inputs">
+                                <div class="control-group">
+                                    <label for="smart-streak-length">Racha (N)</label>
+                                    <input type="number" id="smart-streak-length" value="3" min="1" max="15">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="smart-base-capital">Capital Base ($)
+                                        <span class="tooltip">?
+                                            <span class="tooltip-text">Capital principal a proteger.</span>
+                                        </span>
+                                    </label>
+                                    <input type="number" id="smart-base-capital" value="1000" min="10">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="smart-profit-pct">Rend. Mensual (%)</label>
+                                    <input type="number" id="smart-profit-pct" value="20" min="1" max="100">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="smart-risk-capital">Cap. Riesgo (Arbitraje P2P)
+                                        <span class="tooltip">?
+                                            <span class="tooltip-text">Ganancias obtenidas por arbitraje P2P externo destinadas a arriesgar en la campaña.</span>
+                                        </span>
+                                    </label>
+                                    <input type="number" id="smart-risk-capital" value="200" readonly class="input-readonly">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="smart-attempts">Intentos / Balas (X)</label>
+                                    <input type="number" id="smart-attempts" value="6" min="1" max="50">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="smart-payout">Payout Broker</label>
+                                    <input type="number" id="smart-payout" value="0.85" min="0.1" max="1.0" step="0.01">
+                                </div>
+
+                                <div class="control-group">
+                                    <label for="smart-generations" style="color: #a371f7;">Generaciones
+                                        <span class="tooltip">?
+                                            <span class="tooltip-text">Ciclos evolutivos que correrá el motor genético en Rust.</span>
+                                        </span>
+                                    </label>
+                                    <input type="number" id="smart-generations" value="50" min="5" max="200">
+                                </div>
+
+                                <div class="control-group">
+                                    <label for="smart-population" style="color: #a371f7;">Población
+                                        <span class="tooltip">?
+                                            <span class="tooltip-text">Cantidad de individuos procesados por generación.</span>
+                                        </span>
+                                    </label>
+                                    <input type="number" id="smart-population" value="150" min="10" max="500">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Consola de Progreso Cyberpunk -->
+                        <div class="smart-console-wrapper" id="smart-console-box" style="display: none; margin-top: 15px;">
+                            <div class="console-header" style="background: #161b22; padding: 6px 10px; display: flex; align-items: center; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom: 1px solid var(--border-color);">
+                                <span class="console-dot red" style="width: 8px; height: 8px; border-radius: 50%; background: #ff5f56; margin-right: 6px;"></span>
+                                <span class="console-dot yellow" style="width: 8px; height: 8px; border-radius: 50%; background: #ffbd2e; margin-right: 6px;"></span>
+                                <span class="console-dot green" style="width: 8px; height: 8px; border-radius: 50%; background: #27c93f; margin-right: 10px;"></span>
+                                <span class="console-title" style="font-family: monospace; font-size: 0.7rem; color: var(--text-secondary); font-weight: bold;">PROCESADOR CUANTITATIVO</span>
+                            </div>
+                            <div class="smart-progress-bar-container" style="background: rgba(255, 255, 255, 0.05); height: 5px; border-bottom: 1px solid var(--border-color); position: relative; width: 100%;">
+                                <div class="smart-progress-bar-fill" id="smart-progress-bar-fill" style="background: linear-gradient(90deg, #a371f7, #58a6ff); width: 0%; height: 100%; transition: width 0.3s ease;"></div>
+                            </div>
+                            <div class="console-body" id="smart-console-logs" style="background: #0d1117; font-family: monospace; font-size: 0.75rem; color: #39ff14; padding: 10px; height: 160px; overflow-y: auto; line-height: 1.4; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; border: 1px solid var(--border-color); border-top: none;">
+                                <!-- Logs dynamically added -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tablero de Resultados -->
+                    <div class="smart-results-area" style="display: flex; flex-direction: column; gap: 15px;">
+                        <!-- Selector de Ranking de Estrategias Optimizadas -->
+                        <div class="top-strategies-wrapper glass-card" id="smart-top-5-box" style="display: none; padding: 12px; border-color: rgba(163, 113, 247, 0.4); background: rgba(22, 27, 34, 0.85);">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                                <h3 style="font-size: 0.95rem; color: #a371f7; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                                    🏆 Ranking de Estrategias Optimizadas
+                                    <span class="tooltip">?
+                                        <span class="tooltip-text">
+                                            Ranking cuantitativo de todas las estrategias evaluadas con validación Out-Of-Sample. Haz clic en cualquiera para actualizar automáticamente todas las gráficas, probabilidades y resultados de la pantalla.
+                                        </span>
+                                    </span>
+                                </h3>
+                                <span style="font-size: 0.75rem; color: var(--accent-blue); font-weight: 500;">👈 Selecciona una estrategia para alternar el tablero completo</span>
+                            </div>
+                            <div id="smart-top-5-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px;">
+                                <!-- Dynamic pills -->
+                            </div>
+                        </div>
+
+
+                        <!-- Recomendación y Escalera -->
+                        <div class="smart-row-top" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; align-items: start;">
+                            <div class="chart-card glass-card smart-card-rec" style="padding: 15px; min-width: 0; height: auto; min-height: auto; overflow: visible;">
+                                <h3 style="color: var(--accent-blue); font-size: 1rem; margin-bottom: 10px;">📊 Plan de Rachas Optimizado</h3>
+                                <div id="smart-rec-content" class="smart-rec-text">
+                                    <p class="empty-text">Introduce tus datos a la izquierda y presiona "Auto-Optimizar" para ver el plan.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card glass-card smart-card-ladder" style="padding: 15px; height: auto; min-height: auto; display: flex; flex-direction: column;">
+                                <h3 style="font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span>🪜 Escalera de Apuestas</span>
+                                    <span class="tooltip">?
+                                        <span class="tooltip-text" style="width: 290px; text-align: left; font-weight: normal; font-size: 0.74rem; line-height: 1.4;">
+                                            <strong>¿Qué es la Escalera de Apuestas?</strong><br>
+                                            Es un plan de interés compuesto (Paroli) para acumular ganancias dentro de una racha.<br><br>
+                                            • <strong>¿Qué es N?</strong> Es el número de victorias consecutivas necesarias para completar 1 ciclo.<br>
+                                            • <strong>¿Por qué cambia N según la estrategia?</strong> El optimizador calcula matemáticamente la racha óptima N (1, 2, 3...) según la tasa de acierto de cada estrategia para maximizar la rentabilidad esperada.<br>
+                                            • <strong>Gestión de Riesgo:</strong> Si pierdes en cualquier paso, solo pierdes 1 intento inicial ($100), jamás todo tu patrimonio.
+                                        </span>
+                                    </span>
+                                </h3>
+                                <div id="smart-ladder-content" style="overflow-y: auto; max-height: 380px;">
+                                    <p class="empty-text">Sin plan activo.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Matriz de Correlación y Activos Seleccionados -->
+                        <div class="smart-row-correlation" style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 15px;">
+                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column; min-height: 360px;">
+                                <h3 style="font-size: 0.95rem; margin-bottom: 10px; color: var(--accent-blue); display: flex; align-items: center; gap: 6px;">
+                                    🔥 Heatmap de Correlación de Retornos
+                                    <span class="tooltip">?
+                                        <span class="tooltip-text">
+                                            Muestra la relación estadística entre los activos del universo:<br>
+                                            • <strong>1.00</strong>: Se mueven de forma idéntica.<br>
+                                            • <strong>0.00</strong>: Movimiento totalmente independiente.<br>
+                                            • <strong>&lt; 0.40</strong>: Baja correlación (ideal para diversificar los intentos de la racha sin que caigan todos al mismo tiempo).
+                                        </span>
+                                    </span>
+                                </h3>
+                                <div style="flex: 1; min-height: 290px; width: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
+                                    <canvas id="smart-correlation-canvas" style="width: 100%; height: 290px; min-height: 290px;"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column; min-height: 360px;">
+                                <h3 style="font-size: 0.95rem; margin-bottom: 10px; color: var(--accent-green); display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="display: flex; align-items: center; gap: 6px;">
+                                        📋 Activos Seleccionados (Filtro &lt; 0.40)
+                                        <span class="tooltip">?
+                                            <span class="tooltip-text">
+                                                Lista de activos filtrados automáticamente por baja correlación. Muestra el rango de fechas históricas evaluadas por activo (~5 años / 1,250 velas diarias).
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <span style="font-size: 0.7rem; color: var(--text-secondary); font-weight: normal; background: rgba(255,255,255,0.04); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color);">📅 Muestra: 2021 - 2026</span>
+                                </h3>
+                                <div style="flex: 1; overflow-y: auto; max-height: 290px;">
+                                    <table class="markov-table" id="smart-selected-assets-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8rem;">
+                                        <thead>
+                                            <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                                                <th style="padding: 6px 4px;">Activo</th>
+                                                <th style="padding: 6px 4px;">Estado</th>
+                                                <th style="padding: 6px 4px; text-align: right;">Win Rate OOS</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="smart-selected-assets-body">
+                                            <tr><td colspan="3" class="empty-text" style="text-align:center; padding: 20px 0;">Sin datos</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Gráficas Principales -->
+                        <div class="smart-row-charts" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <!-- Curva de Capital del Backtest -->
+                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column;">
+                                <h3 style="font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                                    📈 Curva de Capital (Backtest Barbell Histórico)
+                                    <span class="tooltip">?
+                                        <span class="tooltip-text">
+                                            Muestra la evolución del capital a lo largo del tiempo.<br>
+                                            <strong>¿Por qué puede decrecer?</strong> Ocurre cuando una racha de N victorias seguidas no se completa a tiempo y se agota el capital de riesgo asignado a ese intento/ciclo.
+                                        </span>
+                                    </span>
+                                </h3>
+                                <div class="chart-wrapper" style="flex: 1; min-height: 220px; position: relative;">
+                                    <canvas id="smart-equity-chart-canvas"></canvas>
+                                </div>
+                            </div>
+                            
+                            <!-- Monte Carlo Campaña -->
+                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column;">
+                                <h3 style="font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                                    🎲 Proyección de Crecimiento (Monte Carlo - 1,000 caminos)
+                                    <span class="tooltip">?
+                                        <span class="tooltip-text">
+                                            Simula 1,000 trayectorias aleatorias de tu capital.<br>
+                                            <strong>Significado de los percentiles (P):</strong><br>
+                                            • <strong>P95 (Verde punteado)</strong>: Escenario muy optimista (el 95% rinde igual o menos).<br>
+                                            • <strong>P75 (Verde claro)</strong>: Escenario favorable (75% por debajo).<br>
+                                            • <strong>P50 (Azul - Mediana)</strong>: Resultado central / el más probable.<br>
+                                            • <strong>P25 (Rojo claro)</strong>: Escenario desfavorable.<br>
+                                            • <strong>P5 (Rojo punteado)</strong>: Escenario de máximo riesgo / peor caso (5%).
+                                        </span>
+                                    </span>
+                                </h3>
+                                <div class="chart-wrapper" style="flex: 1; min-height: 220px; position: relative;">
+                                    <canvas id="smart-mc-chart-canvas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Gráfico de Precios con Señales y Markov -->
+                        <div class="smart-row-bottom" style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
+                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column;">
+                                <h3 style="font-size: 0.95rem; margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
+                                    <span style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                                        🕯️ Velas de Precio con Señales:
+                                        <select id="smart-asset-selector" style="background: #161b22; color: var(--accent-blue); border: 1px solid var(--border-color); border-radius: 6px; padding: 3px 8px; font-size: 0.82rem; font-weight: bold; cursor: pointer; outline: none;"></select>
+                                    </span>
+                                    <span class="tooltip">?
+                                        <span class="tooltip-text">
+                                            Selecciona libremente cualquiera de los activos analizados para visualizar sus velas de precio 1D y la ubicación de sus señales de entrada (CALL/PUT).
+                                        </span>
+                                    </span>
+                                </h3>
+                                <div class="chart-container" id="smart-tv-chart" style="flex: 1; min-height: 280px; position: relative; border-radius: 6px; overflow: hidden; margin-top: 10px;">
+                                    <div id="smart-tv-chart-empty" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; background: rgba(17, 24, 39, 0.98); z-index: 10;">
+                                        <p class="empty-text" style="color: var(--text-secondary); font-size: 0.85rem; text-align: center;">Sin datos</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column;">
+                                <h3 style="font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                                    📊 Matriz de Markov (Estabilidad de Rachas)
+                                    <span class="tooltip">?
+                                        <span class="tooltip-text">
+                                            Calcula la probabilidad condicional de ganar o perder la SIGUIENTE operación dependiendo de si la operación ANTERIOR fue Victoria (Win) o Derrota (Loss).
+                                        </span>
+                                    </span>
+                                </h3>
+                                <div style="flex: 1; overflow-y: auto; width: 100%;">
+                                    <table class="markov-table" id="smart-markov-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8rem; margin-top: 5px;">
+                                        <thead>
+                                            <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
+                                                <th style="padding: 6px 4px;">Resultado Anterior</th>
+                                                <th style="padding: 6px 4px; color: var(--accent-green);">Siguiente: Win (W)</th>
+                                                <th style="padding: 6px 4px; color: var(--accent-red);">Siguiente: Loss (L)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);"><td colspan="3" class="empty-text" style="text-align:center; padding: 20px 0;">Sin datos</td></tr>
+                                        </tbody>
+                                    </table>
+                                    <div id="smart-markov-explanation" style="margin-top: 10px; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.4; padding: 6px 8px; background: rgba(255,255,255,0.02); border-radius: 4px; border: 1px solid rgba(255,255,255,0.05);">
+                                        💡 <em>Muestra la probabilidad de la siguiente operación según el resultado previo.</em>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 1: Dashboard -->
+            <section id="dashboard" class="tab-pane">
+                <div class="controls-bar glass-card">
+                    <div class="control-group">
+                        <label for="pair-selector">Par
+                            <span class="tooltip">?
+                                <span class="tooltip-text">El par de criptomonedas o divisa sobre el cual se cargan las velas de precios (ej. BTCUSDT).</span>
+                            </span>
+                        </label>
+                        <select id="pair-selector">
+                            <option value="BTCUSDT">BTCUSDT</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="interval-selector">Intervalo
+                            <span class="tooltip">?
+                                <span class="tooltip-text">La duración de tiempo de cada vela japonesa (ej. 1h o 30m).</span>
+                            </span>
+                        </label>
+                        <select id="interval-selector">
+                            <option value="1d">1d</option>
+                            <option value="4h">4h</option>
+                            <option value="1h">1h</option>
+                            <option value="30m" selected>30m</option>
+                            <option value="15m">15m</option>
+                            <option value="5m">5m</option>
+                            <option value="1m">1m</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="source-selector">Fuente de Datos
+                            <span class="tooltip">?
+                                <span class="tooltip-text">Selecciona si deseas simular usando datos históricos locales estables (recomendado) o datos en vivo vía Binance API.</span>
+                            </span>
+                            <span id="live-badge" class="live-badge-span" style="display: none; margin-left: 8px;">
+                                <span class="pulse-dot">●</span> <span id="live-badge-text">En Vivo</span>
+                            </span>
+                        </label>
+                        <select id="source-selector">
+                            <option value="historical">Histórico (Local)</option>
+                            <option value="live">En Vivo (Binance API)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-container glass-card" id="tv-chart">
+                    <div class="loading-spinner" id="chart-loader"></div>
+                </div>
+            </section>
+
+            <!-- Tab 2: Backtest -->
+            <section id="backtest" class="tab-pane">
+                <div class="backtest-grid">
+                    <div class="config-panel glass-card" style="padding: 16px; margin-bottom: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+                            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                                <h2 style="font-size: 1.05rem; color: var(--accent-blue); margin: 0; white-space: nowrap;">⚙️ Configuración</h2>
+                                
+                                <!-- Sub-Tabs de Navegación -->
+                                <div class="subtabs-nav" style="display: flex; gap: 6px; background: rgba(0, 0, 0, 0.4); padding: 4px; border-radius: 8px; border: 1px solid var(--border-color);">
+                                    <button type="button" class="subtab-btn active" data-subtab="sec-strategy" style="padding: 5px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">
+                                        🔵 Activo y Estrategia
+                                    </button>
+                                    <button type="button" class="subtab-btn" data-subtab="sec-barbell" style="padding: 5px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">
+                                        🟢 Gestión Barbell
+                                    </button>
+                                    <button type="button" class="subtab-btn" data-subtab="sec-genetic" style="padding: 5px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">
+                                        🟣 Búsqueda Genética (Rust)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Botones de Acción Inline -->
+                            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                                <button type="submit" form="backtest-form" class="btn-primary" id="run-backtest-btn" style="padding: 7px 18px; font-size: 0.82rem; font-weight: 600;">⚡ Ejecutar Backtest</button>
+                                <button type="button" class="btn-secondary" id="save-backtest-btn" style="border-color: var(--accent-green); color: var(--accent-green); padding: 7px 14px; font-size: 0.82rem;" disabled>⭐ Favoritos</button>
+                            </div>
+                        </div>
+
+                        <form id="backtest-form" style="display: flex; flex-direction: column; gap: 10px;">
+                            <!-- Sub-Pane 1: Activo y Estrategia -->
+                            <div id="sec-strategy" class="subtab-pane active" style="display: block;">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; align-items: end;">
+                                    <div class="control-group" style="margin-bottom: 0;">
+                                        <label for="strategy-selector">Estrategia
+                                            <span class="tooltip">?
+                                                <span class="tooltip-text">Selecciona la lógica matemática para la generación de señales. La 'Estrategia Genética Combinada' es la recomendada para cargar los resultados optimizados en Rust.</span>
+                                            </span>
+                                        </label>
+                                        <select id="strategy-selector"></select>
+                                    </div>
+                                    <div id="dynamic-params" class="dynamic-params" style="display: contents;">
+                                        <!-- Generated inputs go here horizontally -->
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 0;">
+                                        <label for="expiry-candles">Velas de Expiración
+                                            <span class="tooltip">?
+                                                <span class="tooltip-text">La cantidad de velas/minutos que transcurren antes de que expire la opción binaria.</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="expiry-candles" value="1" min="1">
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 0;">
+                                        <label for="payout">Payout (%)
+                                            <span class="tooltip">?
+                                                <span class="tooltip-text">El porcentaje de ganancia neta pagado por el broker (ej. 0.92 para 92%).</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="payout" value="0.92" min="0.1" step="0.01">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-Pane 2: Gestión Barbell -->
+                            <div id="sec-barbell" class="subtab-pane" style="display: none;">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; align-items: end;">
+                                    <div class="control-group" style="margin-bottom: 0;" id="group-n-consecutive">
+                                        <label for="backtest-n-consecutive">Racha N (Victorias consecutivas)
+                                            <span class="tooltip">?
+                                                <span class="tooltip-text">El número de victorias consecutivas necesarias en el ciclo para consolidar ganancias.</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="backtest-n-consecutive" value="4" min="1" max="15">
+                                        <small class="info-text" id="backtest-cycle-prob" style="display: block; margin-top: 4px; color: var(--accent-green); font-weight: 500; font-size: 0.72rem;">
+                                            Probabilidad de éxito del ciclo: --%
+                                        </small>
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 0;">
+                                        <label for="backtest-bet-fraction">Fracción de Apuesta
+                                            <span class="tooltip">?
+                                                <span class="tooltip-text">La fracción del capital asignado al ciclo de riesgo que se apuesta en la primera operación.</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="backtest-bet-fraction" value="0.10" min="0.01" max="1.0" step="0.01">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sub-Pane 3: Búsqueda Genética (Rust) -->
+                            <div id="sec-genetic" class="subtab-pane" style="display: none;">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; align-items: end;">
+                                    <div class="control-group" style="margin-bottom: 0;">
+                                        <label for="gen-generations" style="font-size: 0.75rem;">Generaciones
+                                            <span class="tooltip">?
+                                                <span class="tooltip-text">Número de ciclos evolutivos que correrá el algoritmo genético.</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="gen-generations" value="50" min="5" max="200" style="padding: 4px 8px; font-size: 0.8rem;">
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 0;">
+                                        <label for="gen-population" style="font-size: 0.75rem;">Población
+                                            <span class="tooltip">?
+                                                <span class="tooltip-text">Cantidad de combinaciones aleatorias iniciales.</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="gen-population" value="150" min="10" max="500" style="padding: 4px 8px; font-size: 0.8rem;">
+                                    </div>
+                                    <div class="control-group" style="margin-bottom: 0;">
+                                        <label for="gen-min-trades" style="font-size: 0.75rem;">Frecuencia Min. (trades/día)
+                                            <span class="tooltip">?
+                                                <span class="tooltip-text">Número mínimo de trades al día requeridos.</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="gen-min-trades" value="5.0" min="0.5" step="0.5" style="padding: 4px 8px; font-size: 0.8rem;">
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn-secondary" id="optimize-genetic-btn" style="border-color: #a371f7; color: #a371f7; background: rgba(163, 113, 247, 0.1); font-size: 0.8rem; padding: 7px 12px; width: 100%;">🚀 Ejecutar Búsqueda Rust</button>
+                                    </div>
+                                </div>
+                                <div class="progress-container" id="genetic-progress-container" style="display: none; margin-top: 10px; padding: 8px 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px;">
+                                    <div class="progress-bar-bg" style="width: 100%; height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;">
+                                        <div class="progress-bar-fill" id="genetic-progress-fill" style="width: 0%; height: 100%; background: #a371f7; transition: width 0.1s ease;"></div>
+                                    </div>
+                                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 5px; display: flex; justify-content: space-between;">
+                                        <span id="genetic-progress-text">Progreso: 0%</span>
+                                        <span id="genetic-progress-eta">ETA: --s</span>
+                                    </div>
+                                </div>
+                                <div id="genetic-feedback" style="display: none; font-size: 0.8rem; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: #010409; margin-top: 10px; line-height: 1.4;"></div>
+                            </div>
+
+                            <div class="progress-container" id="backtest-progress-container" style="display: none; margin-top: 10px; padding: 8px 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px;">
+                                <div class="progress-bar-bg" style="width: 100%; height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;">
+                                    <div class="progress-bar-fill" id="backtest-progress-fill" style="width: 0%; height: 100%; background: var(--accent-blue); transition: width 0.1s ease;"></div>
+                                </div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 5px; display: flex; justify-content: space-between;">
+                                    <span id="backtest-progress-text">Progreso: 0%</span>
+                                    <span id="backtest-progress-eta">ETA: --s</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="results-panel">
+                        <div class="stats-cards" id="quick-stats">
+                            <div class="stat-card"><h3>Win Rate</h3><p id="stat-winrate">--</p></div>
+                            <div class="stat-card"><h3>Trades</h3><p id="stat-trades">--</p></div>
+                            <div class="stat-card"><h3>P&L Neto</h3><p id="stat-pnl">--</p></div>
+                            <div class="stat-card"><h3>Max Win Streak</h3><p id="stat-mw">--</p></div>
+                            <div class="stat-card"><h3>Max Loss Streak</h3><p id="stat-ml">--</p></div>
+                        </div>
+                        <div class="equity-chart-container glass-card" style="display: flex; flex-direction: column;">
+                            <h3 style="font-size: 1rem; margin-bottom: 12px; color: var(--text-primary); display: flex; align-items: center;">
+                                Curva de Capital (Equity Curve)
+                                <span class="tooltip">?
+                                    <span class="tooltip-text">Muestra cómo sube o baja tu dinero a lo largo del tiempo. Sirve para ver el rendimiento general y si la estrategia es ganadora a largo plazo.</span>
+                                </span>
+                            </h3>
+                            <div class="chart-wrapper" style="flex: 1; min-height: 0;">
+                                <canvas id="equity-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="trades-table-container glass-card">
+                            <table class="trades-table" id="trades-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Tipo</th>
+                                        <th>Precio Entrada</th>
+                                        <th>Precio Salida</th>
+                                        <th>Resultado</th>
+                                        <th>P&L</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 2.5: Resultados -->
+            <section id="resultados" class="tab-pane">
+                <div class="resultados-grid">
+                    <!-- Izquierda: Optimizaciones Automáticas -->
+                    <div class="resultados-panel glass-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h2 style="font-size: 1.2rem; color: var(--accent-blue);">⚡ Optimizaciones Automáticas (Historial)</h2>
+                            <button type="button" class="btn-secondary" id="btn-clear-history" style="width: auto; padding: 6px 12px; font-size: 0.8rem; border-color: var(--accent-red); color: var(--accent-red);">Limpiar Historial</button>
+                        </div>
+                        <div class="backtest-list" id="history-list">
+                            <p class="empty-text">No hay optimizaciones automáticas registradas.</p>
+                        </div>
+                    </div>
+
+                    <!-- Derecha: Backtests Manuales & Favoritos -->
+                    <div class="resultados-panel glass-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h2 style="font-size: 1.2rem; color: var(--accent-purple);">⚙️ Backtests Manuales & Favoritos</h2>
+                        </div>
+                        <div class="backtest-list" id="saved-list">
+                            <p class="empty-text">No hay simulaciones manuales o favoritas guardadas.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 3: Estadisticas -->
+            <section id="estadisticas" class="tab-pane">
+                <div class="stats-grid">
+                    <div class="chart-card glass-card">
+                        <h3>
+                            Autocorrelación (Lags 1-10)
+                            <span class="tooltip">?
+                                <span class="tooltip-text">Mide si ganar o perder ahora influye en las próximas operaciones. Si las barras son altas, significa que hay patrones repetitivos y las rachas no son por pura suerte.</span>
+                            </span>
+                        </h3>
+                        <div class="chart-wrapper">
+                            <canvas id="autocorr-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>
+                            Distribución de Rachas
+                            <span class="tooltip">?
+                                <span class="tooltip-text">Muestra cuántas veces seguidas has ganado o perdido. Sirve para saber qué tan largas suelen ser tus rachas buenas y malas y prepararte para ellas.</span>
+                            </span>
+                        </h3>
+                        <div class="chart-wrapper">
+                            <canvas id="streaks-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>
+                            Win Rate por Hora
+                            <span class="tooltip">?
+                                <span class="tooltip-text">Muestra qué porcentaje de acierto tienes según la hora del día. Sirve para identificar las mejores y peores horas para operar.</span>
+                            </span>
+                        </h3>
+                        <div class="chart-wrapper">
+                            <canvas id="hourly-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>
+                            Probabilidades Condicionales
+                            <span class="tooltip">?
+                                <span class="tooltip-text">Calcula la probabilidad de ganar o perder dependiendo de si la operación anterior fue ganadora o perdedora. Te ayuda a ver si hay rachas lógicas o si el mercado cambia.</span>
+                            </span>
+                        </h3>
+                        <div class="cond-probs-grid" id="cond-probs">
+                            <!-- 2x2 grid -->
+                        </div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>
+                            Win Rate por Estado de Mercado
+                            <span class="tooltip">?
+                                <span class="tooltip-text">Compara tu efectividad cuando el mercado tiene mucha o poca velocidad (volatilidad) y cuando está en tendencia o lateral. Sirve para saber en qué condiciones te va mejor.</span>
+                            </span>
+                        </h3>
+                        <div class="chart-wrapper">
+                            <canvas id="market-state-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>
+                            Matriz de Transición (Markov)
+                            <span class="tooltip">?
+                                <span class="tooltip-text">Te muestra la probabilidad exacta de pasar de una victoria a otra victoria (o derrota), y de una derrota a otra. Sirve para entender cómo se encadenan tus resultados.</span>
+                            </span>
+                        </h3>
+                        <div style="flex: 1; overflow-y: auto; width: 100%;">
+                            <table class="markov-table" id="markov-table">
+                                <!-- populated -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab 4: Optimizador -->
+            <section id="optimizador" class="tab-pane">
+                <div class="optimizer-grid">
+                    <div class="optimizer-sidebar glass-card">
+                        <h2>Plan de Rachas (Arbitraje)</h2>
+                        <div class="control-group">
+                            <label for="opt-winrate">Win Rate de la Estrategia (%)
+                                <span class="tooltip">?
+                                    <span class="tooltip-text">La efectividad de acierto histórica de la estrategia cargada del backtest.</span>
+                                </span>
+                            </label>
+                            <input type="number" id="opt-winrate" step="0.01" placeholder="Ej. 65.5">
+                        </div>
+                        <div class="control-group">
+                            <label for="opt-payout">Payout del Broker (ej. 0.85)
+                                <span class="tooltip">?
+                                    <span class="tooltip-text">El porcentaje neto pagado por el broker por cada operación ganada (85% = 0.85).</span>
+                                </span>
+                            </label>
+                            <input type="number" id="opt-payout" step="0.01" value="0.85">
+                        </div>
+                        <hr style="border-color: var(--border-color); margin: 15px 0;">
+                        <div class="control-group">
+                            <label for="opt-base-capital">💰 Capital Base (P2P Arbitraje, $)
+                                <span class="tooltip">?
+                                    <span class="tooltip-text">Tu capital principal resguardado en arbitraje P2P (ej. $1000). Este es el patrimonio que quieres DUPLICAR. No se arriesga.</span>
+                                </span>
+                            </label>
+                            <input type="number" id="opt-base-capital" value="1000" min="10">
+                        </div>
+                        <div class="control-group">
+                            <label for="opt-profit-pct">📈 Rendimiento Mensual Arbitraje (%)
+                                <span class="tooltip">?
+                                    <span class="tooltip-text">El % mensual que genera tu P2P (ej. 20% = $200 de ganancia). ESTE dinero es el que arriesgas en opciones binarias.</span>
+                                </span>
+                            </label>
+                            <input type="number" id="opt-profit-pct" value="20" min="1" max="100">
+                        </div>
+                        <div class="control-group">
+                            <label for="opt-risk-capital">🎯 Capital de Riesgo Mensual (auto, $)
+                                <span class="tooltip">?
+                                    <span class="tooltip-text">Ganancia mensual de arbitraje que asignas a opciones binarias. Autocalculado (Base × Rendimiento%). Si pierdes todo, tu capital base sigue intacto.</span>
+                                </span>
+                            </label>
+                            <input type="number" id="opt-risk-capital" value="200" readonly style="background: rgba(255,255,255,0.05); font-weight: bold; color: var(--accent-blue);">
+                        </div>
+                        <hr style="border-color: var(--border-color); margin: 15px 0;">
+                        <div class="control-group">
+                            <label for="opt-target-capital" style="color: var(--accent-green); font-weight: 700;">🏆 Meta: Duplicar Patrimonio (Ganancia Neta Objetivo, $)
+                                <span class="tooltip">?
+                                    <span class="tooltip-text">Ganancia neta que debes lograr con las rachas para DUPLICAR tu capital base. Por defecto = Capital Base ($1000). Si logras esto, tu patrimonio pasa de $1000 a $2000+.</span>
+                                </span>
+                            </label>
+                            <input type="number" id="opt-target-capital" value="1000" min="50" style="border-color: var(--accent-green); color: var(--accent-green); font-weight: 700;">
+                            <small style="color: var(--text-secondary); margin-top: 4px; display: block; font-size: 0.72rem;">💡 Mantén igual al Capital Base para calcular duplicación exacta</small>
+                        </div>
+                        <div class="control-group">
+                            <label for="opt-attempts">Intentos / Ciclos (X)
+                                <span class="tooltip">?
+                                    <span class="tooltip-text">El número de intentos en que vas a dividir tu capital de riesgo mensual (ej. 5 intentos de $40).</span>
+                                </span>
+                            </label>
+                            <input type="number" id="opt-attempts" value="5" min="1" max="50">
+                        </div>
+                        
+                        <button class="btn-primary" id="btn-calc-streak" style="background: var(--accent-green); border-color: var(--accent-green); box-shadow: 0 0 10px rgba(63, 185, 80, 0.3); width: 100%;">Calcular Plan de Rachas</button>
+                        <div class="progress-container" id="streak-progress-container" style="display: none; margin-top: 10px; padding: 8px 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px;">
+                            <div class="progress-bar-bg" style="width: 100%; height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;">
+                                <div class="progress-bar-fill" id="streak-progress-fill" style="width: 0%; height: 100%; background: var(--accent-green); transition: width 0.1s ease;"></div>
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 5px; display: flex; justify-content: space-between;">
+                                <span id="streak-progress-text">Progreso: 0%</span>
+                                <span id="streak-progress-eta">ETA: --s</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="optimizer-charts">
+                        <!-- Tarjeta de Plan Recomendado -->
+                        <div class="chart-card glass-card" style="grid-column: span 2; margin-bottom: 0;">
+                            <h2 style="font-size: 1.15rem; color: var(--accent-blue); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                                📊 Plan de Rachas Recomendado
+                            </h2>
+                            <div id="streak-recommendation-content">
+                                <p class="empty-text" style="text-align: left; padding: 10px 0;">Ejecuta "Calcular Plan de Rachas" para ver la recomendación óptima para tu capital de riesgo.</p>
+                            </div>
+                        </div>
+
+                        <!-- Escalera de Apuestas -->
+                        <div class="chart-card glass-card">
+                            <h3>
+                                🪜 Escalera de Apuestas Paso a Paso
+                                <span class="tooltip">?
+                                    <span class="tooltip-text">Sigue esta progresión de apuestas en tu broker. Si ganas todas las operaciones de la racha de forma consecutiva, completas el ciclo con éxito y retiras. Si pierdes alguna operación, pierdes ese intento y comienzas el siguiente intento desde el Paso 1.</span>
+                                </span>
+                            </h3>
+                            <div id="bet-ladder-container" style="overflow-y: auto; max-height: 380px; padding-right: 5px;">
+                                <p class="empty-text">No hay plan activo.</p>
+                            </div>
+                        </div>
+
+                        <!-- Tabla Comparativa de Alternativas -->
+                        <div class="chart-card glass-card" style="display: flex; flex-direction: column;">
+                            <h3>
+                                🔍 Tabla Comparativa por Racha (N)
+                                <span class="tooltip">?
+                                    <span class="tooltip-text">Compara qué pasa con diferentes tamaños de rachas (N). A menor racha, mayor probabilidad de éxito pero menor multiplicación del capital. La racha recomendada se resalta en verde.</span>
+                                </span>
+                            </h3>
+                            <div style="flex: 1; overflow-y: auto; width: 100%;">
+                                <table class="n-table" id="streak-alternatives-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Racha (N)</th>
+                                            <th>P(1 Racha)</th>
+                                            <th>M (Rachas)</th>
+                                            <th>P(Duplicación)</th>
+                                            <th>Apuesta</th>
+                                            <th>Final</th>
+                                            <th>EV (USD)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td colspan="7" class="empty-text" style="text-align:center">Sin datos</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Monte Carlo de Campaña (Percentiles) -->
+                        <div class="chart-card glass-card" style="grid-column: span 2;">
+                            <h3>
+                                📈 Proyección de Crecimiento de Campaña (Monte Carlo)
+                                <span class="tooltip">?
+                                    <span class="tooltip-text">Simulación de 5,000 campañas aleatorias del plan de rachas. Muestra cómo se comportaría tu capital de riesgo de $200 a lo largo de los intentos. Si cruzas la meta de $1000, ganas. Si tocas $0 en todos los intentos, quiebras.</span>
+                                </span>
+                            </h3>
+                            <div class="chart-wrapper">
+                                <canvas id="mc-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="/static/js/charts.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

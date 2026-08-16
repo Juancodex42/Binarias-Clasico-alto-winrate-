@@ -1,0 +1,5 @@
+Total signals in series: 129
+Total labels created: 128
+Total trades in sim: 128
+
+TOTAL MISMATCHES: 0

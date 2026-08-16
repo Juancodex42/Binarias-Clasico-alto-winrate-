@@ -1,0 +1,23 @@
+Total signals in series: 129
+Total labels created: 128
+Total trades in sim: 71
+Idx 0 (PUT): in_labels=True (val=0.0), in_sim=True (res=LOSS)
+Idx 4 (CALL): in_labels=True (val=0.0), in_sim=True (res=LOSS)
+Idx 5 (CALL): in_labels=True (val=1.0), in_sim=True (res=WIN)
+Idx 6 (CALL): in_labels=True (val=0.0), in_sim=True (res=LOSS)
+Idx 10 (CALL): in_labels=True (val=0.0), in_sim=True (res=LOSS)
+Idx 13 (PUT): in_labels=True (val=0.0), in_sim=True (res=LOSS)
+Idx 14 (CALL): in_labels=True (val=0.0), in_sim=True (res=LOSS)
+Idx 15 (CALL): in_labels=True (val=0.0), in_sim=True (res=LOSS)
+Idx 16 (PUT): in_labels=True (val=1.0), in_sim=True (res=WIN)
+Idx 19 (PUT): in_labels=True (val=1.0), in_sim=True (res=WIN)
+Idx 21 (CALL): in_labels=True (val=0.0), in_sim=True (res=LOSS)
+Idx 22 (PUT): in_labels=True (val=0.0), in_sim=True (res=LOSS)
+Idx 23 (PUT): in_labels=True (val=1.0), in_sim=True (res=WIN)
+Idx 26 (CALL): in_labels=True (val=0.0), in_sim=True (res=LOSS)
+Idx 29 (CALL): in_labels=True (val=1.0), in_sim=True (res=WIN)
+Idx 31 (CALL): in_labels=True (val=1.0), in_sim=True (res=WIN)
+Idx 32 (CALL): in_labels=True (val=1.0), in_sim=True (res=WIN)
+Idx 36 (PUT): in_labels=True (val=1.0), in_sim=True (res=WIN)
+Idx 37 (CALL): in_labels=True (val=0.0), in_sim=True (res=LOSS)
+Idx 40 (CALL): in_labels=True (val=0.0), in_sim=True (res=LOSS)
