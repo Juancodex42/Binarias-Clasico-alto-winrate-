@@ -1,0 +1,1737 @@
+{
+  "all_ids": [
+    {
+      "id": "mode-smart",
+      "tag": "button",
+      "classes": [
+        "mode-btn",
+        "active"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "mode-advanced",
+      "tag": "button",
+      "classes": [
+        "mode-btn"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "btn-resultados",
+      "tag": "button",
+      "classes": [
+        "tab-btn"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "btn-estadisticas",
+      "tag": "button",
+      "classes": [
+        "tab-btn"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "btn-optimizador",
+      "tag": "button",
+      "classes": [
+        "tab-btn"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-dashboard",
+      "tag": "section",
+      "classes": [
+        "tab-pane",
+        "active"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "btn-smart-run",
+      "tag": "button",
+      "classes": [
+        "btn-primary"
+      ],
+      "type": "button",
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-preset-select",
+      "tag": "select",
+      "classes": [
+        "form-control"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-streak-length",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "3"
+    },
+    {
+      "id": "smart-base-capital",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "1000"
+    },
+    {
+      "id": "smart-profit-pct",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "20"
+    },
+    {
+      "id": "smart-risk-capital",
+      "tag": "input",
+      "classes": [
+        "input-readonly"
+      ],
+      "type": "number",
+      "name": null,
+      "value": "200"
+    },
+    {
+      "id": "smart-attempts",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "6"
+    },
+    {
+      "id": "smart-payout",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "0.85"
+    },
+    {
+      "id": "smart-generations",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "50"
+    },
+    {
+      "id": "smart-population",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "150"
+    },
+    {
+      "id": "smart-console-box",
+      "tag": "div",
+      "classes": [
+        "smart-console-wrapper"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-progress-bar-fill",
+      "tag": "div",
+      "classes": [
+        "smart-progress-bar-fill"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-console-logs",
+      "tag": "div",
+      "classes": [
+        "console-body"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-top-5-box",
+      "tag": "div",
+      "classes": [
+        "top-strategies-wrapper",
+        "glass-card"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-top-5-list",
+      "tag": "div",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-rec-content",
+      "tag": "div",
+      "classes": [
+        "smart-rec-text"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-ladder-content",
+      "tag": "div",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-correlation-canvas",
+      "tag": "canvas",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-selected-assets-table",
+      "tag": "table",
+      "classes": [
+        "markov-table"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-selected-assets-body",
+      "tag": "tbody",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-equity-chart-canvas",
+      "tag": "canvas",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-mc-chart-canvas",
+      "tag": "canvas",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-asset-selector",
+      "tag": "select",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-tv-chart",
+      "tag": "div",
+      "classes": [
+        "chart-container"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-tv-chart-empty",
+      "tag": "div",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-markov-table",
+      "tag": "table",
+      "classes": [
+        "markov-table"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "smart-markov-explanation",
+      "tag": "div",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "dashboard",
+      "tag": "section",
+      "classes": [
+        "tab-pane"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "pair-selector",
+      "tag": "select",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "interval-selector",
+      "tag": "select",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "live-badge",
+      "tag": "span",
+      "classes": [
+        "live-badge-span"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "live-badge-text",
+      "tag": "span",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "source-selector",
+      "tag": "select",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "tv-chart",
+      "tag": "div",
+      "classes": [
+        "chart-container",
+        "glass-card"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "chart-loader",
+      "tag": "div",
+      "classes": [
+        "loading-spinner"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "backtest",
+      "tag": "section",
+      "classes": [
+        "tab-pane"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "run-backtest-btn",
+      "tag": "button",
+      "classes": [
+        "btn-primary"
+      ],
+      "type": "submit",
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "save-backtest-btn",
+      "tag": "button",
+      "classes": [
+        "btn-secondary"
+      ],
+      "type": "button",
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "backtest-form",
+      "tag": "form",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "sec-strategy",
+      "tag": "div",
+      "classes": [
+        "subtab-pane",
+        "active"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "strategy-selector",
+      "tag": "select",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "dynamic-params",
+      "tag": "div",
+      "classes": [
+        "dynamic-params"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "expiry-candles",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "1"
+    },
+    {
+      "id": "payout",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "0.92"
+    },
+    {
+      "id": "sec-barbell",
+      "tag": "div",
+      "classes": [
+        "subtab-pane"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "group-n-consecutive",
+      "tag": "div",
+      "classes": [
+        "control-group"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "backtest-n-consecutive",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "4"
+    },
+    {
+      "id": "backtest-cycle-prob",
+      "tag": "small",
+      "classes": [
+        "info-text"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "backtest-bet-fraction",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "0.10"
+    },
+    {
+      "id": "sec-genetic",
+      "tag": "div",
+      "classes": [
+        "subtab-pane"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "gen-generations",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "50"
+    },
+    {
+      "id": "gen-population",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "150"
+    },
+    {
+      "id": "gen-min-trades",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "5.0"
+    },
+    {
+      "id": "optimize-genetic-btn",
+      "tag": "button",
+      "classes": [
+        "btn-secondary"
+      ],
+      "type": "button",
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "genetic-progress-container",
+      "tag": "div",
+      "classes": [
+        "progress-container"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "genetic-progress-fill",
+      "tag": "div",
+      "classes": [
+        "progress-bar-fill"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "genetic-progress-text",
+      "tag": "span",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "genetic-progress-eta",
+      "tag": "span",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "genetic-feedback",
+      "tag": "div",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "backtest-progress-container",
+      "tag": "div",
+      "classes": [
+        "progress-container"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "backtest-progress-fill",
+      "tag": "div",
+      "classes": [
+        "progress-bar-fill"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "backtest-progress-text",
+      "tag": "span",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "backtest-progress-eta",
+      "tag": "span",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "quick-stats",
+      "tag": "div",
+      "classes": [
+        "stats-cards"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "stat-winrate",
+      "tag": "p",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "stat-trades",
+      "tag": "p",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "stat-pnl",
+      "tag": "p",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "stat-mw",
+      "tag": "p",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "stat-ml",
+      "tag": "p",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "equity-chart",
+      "tag": "canvas",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "trades-table",
+      "tag": "table",
+      "classes": [
+        "trades-table"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "resultados",
+      "tag": "section",
+      "classes": [
+        "tab-pane"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "btn-clear-history",
+      "tag": "button",
+      "classes": [
+        "btn-secondary"
+      ],
+      "type": "button",
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "history-list",
+      "tag": "div",
+      "classes": [
+        "backtest-list"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "saved-list",
+      "tag": "div",
+      "classes": [
+        "backtest-list"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "estadisticas",
+      "tag": "section",
+      "classes": [
+        "tab-pane"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "autocorr-chart",
+      "tag": "canvas",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "streaks-chart",
+      "tag": "canvas",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "hourly-chart",
+      "tag": "canvas",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "cond-probs",
+      "tag": "div",
+      "classes": [
+        "cond-probs-grid"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "market-state-chart",
+      "tag": "canvas",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "markov-table",
+      "tag": "table",
+      "classes": [
+        "markov-table"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "optimizador",
+      "tag": "section",
+      "classes": [
+        "tab-pane"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "opt-winrate",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "opt-payout",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "0.85"
+    },
+    {
+      "id": "opt-base-capital",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "1000"
+    },
+    {
+      "id": "opt-profit-pct",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "20"
+    },
+    {
+      "id": "opt-risk-capital",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "200"
+    },
+    {
+      "id": "opt-target-capital",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "1000"
+    },
+    {
+      "id": "opt-attempts",
+      "tag": "input",
+      "classes": [],
+      "type": "number",
+      "name": null,
+      "value": "5"
+    },
+    {
+      "id": "btn-calc-streak",
+      "tag": "button",
+      "classes": [
+        "btn-primary"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "streak-progress-container",
+      "tag": "div",
+      "classes": [
+        "progress-container"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "streak-progress-fill",
+      "tag": "div",
+      "classes": [
+        "progress-bar-fill"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "streak-progress-text",
+      "tag": "span",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "streak-progress-eta",
+      "tag": "span",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "streak-recommendation-content",
+      "tag": "div",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "bet-ladder-container",
+      "tag": "div",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "streak-alternatives-table",
+      "tag": "table",
+      "classes": [
+        "n-table"
+      ],
+      "type": null,
+      "name": null,
+      "value": null
+    },
+    {
+      "id": "mc-chart",
+      "tag": "canvas",
+      "classes": [],
+      "type": null,
+      "name": null,
+      "value": null
+    }
+  ],
+  "inputs": [
+    {
+      "tag": "input",
+      "id": null,
+      "name": "smart-universe",
+      "type": "checkbox",
+      "value": "WTI",
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": true,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "smart-universe",
+      "type": "checkbox",
+      "value": "NASDAQ",
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": true,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "smart-universe",
+      "type": "checkbox",
+      "value": "GBPJPY",
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": true,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "smart-universe",
+      "type": "checkbox",
+      "value": "XAUUSD",
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": true,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "smart-universe",
+      "type": "checkbox",
+      "value": "DOGEUSDT",
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": true,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "smart-universe",
+      "type": "checkbox",
+      "value": "ADAUSDT",
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": true,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "smart-universe",
+      "type": "checkbox",
+      "value": "BTCUSDT",
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": true,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "smart-universe",
+      "type": "checkbox",
+      "value": "BNBUSDT",
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": true,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "name": "smart-universe",
+      "type": "checkbox",
+      "value": "ETHUSDT",
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "select",
+      "id": "smart-preset-select",
+      "name": null,
+      "type": "select",
+      "value": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "smart-streak-length",
+      "name": null,
+      "type": "number",
+      "value": "3",
+      "min": "1",
+      "max": "15",
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "smart-base-capital",
+      "name": null,
+      "type": "number",
+      "value": "1000",
+      "min": "10",
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "smart-profit-pct",
+      "name": null,
+      "type": "number",
+      "value": "20",
+      "min": "1",
+      "max": "100",
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "smart-risk-capital",
+      "name": null,
+      "type": "number",
+      "value": "200",
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": true,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "smart-attempts",
+      "name": null,
+      "type": "number",
+      "value": "6",
+      "min": "1",
+      "max": "50",
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "smart-payout",
+      "name": null,
+      "type": "number",
+      "value": "0.85",
+      "min": "0.1",
+      "max": "1.0",
+      "step": "0.01",
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "smart-generations",
+      "name": null,
+      "type": "number",
+      "value": "50",
+      "min": "5",
+      "max": "200",
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "smart-population",
+      "name": null,
+      "type": "number",
+      "value": "150",
+      "min": "10",
+      "max": "500",
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "select",
+      "id": "smart-asset-selector",
+      "name": null,
+      "type": "select",
+      "value": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "select",
+      "id": "pair-selector",
+      "name": null,
+      "type": "select",
+      "value": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "select",
+      "id": "interval-selector",
+      "name": null,
+      "type": "select",
+      "value": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "select",
+      "id": "source-selector",
+      "name": null,
+      "type": "select",
+      "value": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "select",
+      "id": "strategy-selector",
+      "name": null,
+      "type": "select",
+      "value": null,
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "expiry-candles",
+      "name": null,
+      "type": "number",
+      "value": "1",
+      "min": "1",
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "payout",
+      "name": null,
+      "type": "number",
+      "value": "0.92",
+      "min": "0.1",
+      "max": null,
+      "step": "0.01",
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "backtest-n-consecutive",
+      "name": null,
+      "type": "number",
+      "value": "4",
+      "min": "1",
+      "max": "15",
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "backtest-bet-fraction",
+      "name": null,
+      "type": "number",
+      "value": "0.10",
+      "min": "0.01",
+      "max": "1.0",
+      "step": "0.01",
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "gen-generations",
+      "name": null,
+      "type": "number",
+      "value": "50",
+      "min": "5",
+      "max": "200",
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "gen-population",
+      "name": null,
+      "type": "number",
+      "value": "150",
+      "min": "10",
+      "max": "500",
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "gen-min-trades",
+      "name": null,
+      "type": "number",
+      "value": "5.0",
+      "min": "0.5",
+      "max": null,
+      "step": "0.5",
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "opt-winrate",
+      "name": null,
+      "type": "number",
+      "value": null,
+      "min": null,
+      "max": null,
+      "step": "0.01",
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "opt-payout",
+      "name": null,
+      "type": "number",
+      "value": "0.85",
+      "min": null,
+      "max": null,
+      "step": "0.01",
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "opt-base-capital",
+      "name": null,
+      "type": "number",
+      "value": "1000",
+      "min": "10",
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "opt-profit-pct",
+      "name": null,
+      "type": "number",
+      "value": "20",
+      "min": "1",
+      "max": "100",
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "opt-risk-capital",
+      "name": null,
+      "type": "number",
+      "value": "200",
+      "min": null,
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": true,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "opt-target-capital",
+      "name": null,
+      "type": "number",
+      "value": "1000",
+      "min": "50",
+      "max": null,
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    },
+    {
+      "tag": "input",
+      "id": "opt-attempts",
+      "name": null,
+      "type": "number",
+      "value": "5",
+      "min": "1",
+      "max": "50",
+      "step": null,
+      "checked": false,
+      "readonly": false,
+      "disabled": false,
+      "data_attrs": {}
+    }
+  ],
+  "buttons": [
+    {
+      "id": "mode-smart",
+      "class": [
+        "mode-btn",
+        "active"
+      ],
+      "type": "button",
+      "text": "⚡ Modo Inteligente (Piloto Automático)",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {
+        "data-mode": "smart"
+      }
+    },
+    {
+      "id": "mode-advanced",
+      "class": [
+        "mode-btn"
+      ],
+      "type": "button",
+      "text": "⚙️ Modo Avanzado (Manual)",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {
+        "data-mode": "advanced"
+      }
+    },
+    {
+      "id": null,
+      "class": [
+        "tab-btn"
+      ],
+      "type": "button",
+      "text": "Mercado",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {
+        "data-tab": "dashboard"
+      }
+    },
+    {
+      "id": null,
+      "class": [
+        "tab-btn"
+      ],
+      "type": "button",
+      "text": "Backtest",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {
+        "data-tab": "backtest"
+      }
+    },
+    {
+      "id": "btn-resultados",
+      "class": [
+        "tab-btn"
+      ],
+      "type": "button",
+      "text": "Resultados",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {
+        "data-tab": "resultados"
+      }
+    },
+    {
+      "id": "btn-estadisticas",
+      "class": [
+        "tab-btn"
+      ],
+      "type": "button",
+      "text": "Estadísticas",
+      "disabled": true,
+      "form": null,
+      "data_attrs": {
+        "data-tab": "estadisticas"
+      }
+    },
+    {
+      "id": "btn-optimizador",
+      "class": [
+        "tab-btn"
+      ],
+      "type": "button",
+      "text": "Optimizador",
+      "disabled": true,
+      "form": null,
+      "data_attrs": {
+        "data-tab": "optimizador"
+      }
+    },
+    {
+      "id": "btn-smart-run",
+      "class": [
+        "btn-primary"
+      ],
+      "type": "button",
+      "text": "⚡ Auto-Optimizar Estrategia",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {}
+    },
+    {
+      "id": null,
+      "class": [
+        "subtab-btn",
+        "active"
+      ],
+      "type": "button",
+      "text": "🔵 Activo y Estrategia",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {
+        "data-subtab": "sec-strategy"
+      }
+    },
+    {
+      "id": null,
+      "class": [
+        "subtab-btn"
+      ],
+      "type": "button",
+      "text": "🟢 Gestión Barbell",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {
+        "data-subtab": "sec-barbell"
+      }
+    },
+    {
+      "id": null,
+      "class": [
+        "subtab-btn"
+      ],
+      "type": "button",
+      "text": "🟣 Búsqueda Genética (Rust)",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {
+        "data-subtab": "sec-genetic"
+      }
+    },
+    {
+      "id": "run-backtest-btn",
+      "class": [
+        "btn-primary"
+      ],
+      "type": "submit",
+      "text": "⚡ Ejecutar Backtest",
+      "disabled": false,
+      "form": "backtest-form",
+      "data_attrs": {}
+    },
+    {
+      "id": "save-backtest-btn",
+      "class": [
+        "btn-secondary"
+      ],
+      "type": "button",
+      "text": "⭐ Favoritos",
+      "disabled": true,
+      "form": null,
+      "data_attrs": {}
+    },
+    {
+      "id": "optimize-genetic-btn",
+      "class": [
+        "btn-secondary"
+      ],
+      "type": "button",
+      "text": "🚀 Ejecutar Búsqueda Rust",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {}
+    },
+    {
+      "id": "btn-clear-history",
+      "class": [
+        "btn-secondary"
+      ],
+      "type": "button",
+      "text": "Limpiar Historial",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {}
+    },
+    {
+      "id": "btn-calc-streak",
+      "class": [
+        "btn-primary"
+      ],
+      "type": "button",
+      "text": "Calcular Plan de Rachas",
+      "disabled": false,
+      "form": null,
+      "data_attrs": {}
+    }
+  ],
+  "canvases": [
+    {
+      "id": "smart-correlation-canvas",
+      "class": []
+    },
+    {
+      "id": "smart-equity-chart-canvas",
+      "class": []
+    },
+    {
+      "id": "smart-mc-chart-canvas",
+      "class": []
+    },
+    {
+      "id": "equity-chart",
+      "class": []
+    },
+    {
+      "id": "autocorr-chart",
+      "class": []
+    },
+    {
+      "id": "streaks-chart",
+      "class": []
+    },
+    {
+      "id": "hourly-chart",
+      "class": []
+    },
+    {
+      "id": "market-state-chart",
+      "class": []
+    },
+    {
+      "id": "mc-chart",
+      "class": []
+    }
+  ],
+  "tables": [
+    {
+      "id": "smart-selected-assets-table",
+      "class": [
+        "markov-table"
+      ]
+    },
+    {
+      "id": "smart-markov-table",
+      "class": [
+        "markov-table"
+      ]
+    },
+    {
+      "id": "trades-table",
+      "class": [
+        "trades-table"
+      ]
+    },
+    {
+      "id": "markov-table",
+      "class": [
+        "markov-table"
+      ]
+    },
+    {
+      "id": "streak-alternatives-table",
+      "class": [
+        "n-table"
+      ]
+    }
+  ]
+}

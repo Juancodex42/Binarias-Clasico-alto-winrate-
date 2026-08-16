@@ -1,0 +1,16 @@
+{
+  "rust_engine": {
+    "cargo_exists": true,
+    "main_rs_exists": true,
+    "main_rs_len": 34519,
+    "has_population": false,
+    "has_crossover": true,
+    "has_fitness": true,
+    "has_parallel": true
+  },
+  "app_routes": {
+    "missing_routes": [],
+    "has_sse_generator": true,
+    "has_rust_subprocess": true
+  }
+}

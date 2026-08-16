@@ -210,6 +210,60 @@ ENTREGABLES:
 3. Señales plotshape con triángulos verdes (CALL) y rojos (PUT) y alertcondition.`;
 }
 
+function showToast(message, type = 'info', duration = 3000) {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.style.cssText = 'position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; pointer-events: none;';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast-message toast-${type}`;
+    
+    let borderColor = 'rgba(56, 189, 248, 0.35)';
+    if (type === 'success') {
+        borderColor = 'rgba(16, 185, 129, 0.4)';
+    } else if (type === 'error') {
+        borderColor = 'rgba(244, 63, 94, 0.4)';
+    }
+
+    toast.style.cssText = `
+        background: #141d2e;
+        color: #f0f6fc;
+        border: 1px solid ${borderColor};
+        border-radius: 6px;
+        padding: 10px 16px;
+        font-size: 0.82rem;
+        font-family: 'Inter', system-ui, sans-serif;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 180ms cubic-bezier(0.16, 1, 0.3, 1), transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: auto;
+    `;
+    toast.innerHTML = `<span>${message}</span>`;
+    container.appendChild(toast);
+
+    requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+    });
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+            if (toast.parentElement) toast.parentElement.removeChild(toast);
+        }, 200);
+    }, duration);
+}
+window.showToast = showToast;
+
 window.togglePineScriptModal = function(id) {
     const el = document.getElementById(`pinescript-box-${id}`);
     if (el) {
@@ -221,7 +275,7 @@ window.copyPineScript = function(id) {
     const txt = document.getElementById(`pinescript-code-${id}`);
     if (txt) {
         navigator.clipboard.writeText(txt.value);
-        alert('✅ Código Pine Script (v5) copiado al portapapeles.');
+        showToast('✅ Código Pine Script (v5) copiado al portapapeles.', 'success');
     }
 };
 
@@ -229,7 +283,7 @@ window.copyAIPrompt = function(id) {
     const txt = document.getElementById(`ai-prompt-${id}`);
     if (txt) {
         navigator.clipboard.writeText(txt.value);
-        alert('✅ Prompt estructurado para IA copiado al portapapeles.');
+        showToast('✅ Prompt estructurado para IA copiado al portapapeles.', 'success');
     }
 };
 
@@ -292,7 +346,7 @@ function updateLiveCandleInChart(updatedCandle) {
                 isBearish = true;
             }
 
-            const barColor = isBearish ? '#ff4d4d' : (updatedCandle.close > updatedCandle.open || updatedCandle.close > prevClose ? '#00f5a0' : '#8b949e');
+            const barColor = isBearish ? '#f43f5e' : (updatedCandle.close > updatedCandle.open || updatedCandle.close > prevClose ? '#10b981' : '#94a3b8');
             const candleWithColor = {
                 ...updatedCandle,
                 color: barColor,
@@ -432,7 +486,7 @@ function buildChartMarkers(signals) {
             markers.push({
                 time: s.time,
                 position: 'belowBar',
-                color: '#00f5a0',
+                color: '#10b981',
                 shape: 'arrowUp',
                 text: `CALL${priceStr}`
             });
@@ -440,7 +494,7 @@ function buildChartMarkers(signals) {
             markers.push({
                 time: s.time,
                 position: 'aboveBar',
-                color: '#ff4d4d',
+                color: '#f43f5e',
                 shape: 'arrowDown',
                 text: `PUT${priceStr}`
             });
@@ -459,7 +513,7 @@ function buildChartMarkers(signals) {
             markers.push({
                 time: s.time,
                 position: exitPos,
-                color: isWin ? '#00f5a0' : '#ff4d4d',
+                color: isWin ? '#10b981' : '#f43f5e',
                 shape: 'circle',
                 text: isWin ? `WIN${exitPriceStr}${pnlStr}` : `LOSS${exitPriceStr}${pnlStr}`
             });
@@ -519,6 +573,17 @@ async function initApp() {
         const r = entries[0].contentRect;
         if (smartChart) smartChart.applyOptions({ height: r.height, width: r.width });
     }).observe(document.getElementById('smart-tv-chart'));
+
+    // Observe Correlation Canvas container for High-DPI responsive redraw
+    const smartCorrCanvas = document.getElementById('smart-correlation-canvas');
+    if (smartCorrCanvas && smartCorrCanvas.parentElement) {
+        new ResizeObserver(entries => {
+            if (entries.length === 0) return;
+            if (smartCorrCanvas._lastMatrix && smartCorrCanvas._lastLabels) {
+                createCorrelationHeatmap('smart-correlation-canvas', smartCorrCanvas._lastMatrix, smartCorrCanvas._lastLabels);
+            }
+        }).observe(smartCorrCanvas.parentElement);
+    }
 
     // Auto-calculate risk capital for Smart Mode
     const smartBaseCap = document.getElementById('smart-base-capital');
@@ -637,7 +702,7 @@ function prepareCandles(candles) {
                 isBearish = true;
             }
 
-            const barColor = isBearish ? '#ff4d4d' : (close > open || (prevClose !== null && close > prevClose) ? '#00f5a0' : '#8b949e');
+            const barColor = isBearish ? '#f43f5e' : (close > open || (prevClose !== null && close > prevClose) ? '#10b981' : '#94a3b8');
 
             clean.push({
                 time: c.time,
@@ -678,6 +743,11 @@ function switchTab(tabId) {
                 }
             }
         });
+
+        const smartCorr = document.getElementById('smart-correlation-canvas');
+        if (smartCorr && smartCorr._lastMatrix && smartCorr._lastLabels) {
+            createCorrelationHeatmap('smart-correlation-canvas', smartCorr._lastMatrix, smartCorr._lastLabels);
+        }
     }, 50);
 }
 
@@ -1094,8 +1164,8 @@ function displayBacktestResults(data) {
             const trade = trades[idx];
             if (!trade) return;
             tbody.querySelectorAll('tr').forEach(r => r.style.background = 'transparent');
-            row.style.background = 'rgba(163, 113, 247, 0.15)';
-            highlightTradeOnChart(trade, tvChart, candleSeries);
+            row.style.background = 'rgba(168, 85, 247, 0.15)';
+            highlightTradeOnChart(trade, mainChart, candleSeries);
         });
     });
 }
@@ -1113,7 +1183,7 @@ function highlightTradeOnChart(trade, chartObj, seriesObj) {
     if (trade.entry_price) {
         const entryLine = seriesObj.createPriceLine({
             price: trade.entry_price,
-            color: trade.direction === 'CALL' ? '#00f5a0' : '#ff4d4d',
+            color: trade.direction === 'CALL' ? '#10b981' : '#f43f5e',
             lineWidth: 2,
             lineStyle: LightweightCharts.LineStyle.Dashed,
             axisLabelVisible: true,
@@ -1125,7 +1195,7 @@ function highlightTradeOnChart(trade, chartObj, seriesObj) {
     if (trade.exit_price) {
         const exitLine = seriesObj.createPriceLine({
             price: trade.exit_price,
-            color: trade.result === 'WIN' ? '#00f5a0' : '#ff4d4d',
+            color: trade.result === 'WIN' ? '#10b981' : '#f43f5e',
             lineWidth: 2,
             lineStyle: LightweightCharts.LineStyle.Dotted,
             axisLabelVisible: true,
@@ -1135,27 +1205,36 @@ function highlightTradeOnChart(trade, chartObj, seriesObj) {
     }
 }
 
-
 function displayStatistics(stats) {
-    // Autocorrelation
+    if (!stats) return;
+
+    // Autocorrelation: Quantum Amethyst for positive, Rose Crimson for negative
     const ac = stats.dependency?.autocorrelation || [];
     if (ac.length > 0) {
         const labels = ac.map((_, i) => `Lag ${i + 1}`);
-        createBarChart('autocorr-chart', labels, ac, 'Autocorrelacion', '#a371f7');
+        const colors = ac.map(v => v >= 0 ? '#a855f7' : '#f43f5e');
+        createBarChart('autocorr-chart', labels, ac, 'Autocorrelación', colors);
     }
 
-    // Streak distribution
+    // Streak distribution: Electric Sky #38bdf8
     const sd = stats.streaks?.streak_distribution || {};
     if (Object.keys(sd).length > 0) {
         const sortedKeys = Object.keys(sd).map(Number).sort((a, b) => a - b);
-        createBarChart('streaks-chart', sortedKeys.map(String), sortedKeys.map(k => sd[k]), 'Frecuencia de Rachas');
+        createBarChart('streaks-chart', sortedKeys.map(String), sortedKeys.map(k => sd[k]), 'Frecuencia de Rachas', '#38bdf8');
     }
 
-    // Win rate by hour
+    // Win rate by hour: Cyber Emerald for >= 58.8%, Electric Sky for 50-58.8%, Rose Crimson for < 50%
     const bh = stats.temporal?.by_hour || {};
     if (Object.keys(bh).length > 0) {
         const hours = Object.keys(bh).map(Number).sort((a, b) => a - b);
-        createBarChart('hourly-chart', hours.map(h => h + 'h'), hours.map(h => bh[h]), 'Win Rate por Hora', '#58a6ff');
+        const values = hours.map(h => bh[h]);
+        const colors = values.map(wr => {
+            const pct = wr > 1 ? wr : wr * 100;
+            if (pct >= 58.8) return '#10b981';
+            if (pct >= 50.0) return '#38bdf8';
+            return '#f43f5e';
+        });
+        createBarChart('hourly-chart', hours.map(h => h + 'h'), values, 'Win Rate por Hora', colors);
     }
 
     // Conditional probabilities
@@ -1166,30 +1245,35 @@ function displayStatistics(stats) {
         <div><span>P(L|W)</span><strong>${((dep.p_loss_given_win || 0) * 100).toFixed(1)}%</strong></div>
         <div><span>P(L|L)</span><strong class="text-red">${((dep.p_loss_given_loss || 0) * 100).toFixed(1)}%</strong></div>
     `;
-    document.getElementById('cond-probs').innerHTML = probsHtml;
+    const condEl = document.getElementById('cond-probs');
+    if (condEl) condEl.innerHTML = probsHtml;
 
-    // Market state
+    // Market state: Regime tokens
     const ms = stats.market_state || {};
     if (Object.values(ms).some(v => v > 0)) {
         createBarChart('market-state-chart',
             ['Alta Vol', 'Baja Vol', 'Tendencia', 'Rango'],
             [ms.high_vol_wr || 0, ms.low_vol_wr || 0, ms.trending_wr || 0, ms.ranging_wr || 0],
-            'Win Rate', '#d2a8ff');
+            'Win Rate por Régimen',
+            ['#f59e0b', '#38bdf8', '#10b981', '#a855f7']
+        );
     }
 
     // Markov table
     const mt = stats.markov?.transition_matrix || [];
     if (mt.length > 0) {
         const tbl = document.getElementById('markov-table');
-        let html = '<thead><tr><th>Si el anterior fue...</th><th>Siguiente: Win</th><th>Siguiente: Loss</th></tr></thead><tbody>';
-        const labels = ['Win', 'Loss'];
-        mt.forEach((row, i) => {
-            html += `<tr><td><strong>${labels[i] || i}</strong></td>`;
-            (row || []).forEach(v => { html += `<td>${(v * 100).toFixed(1)}%</td>`; });
-            html += '</tr>';
-        });
-        html += '</tbody>';
-        tbl.innerHTML = html;
+        if (tbl) {
+            let html = '<thead><tr><th>Si el anterior fue...</th><th>Siguiente: Win</th><th>Siguiente: Loss</th></tr></thead><tbody>';
+            const labels = ['Win', 'Loss'];
+            mt.forEach((row, i) => {
+                html += `<tr><td><strong>${labels[i] || i}</strong></td>`;
+                (row || []).forEach(v => { html += `<td>${(v * 100).toFixed(1)}%</td>`; });
+                html += '</tr>';
+            });
+            html += '</tbody>';
+            tbl.innerHTML = html;
+        }
     }
 }
 
@@ -1552,8 +1636,8 @@ function renderBacktestItemHtml(item, type) {
     const stratName = item.inputs.strategy_display || item.inputs.strategy;
     const isSmart = item.inputs.is_smart || item.id.startsWith('bt_smart_');
     const badgeHtml = isSmart 
-        ? `<span style="font-size: 0.65rem; font-weight: bold; background: rgba(163, 113, 247, 0.2); color: #a371f7; border: 1px solid rgba(163, 113, 247, 0.4); padding: 2px 6px; border-radius: 4px; margin-right: 6px;">⚡ AUTO-OPTIMIZACIÓN GENÉTICA</span>`
-        : `<span style="font-size: 0.65rem; font-weight: bold; background: rgba(88, 166, 255, 0.15); color: #58a6ff; border: 1px solid rgba(88, 166, 255, 0.3); padding: 2px 6px; border-radius: 4px; margin-right: 6px;">⚙️ BACKTEST MANUAL</span>`;
+        ? `<span style="font-size: 0.65rem; font-weight: bold; background: rgba(168, 85, 247, 0.2); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.4); padding: 2px 6px; border-radius: 4px; margin-right: 6px;">⚡ AUTO-OPTIMIZACIÓN GENÉTICA</span>`
+        : `<span style="font-size: 0.65rem; font-weight: bold; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 6px; border-radius: 4px; margin-right: 6px;">⚙️ BACKTEST MANUAL</span>`;
 
     let actionsHtml = '';
     if (type === 'history') {
@@ -1707,7 +1791,7 @@ function loadBacktestState(backtestObj) {
         
         const kellys = results.map(r => r.kelly_f);
         if (document.getElementById('kelly-chart')) {
-            createBarChart('kelly-chart', ns, kellys, 'Kelly Fraction', '#3fb950');
+            createBarChart('kelly-chart', ns, kellys, 'Kelly Fraction', '#10b981');
         }
         
         const rec = document.getElementById('opt-recommendation');
@@ -1732,7 +1816,7 @@ function loadBacktestState(backtestObj) {
             </tr></thead><tbody>`;
             results.forEach(r => {
                 const isOpt = r.n === (optData.optimal_n || bestN);
-                tableHtml += `<tr style="${isOpt ? 'background: rgba(63,185,80,0.15);' : ''}">
+                tableHtml += `<tr style="${isOpt ? 'background: rgba(16, 185, 129, 0.15);' : ''}">
                     <td>${isOpt ? '>> ' : ''}${r.n}</td>
                     <td>${((r.p_success || r.p_success_single || 0) * 100).toFixed(1)}%</td>
                     <td>${(r.profit_if_win || r.multiplier || 0).toFixed(2)}x</td>
@@ -2104,7 +2188,7 @@ async function runSmartOptimization() {
                             const raw = data.asset_win_rates[sym];
                             const wr = typeof raw === 'object' && raw !== null ? (raw.win_rate * 100).toFixed(1) : (parseFloat(raw) * 100).toFixed(1);
                             const stars = wr >= 70 ? '⭐⭐⭐' : (wr >= 60 ? '⭐⭐' : '⭐');
-                            const color = wr >= 70 ? '#fbbf24' : (wr >= 60 ? '#38bdf8' : '#00f5a0');
+                            const color = wr >= 70 ? '#fbbf24' : (wr >= 60 ? '#38bdf8' : '#10b981');
                             span.style.color = color;
                             span.style.fontWeight = 'bold';
                             span.innerHTML = ` ${stars} ${wr}%`;
@@ -2162,29 +2246,29 @@ async function runSmartOptimization() {
 
                             recContent.innerHTML = `
                                 <div style="font-size: 0.9rem; line-height: 1.5; color: var(--text-primary);">
-                                    La racha óptima sugerida para <strong style="color: #a371f7;">${strat.name}</strong> es de <strong style="color: var(--accent-green); font-size: 1.1rem;">N = ${bestN} victorias consecutivas</strong>.
+                                    La racha óptima sugerida para <strong style="color: #a855f7;">${strat.name}</strong> es de <strong style="color: var(--accent-green); font-size: 1.1rem;">N = ${bestN} victorias consecutivas</strong>.
                                     Se requiere un número de <strong style="color: var(--accent-blue);">M = ${needed_streaks} racha(s)</strong> para la <strong>Duplicación de Patrimonio (+100%)</strong> de <strong>$${base_capital_val.toFixed(2)}</strong> a <strong>$${target_patrimony_val.toFixed(2)} USD</strong> (Probabilidad Binomial: <strong style="color: var(--accent-green);">${prob_duplication_pct.toFixed(1)}%</strong> en ${attempts} intentos).
                                 </div>
-                                <div style="margin-top: 10px; font-size: 0.8rem; padding: 10px; border-radius: 6px; background: rgba(88, 166, 255, 0.08); border: 1px solid rgba(88, 166, 255, 0.25); color: var(--text-primary); line-height: 1.4;">
+                                <div style="margin-top: 10px; font-size: 0.8rem; padding: 10px; border-radius: 6px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); color: var(--text-primary); line-height: 1.4;">
                                     📖 <strong>Explicación Dinámica de la Estrategia:</strong><br>
                                     ${strat.natural_description || 'Estrategia cuantitativa optimizada mediante algoritmo genético en Rust.'}<br>
                                     <span style="font-size: 0.75rem; color: var(--accent-blue); display: inline-block; margin-top: 4px;">Filtros activos: ${genomeStr}</span>
                                     
                                     <div style="margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                                        <span style="font-size: 0.75rem; padding: 4px 10px; background: rgba(39, 201, 63, 0.15); border: 1px solid rgba(39, 201, 63, 0.4); color: #39ff14; border-radius: 4px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;" title="Win Rate OOS (Out-Of-Sample) es el resultado real en datos de prueba no vistos. IS (In-Sample) es en datos de entrenamiento.">
+                                        <span style="font-size: 0.75rem; padding: 4px 10px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #10b981; border-radius: 4px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;" title="Win Rate OOS (Out-Of-Sample) es el resultado real en datos de prueba no vistos. IS (In-Sample) es en datos de entrenamiento.">
                                             🛡️ Win Rate OOS: ${(strat.win_rate_oos ? (strat.win_rate_oos * 100).toFixed(1) : '0.0')}% | IS: ${(strat.win_rate_is ? (strat.win_rate_is * 100).toFixed(1) : '0.0')}% | WFE: 100%+
                                         </span>
-                                        <button type="button" class="btn-secondary" style="font-size: 0.75rem; padding: 5px 12px; background: rgba(163, 113, 247, 0.15); border: 1px solid rgba(163, 113, 247, 0.4); color: #a371f7; cursor: pointer; border-radius: 4px; font-weight: 600;" onclick="togglePineScriptModal(${stratId})">
+                                        <button type="button" class="btn-secondary" style="font-size: 0.75rem; padding: 5px 12px; background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #a855f7; cursor: pointer; border-radius: 4px; font-weight: 600;" onclick="togglePineScriptModal(${stratId})">
                                             📜 Exportar a Pine Script (TradingView v5) / Prompt IA
                                         </button>
                                     </div>
 
-                                    <div id="pinescript-box-${stratId}" style="display: none; margin-top: 10px; padding: 12px; border-radius: 6px; background: #0d1117; border: 1px solid var(--border-color);">
+                                    <div id="pinescript-box-${stratId}" style="display: none; margin-top: 10px; padding: 12px; border-radius: 6px; background: #0e1420; border: 1px solid var(--border-color);">
                                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                            <h4 style="font-size: 0.85rem; color: #a371f7; margin: 0;">🌲 Pine Script v5 / Especificación para IA</h4>
+                                            <h4 style="font-size: 0.85rem; color: #a855f7; margin: 0;">🌲 Pine Script v5 / Especificación para IA</h4>
                                             <div style="display: flex; gap: 6px;">
                                                 <button type="button" class="btn-secondary" style="font-size: 0.7rem; padding: 3px 8px;" onclick="copyPineScript(${stratId})">📋 Copiar PineScript v5</button>
-                                                <button type="button" class="btn-secondary" style="font-size: 0.7rem; padding: 3px 8px; background: rgba(88, 166, 255, 0.15); color: #58a6ff; border-color: rgba(88, 166, 255, 0.4);" onclick="copyAIPrompt(${stratId})">🤖 Copiar Prompt IA</button>
+                                                <button type="button" class="btn-secondary" style="font-size: 0.7rem; padding: 3px 8px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);" onclick="copyAIPrompt(${stratId})">🤖 Copiar Prompt IA</button>
                                             </div>
                                         </div>
                                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
@@ -2423,12 +2507,12 @@ async function runSmartOptimization() {
                             const sampleWarning = tradeCnt < 15 ? `<span title="Muestra pequeña de datos" style="color: #e3b341; font-size: 0.62rem; margin-left: 2px;">⚠️</span>` : '';
                             const rankBadge = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : (rank === 3 ? '🥉' : `#${rank}`));
                             pillsHtml += `
-                                <button type="button" class="top-strat-pill ${isActive ? 'active' : ''}" data-strat-idx="${index}" style="background: ${isActive ? 'rgba(163, 113, 247, 0.25)' : 'rgba(255, 255, 255, 0.03)'}; border: 1px solid ${isActive ? '#a371f7' : 'var(--border-color)'}; color: ${isActive ? '#ffffff' : 'var(--text-secondary)'}; border-radius: 8px; padding: 8px 10px; cursor: pointer; text-align: left; transition: all 0.2s ease;">
-                                    <div style="font-weight: bold; font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: ${isActive ? '#a371f7' : 'var(--text-primary)'};">${rankBadge} ${strat.name}</div>
+                                <button type="button" class="top-strat-pill ${isActive ? 'active' : ''}" data-strat-idx="${index}" style="background: ${isActive ? 'rgba(168, 85, 247, 0.25)' : 'rgba(255, 255, 255, 0.03)'}; border: 1px solid ${isActive ? '#a855f7' : 'var(--border-color)'}; color: ${isActive ? '#ffffff' : 'var(--text-secondary)'}; border-radius: 8px; padding: 8px 10px; cursor: pointer; text-align: left; transition: all 0.2s ease;">
+                                    <div style="font-weight: bold; font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: ${isActive ? '#a855f7' : 'var(--text-primary)'};">${rankBadge} ${strat.name}</div>
                                     <div style="font-size: 0.65rem; display: flex; justify-content: space-between; align-items: center; margin-top: 4px; gap: 4px; flex-wrap: wrap;">
                                         <span style="color: var(--accent-green); font-weight: bold;" title="Win Rate Out-Of-Sample (Validación sin sobreajuste)">${wrPct}% OOS</span>
                                         <span style="color: var(--text-secondary);" title="Total de trades evaluados">${tradeCnt} ops${sampleWarning}</span>
-                                        <span style="color: #58a6ff; font-weight: bold;" title="Probabilidad de al menos 1 racha">Racha: ${streakProb}%</span>
+                                        <span style="color: #38bdf8; font-weight: bold;" title="Probabilidad de al menos 1 racha">Racha: ${streakProb}%</span>
                                     </div>
                                 </button>
                             `;
@@ -2445,8 +2529,8 @@ async function runSmartOptimization() {
                                 
                                 topList.querySelectorAll('.top-strat-pill').forEach((p, i) => {
                                     if (i === idx) {
-                                        p.style.background = 'rgba(163, 113, 247, 0.25)';
-                                        p.style.borderColor = '#a371f7';
+                                        p.style.background = 'rgba(168, 85, 247, 0.25)';
+                                        p.style.borderColor = '#a855f7';
                                         p.style.color = '#ffffff';
                                     } else {
                                         p.style.background = 'rgba(255, 255, 255, 0.03)';

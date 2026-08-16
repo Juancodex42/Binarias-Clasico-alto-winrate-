@@ -1,89 +1,75 @@
-# Project: Binary Options Quantitative Strategy Simulator & Optimization Engine
+# Project: Binary Options Quantitative Terminal UI/UX Pro Redesign
 
 ## Architecture
-The system is a quantitative binary options backtesting, strategy simulation, and hyperparameter optimization platform.
-Major layers and data flow:
-1. **Data Ingestion & Feature Engineering**: OHLCV market data feeds into `BinaryFeatureExtractor` (calculating indicators, López de Prado FFD, Hurst exponent, NATR, volatility squeeze) respecting strict temporal causality.
-2. **Strategy Signal Generation**: Strategy modules (`strategies/`) generate base entry signals (`CALL`/`PUT`) using indicator logic.
-3. **Regime & Meta-Filtering**: `RegimeDetector` (HMM/volatility), `CUSUMMonitor` (drift detection), and `MetaLabeler` / `BinaryMLMetaFilter` apply ML probabilistic filtering and regime gating to filter out low-probability trade setups.
-4. **Execution Simulation**: `BinarySimulator` simulates binary option trade execution, payoff calculations, expiry handling, and multi-asset capital management (`BARBELL` / `CORE` allocation).
-5. **Optimization Engine**: Hyperparameter exploration framework (Grid Search, Optuna TPE/Bayesian optimization, Walk-Forward Engine, Purged Cross-Validation) exploring multi-dimensional parameter spaces to discover configurations with Out-Of-Sample (OOS) Win Rate > 65% and positive Expected Value (EV).
-6. **Testing & Verification Harness**: Unit test suite (`tests/`) and reproducible verification script (`verify_high_winrate_oos.py`).
+- **Tech Stack**: Flask / Python backend, Rust quantitative core bindings, Vanilla JS (ES6+) with SSE & WebSocket streaming, TradingView Lightweight Charts v4, Chart.js v4, HTML5 2D Canvas, Custom CSS Design System (Inter + JetBrains Mono).
+- **Core Pattern**: Single-Page Application (SPA) with Dual-Mode Interface:
+  1. *Smart Mode (Piloto Automático)*: 1-click execution with pre-calculated Barbell presets, multi-asset universe selection, real-time SSE genetic optimization logs, Top-5 strategy ranking, Paroli compound ladder, Markov matrix, cross-asset correlation heatmap, and equity / Monte Carlo cones.
+  2. *Advanced Mode (Manual)*: Granular control over currency pairs, timeframes, custom strategy hyperparameters, genetic algorithm tuning, Monte Carlo stress testing (5,000 paths), and statistical diagnostics.
+- **Data Flow**:
+  - Backend API (`app.py`) serves REST endpoints and SSE streams.
+  - Rust engine powers genetic optimization and high-frequency backtesting.
+  - Frontend (`app.js`) handles DOM state, user interactions, WebSocket feeds, and data distribution to `charts.js`.
+  - Styling (`style.css`) applies an institutional dark fintech visual design system.
 
 ## Feature Inventory
 | # | Feature | Description | Milestone | Source |
 |---|---------|-------------|-----------|--------|
-| 1 | BinarySimulator Tie Rule Consistency | Support `tie_rule` ('RETURN_STAKE' / 'LOSS') in `run_multi_asset` and align with single-asset `run` | M1 | Survey 1 |
-| 2 | Multi-Asset Barbell State Tracking | Fix bullet state corruption upon streak reset during multi-asset trade evaluation | M1 | Survey 1 |
-| 3 | FracDiff FFT Acceleration | Vectorize `frac_diff_fixed` in `BinaryFeatureExtractor` using `scipy.signal.fftconvolve` | M1 | Survey 1 |
-| 4 | RegimeDetector & CUSUM Memory/Pause Fix | Remove full-sample `returns.std()` leakage in HMM and fix unbounded memory & pause deadlock in CUSUM | M1 | Survey 1 |
-| 5 | MetaLabeler Timestamp & Leakage Fix | Fix millisecond timestamp overflow (`unit='s'`) and replace global `median()` with rolling median | M1 | Survey 1 |
-| 6 | Walk-Forward Efficiency Metric Fix | Correct false stability counting for zero OOS trade windows in `WalkForwardEngine` | M1 | Survey 1 |
-| 7 | Target Expiry Label Alignment | Align `create_labels` shift logic in optimization scripts with `BinarySimulator` 1-candle expiry | M2 | Survey 2 |
-| 8 | Feature Scaling & Threshold Leakage Elimination | Remove global quantile clipping in `volatility_squeeze_ml` and global medians in dynamic regime adapters | M2 | Survey 2 |
-| 9 | HMM Forward-Only Probability State Estimation | Replace Viterbi `predict()` sequence decoding with forward-only filtered state probabilities | M2 | Survey 2 |
-| 10 | Purged CV Integration | Integrate `PurgedGroupTimeSeriesSplit` with embargo into all optimization and split routines | M2 | Survey 2 |
-| 11 | Capital State Split Isolation | Ensure multi-asset simulation splits capital tracking independently between IS and OOS periods | M2 | Survey 2 |
-| 12 | Optuna Framework Integration | Implement Optuna (TPE sampler, Bayesian optimization, pruning) for hyperparameter search | M3 | Survey 2 / R2 |
-| 13 | Multi-Dimensional Search Space Design | Expand parameter grid across timeframes, expirations (1–12), session hours, indicator periods, and meta-filters | M3 | Survey 2 / R2 |
-| 14 | True Walk-Forward Optimization Engine | Upgrade `WalkForwardEngine` to perform rolling In-Sample optimization and OOS evaluation | M3 | Survey 2 / R2 |
-| 15 | Backtest Engine Parallel Vectorization | Accelerate backtest simulation loops for high-throughput hyperparameter search | M3 | Survey 2 |
-| 16 | Formal `tests/` Directory & `pytest.ini` Setup | Isolate test discovery to `tests/` and `test_high_winrate_mechanisms.py`, ignoring `scratch/` | M4 | Survey 3 |
-| 17 | Integrity & Causality Test Suite Expansion | Consolidate scratch verification scripts into formal unit tests (`test_causality_zero_cheating.py`, etc.) | M4 | Survey 3 / Criteria |
-| 18 | Executable Backtest Verification Script | Build `verify_high_winrate_oos.py` proving empirical reproducible OOS Win Rate > 65% and Positive EV | M4 | Survey 3 / Criteria |
-| 19 | E2E Opaque-Box Test Suite | Requirements-driven multi-tier E2E test suite covering engine workflows (`TEST_READY.md`) | E2E-Track | Dual Track |
+| 1 | Institutional Dark Design System | FinTech Slate & Obsidian surfaces (#080b11, #0e1420, #141d2e, #1c273d), 1px subtle borders | M1 | GUIA_MAESTRA §4.1 |
+| 2 | Calibrated Semantic Color Palette | Anti-halation & anti-chromostereopsis semantic accents (#38bdf8, #10b981, #f43f5e, #a855f7, #f59e0b) | M1 | GUIA_MAESTRA §4.3 |
+| 3 | 8-Point Grid & Spacing Hierarchy | Standardized spacing tokens (--space-1 to --space-8) and container padding | M1 | GUIA_MAESTRA §4.4 |
+| 4 | Dual Typography & Tabular Numbers | Inter for UI text; JetBrains Mono with tabular-nums / tnum for all numeric data | M1 | GUIA_MAESTRA §5.1 |
+| 5 | Micro-Interactions & Motion Tokens | 120ms-180ms ease transitions, hover elevations, focus rings, progress bar shimmer | M1 | GUIA_MAESTRA §7.1 |
+| 6 | Unified Institutional Header | Brand identity, Smart/Advanced Mode Switcher, Rust engine badge, live pulse indicator | M2 | GUIA_MAESTRA §2.2 |
+| 7 | High-Density Compact Control Bar | Single-line command bar for Smart Mode: Barbell presets, universe checkboxes, numeric inputs, auto-run button | M2 | GUIA_MAESTRA §2.4 |
+| 8 | 100% ID & Form Input Preservation | Complete retention of all 89 DOM IDs and 37 form inputs across templates | M2 | Survey Explorer Report |
+| 9 | Smart Mode Multi-Panel Workspace | Asymmetric layout: Top-5 strategy ranking, Paroli ladder, recommendation text, selected assets table | M3 | GUIA_MAESTRA §2.5 |
+| 10 | Advanced Mode Tab Panes & Forms | Full styling of Mercado, Backtest, Resultados, Estadísticas, Optimizador panels & stats cards | M3 | index.html, style.css |
+| 11 | Data Tables & Markov Alignment | Tabular numeric alignment (right-aligned numbers) on Markov matrices, trades, and streak tables | M3 | GUIA_MAESTRA §5.2 |
+| 12 | Lightweight Charts Theme & Markers | Dark transparent canvas, subtle grid (0.03 opacity), crosshairs, candlestick styling, CALL/PUT badges | M4 | charts.js, GUIA_MAESTRA §6.1 |
+| 13 | Chart.js Equity Curves & MC Cones | Auto-log scale equity curve with glowing gradient, Monte Carlo P5-P95 cones, dark tooltips | M4 | charts.js, GUIA_MAESTRA §6.2 |
+| 14 | Canvas 2D Correlation Heatmap | High-DPI Retina canvas rendering of cross-asset return correlation matrix with color interpolation | M4 | charts.js, GUIA_MAESTRA §6.3 |
+| 15 | Live Binance WebSocket & SSE Feeds | Robust live price updates, SSE streaming logs, modal dialogs (Pine Script & AI Prompt export) | M4 | app.js |
+| 16 | E2E Testing Suite Pass (Tiers 1-4) | Comprehensive test suite validation (backend 264 tests + frontend DOM/ID/CSS verification) | M5 | Dual Track Plan |
+| 17 | Adversarial Hardening (Tier 5) & Audit | Stress-testing edge cases, zero console errors, forensic integrity audit (CLEAN) | M5 | Project Protocol |
 
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| M1 | Engine Bug Remediation & Core Fixes | `BinarySimulator`, `BinaryFeatureExtractor`, `RegimeDetector`, `CUSUMMonitor`, `MetaLabeler`, `WalkForwardEngine` bug fixes | None | DONE |
-| M2 | Temporal Causality & Zero Leakage Enforcement | Expiry label alignment, OOS feature scaling isolation, HMM forward-only probabilities, Purged CV integration, Capital split isolation | M1 | DONE |
-| M3 | Optuna & Systematic Search Space Exploration | Optuna integration (TPE/Bayesian), multi-dimensional search space, True Walk-Forward Optimization, vectorization | M1, M2 | DONE |
-| M4 | Test Suite Expansion & Reproducible Backtest Verification | Clean `tests/` harness, `pytest.ini`, 0 failures/warnings on unit tests, executable `verify_high_winrate_oos.py` (Win Rate > 65%, EV+) | M1, M2, M3 | DONE |
-| E2E | E2E Testing Track | Requirement-driven opaque-box test suite creation (Tiers 1-4) publishing `TEST_READY.md` | None | DONE |
+| M1 | Design System & CSS Foundation | `static/css/style.css`: Tokens, variables, 8-pt grid, typography, cards, inputs, buttons, badges, shimmer | none | DONE |
+| M2 | Institutional HTML5 Workspace & Templates | `templates/index.html`: Header, Mode Switcher, Telemetry badges, Smart Mode control bar, Multi-panel workspace, Advanced tabs, Tabular data tables, 100% ID retention | M1 | DONE |
+| M3 | Charting Engine & Micro-Interactions | `static/js/charts.js` & `static/js/app.js`: Lightweight Charts, Chart.js, Canvas Heatmap, tooltips, markers | M1, M2 | DONE |
+| M4 | E2E Verification, Hardening & Audit | Full test suite execution, zero console errors, browser render checks, Tier 5 hardening, Forensic Audit | M1..M3 | DONE |
 
 ## Interface Contracts
+### `templates/index.html` ↔ `static/js/app.js`
+- **Header & Modes**: `#mode-smart`, `#mode-advanced`, `.tabs-nav`
+- **Smart Mode Form Controls**: `#smart-preset-select`, `#smart-streak-length`, `#smart-base-capital`, `#smart-profit-pct`, `#smart-risk-capital` (readonly), `#smart-attempts`, `#smart-payout`, `#smart-generations`, `#smart-population`, `input[name="smart-universe"]`, `.asset-wr-badge`, `#btn-smart-run`
+- **Smart Mode Telemetry & Output**: `#smart-console-box`, `#smart-progress-bar-fill`, `#smart-console-logs`, `#smart-top-5-box`, `#smart-top-5-list`, `#smart-rec-content`, `#smart-ladder-content`, `#smart-selected-assets-table`, `#smart-selected-assets-body`, `#smart-markov-table`, `#smart-markov-explanation`, `#smart-asset-selector`, `#smart-tv-chart`, `#smart-tv-chart-empty`, `#smart-equity-chart-canvas`, `#smart-mc-chart-canvas`, `#smart-correlation-canvas`
+- **Advanced Mode Controls & Panels**: `#pair-selector`, `#interval-selector`, `#source-selector`, `#live-badge`, `#live-badge-text`, `#tv-chart`, `#chart-loader`, `#backtest-form`, `#run-backtest-btn`, `#save-backtest-btn`, `#strategy-selector`, `#dynamic-params`, `#expiry-candles`, `#payout`, `#backtest-n-consecutive`, `#backtest-cycle-prob`, `#backtest-bet-fraction`, `#optimize-genetic-btn`, `#gen-generations`, `#gen-population`, `#gen-min-trades`, `#genetic-progress-fill`, `#genetic-progress-text`, `#genetic-progress-eta`, `#genetic-feedback`, `#backtest-progress-fill`, `#stat-winrate`, `#stat-trades`, `#stat-pnl`, `#stat-mw`, `#stat-ml`, `#equity-chart`, `#trades-table`, `#btn-clear-history`, `#history-list`, `#saved-list`, `#autocorr-chart`, `#streaks-chart`, `#hourly-chart`, `#cond-probs`, `#market-state-chart`, `#markov-table`, `#opt-winrate`, `#opt-payout`, `#opt-base-capital`, `#opt-profit-pct`, `#opt-risk-capital`, `#opt-target-capital`, `#opt-attempts`, `#btn-calc-streak`, `#streak-progress-fill`, `#streak-recommendation-content`, `#bet-ladder-container`, `#streak-alternatives-table`, `#mc-chart`
+- **Global Window Hooks**: `window.togglePineScriptModal(id)`, `window.copyPineScript(id)`, `window.copyAIPrompt(id)`
 
-### BinarySimulator Signature Contract
-`run(df: pd.DataFrame, signals: pd.Series, expiry_candles: int = 1, payout: float = 0.85, bet_amount: float = 10.0, tie_rule: str = 'RETURN_STAKE') -> dict`
-`run_multi_asset(universe_data: dict, signals_by_pair: dict, expiry_candles: int = 1, payout: float = 0.85, mode: str = 'BARBELL', bet_fraction: float = 0.166, tie_rule: str = 'RETURN_STAKE') -> dict`
+### `static/js/app.js` ↔ `static/js/charts.js`
+- `initLightweightChart(containerId, height)`
+- `updateCandlestickChart(chartInstance, candleData, signalMarkers)`
+- `renderEquityCurve(canvasId, equityData, tradeDates, options)`
+- `renderMonteCarloCones(canvasId, mcPercentiles, initialCapital)`
+- `renderCorrelationHeatmap(canvasId, correlationMatrix, tickerList)`
+- `renderDiagnosticsCharts(statsData)`
 
-### BinaryFeatureExtractor Signature Contract
-`extract_features(df: pd.DataFrame) -> pd.DataFrame`
-`frac_diff_fixed(series: pd.Series, d: float, threshold: float = 1e-4) -> pd.Series`
-
-### MetaLabeler / MetaFilter Signature Contract
-`filter_signals(df: pd.DataFrame, base_signals: pd.Series, probability_threshold: float = 0.65) -> pd.Series`
-
-### Optimization Output Contract (`verify_high_winrate_oos.py`)
-`run_verification() -> dict`: Returns summary containing strategy configuration, asset universe results, Out-Of-Sample Win Rate (> 0.65), Expected Value per trade (> 0.0), Wilson 95% lower bound, and zero causality violation attestation.
+### `static/js/app.js` ↔ Backend Flask / SSE APIs (`app.py`)
+- `/api/data/pairs` (GET)
+- `/api/data/candles` (GET)
+- `/api/strategies` (GET)
+- `/api/backtest-stream` (GET SSE)
+- `/api/smart-optimize-v2-stream` (GET SSE)
+- `/api/genetic/run-stream` (GET SSE)
+- `/api/optimize-streak` (POST)
+- `/api/montecarlo` (POST)
 
 ## Code Layout
-```
-c:\Users\juanc\Desktop\prueba\
-├── engine/
-│   ├── simulator.py                   # BinarySimulator trade execution & multi-asset capital management
-│   ├── auto_tuner.py                   # WalkForwardEngine & DynamicRegimeAdapter
-│   ├── optimizer.py                    # Grid search & strategy optimization routines
-│   └── ml_engine/
-│       ├── feature_extractor.py       # Indicator computation, FFD, Hurst exponent
-│       ├── regime_detector.py         # GaussianHMM regime classification
-│       ├── cusum_monitor.py           # CUSUM drift detection
-│       ├── meta_labeler.py            # Secondary ML label generation & dataset building
-│       ├── meta_filter.py             # BinaryMLMetaFilter adaptive threshold signal filtering
-│       └── purged_cv.py               # PurgedGroupTimeSeriesSplit cross-validation
-├── strategies/                        # Base strategy implementations
-│   ├── daily_confluence.py
-│   ├── volatility_squeeze_ml.py
-│   └── genetic_composite.py
-├── tests/                             # Clean unit & integration test suite
-│   ├── test_high_winrate_mechanisms.py
-│   ├── test_causality_zero_cheating.py
-│   ├── test_simulator_integrity.py
-│   ├── test_strategies.py
-│   └── test_statistics_optimizer.py
-├── scratch/                           # Ad-hoc audit scripts (excluded from pytest)
-├── pytest.ini                         # Test runner configuration
-├── verify_high_winrate_oos.py         # Executable empirical verification script
-└── ORIGINAL_REQUEST.md                # Verbatim user requirements
-```
+- `templates/index.html`: Semantic HTML5 layout, container hierarchy, glass-card elements, form controls, charts placeholders.
+- `static/css/style.css`: Design tokens, CSS reset, layout grid, typography, components, tables, animations.
+- `static/js/app.js`: State manager, SSE listener, WebSocket, UI bindings, modal handlers.
+- `static/js/charts.js`: Lightweight Charts v4 & Chart.js v4 wrappers, Canvas 2D renderers.
+- `tests/`: Comprehensive Python test suite (Tiers 1-4).
+- `documentos_md/GUIA_MAESTRA_REDISENO_UI_UX_TERMINAL_PRO.md`: Reference UI/UX standard.

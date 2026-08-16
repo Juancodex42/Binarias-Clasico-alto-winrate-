@@ -1,0 +1,62 @@
+{
+  "color_integrity": {
+    "issues": [
+      "Expected dark chart token rgba(8, 11, 17 not found in charts.js",
+      "Expected dark chart token rgba(14, 20, 32 not found in charts.js"
+    ],
+    "clean": false
+  },
+  "chart_engine": [
+    "Lightweight Charts v4 Candlestick series initialization verified.",
+    "Lightweight Charts Signal Markers verified.",
+    "Chart.js v4 Equity Curve with linear gradient verified.",
+    "Chart.js Monte Carlo P5-P95 Cones verified.",
+    "Canvas 2D Correlation Heatmap with Retina HiDPI scaling verified."
+  ],
+  "button_bindings": {
+    "mode-smart": {
+      "in_html": true,
+      "referenced_in_js": true
+    },
+    "mode-advanced": {
+      "in_html": true,
+      "referenced_in_js": true
+    },
+    "btn-smart-run": {
+      "in_html": true,
+      "referenced_in_js": true
+    },
+    "run-backtest-btn": {
+      "in_html": true,
+      "referenced_in_js": true
+    },
+    "save-backtest-btn": {
+      "in_html": true,
+      "referenced_in_js": true
+    },
+    "optimize-genetic-btn": {
+      "in_html": true,
+      "referenced_in_js": true
+    },
+    "btn-clear-history": {
+      "in_html": true,
+      "referenced_in_js": true
+    },
+    "btn-calc-streak": {
+      "in_html": true,
+      "referenced_in_js": true
+    },
+    "btn-resultados": {
+      "in_html": true,
+      "referenced_in_js": false
+    },
+    "btn-estadisticas": {
+      "in_html": true,
+      "referenced_in_js": true
+    },
+    "btn-optimizador": {
+      "in_html": true,
+      "referenced_in_js": true
+    }
+  }
+}

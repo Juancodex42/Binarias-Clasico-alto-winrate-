@@ -1,0 +1,768 @@
+{
+  "html": {
+    "total_ids": 105,
+    "all_ids": [
+      "autocorr-chart",
+      "backtest",
+      "backtest-bet-fraction",
+      "backtest-cycle-prob",
+      "backtest-form",
+      "backtest-n-consecutive",
+      "backtest-progress-container",
+      "backtest-progress-eta",
+      "backtest-progress-fill",
+      "backtest-progress-text",
+      "bet-ladder-container",
+      "btn-calc-streak",
+      "btn-clear-history",
+      "btn-estadisticas",
+      "btn-optimizador",
+      "btn-resultados",
+      "btn-smart-run",
+      "chart-loader",
+      "cond-probs",
+      "dashboard",
+      "dynamic-params",
+      "equity-chart",
+      "estadisticas",
+      "expiry-candles",
+      "gen-generations",
+      "gen-min-trades",
+      "gen-population",
+      "genetic-feedback",
+      "genetic-progress-container",
+      "genetic-progress-eta",
+      "genetic-progress-fill",
+      "genetic-progress-text",
+      "group-n-consecutive",
+      "history-list",
+      "hourly-chart",
+      "interval-selector",
+      "live-badge",
+      "live-badge-text",
+      "market-state-chart",
+      "markov-table",
+      "mc-chart",
+      "mode-advanced",
+      "mode-smart",
+      "opt-attempts",
+      "opt-base-capital",
+      "opt-payout",
+      "opt-profit-pct",
+      "opt-risk-capital",
+      "opt-target-capital",
+      "opt-winrate",
+      "optimizador",
+      "optimize-genetic-btn",
+      "pair-selector",
+      "payout",
+      "quick-stats",
+      "resultados",
+      "run-backtest-btn",
+      "save-backtest-btn",
+      "saved-list",
+      "sec-barbell",
+      "sec-genetic",
+      "sec-strategy",
+      "smart-asset-selector",
+      "smart-attempts",
+      "smart-base-capital",
+      "smart-console-box",
+      "smart-console-logs",
+      "smart-correlation-canvas",
+      "smart-dashboard",
+      "smart-equity-chart-canvas",
+      "smart-generations",
+      "smart-ladder-content",
+      "smart-markov-explanation",
+      "smart-markov-table",
+      "smart-mc-chart-canvas",
+      "smart-payout",
+      "smart-population",
+      "smart-preset-select",
+      "smart-profit-pct",
+      "smart-progress-bar-fill",
+      "smart-rec-content",
+      "smart-risk-capital",
+      "smart-selected-assets-body",
+      "smart-selected-assets-table",
+      "smart-streak-length",
+      "smart-top-5-box",
+      "smart-top-5-list",
+      "smart-tv-chart",
+      "smart-tv-chart-empty",
+      "source-selector",
+      "stat-ml",
+      "stat-mw",
+      "stat-pnl",
+      "stat-trades",
+      "stat-winrate",
+      "strategy-selector",
+      "streak-alternatives-table",
+      "streak-progress-container",
+      "streak-progress-eta",
+      "streak-progress-fill",
+      "streak-progress-text",
+      "streak-recommendation-content",
+      "streaks-chart",
+      "trades-table",
+      "tv-chart"
+    ],
+    "total_inputs": 37,
+    "input_details": [
+      {
+        "tag": "input",
+        "id": "",
+        "name": "smart-universe",
+        "type": "checkbox"
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "name": "smart-universe",
+        "type": "checkbox"
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "name": "smart-universe",
+        "type": "checkbox"
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "name": "smart-universe",
+        "type": "checkbox"
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "name": "smart-universe",
+        "type": "checkbox"
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "name": "smart-universe",
+        "type": "checkbox"
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "name": "smart-universe",
+        "type": "checkbox"
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "name": "smart-universe",
+        "type": "checkbox"
+      },
+      {
+        "tag": "input",
+        "id": "",
+        "name": "smart-universe",
+        "type": "checkbox"
+      },
+      {
+        "tag": "select",
+        "id": "smart-preset-select",
+        "name": "",
+        "type": "select"
+      },
+      {
+        "tag": "input",
+        "id": "smart-streak-length",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "smart-base-capital",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "smart-profit-pct",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "smart-risk-capital",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "smart-attempts",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "smart-payout",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "smart-generations",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "smart-population",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "select",
+        "id": "smart-asset-selector",
+        "name": "",
+        "type": "select"
+      },
+      {
+        "tag": "select",
+        "id": "pair-selector",
+        "name": "",
+        "type": "select"
+      },
+      {
+        "tag": "select",
+        "id": "interval-selector",
+        "name": "",
+        "type": "select"
+      },
+      {
+        "tag": "select",
+        "id": "source-selector",
+        "name": "",
+        "type": "select"
+      },
+      {
+        "tag": "select",
+        "id": "strategy-selector",
+        "name": "",
+        "type": "select"
+      },
+      {
+        "tag": "input",
+        "id": "expiry-candles",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "payout",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "backtest-n-consecutive",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "backtest-bet-fraction",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "gen-generations",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "gen-population",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "gen-min-trades",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "opt-winrate",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "opt-payout",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "opt-base-capital",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "opt-profit-pct",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "opt-risk-capital",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "opt-target-capital",
+        "name": "",
+        "type": "number"
+      },
+      {
+        "tag": "input",
+        "id": "opt-attempts",
+        "name": "",
+        "type": "number"
+      }
+    ],
+    "total_buttons": 16,
+    "button_details": [
+      {
+        "id": "mode-smart",
+        "classes": [
+          "mode-btn",
+          "active"
+        ],
+        "onclick": "",
+        "text": "\u26a1 Modo Inteligente (Piloto Autom\u00e1tico)"
+      },
+      {
+        "id": "mode-advanced",
+        "classes": [
+          "mode-btn"
+        ],
+        "onclick": "",
+        "text": "\u2699\ufe0f Modo Avanzado (Manual)"
+      },
+      {
+        "id": "",
+        "classes": [
+          "tab-btn"
+        ],
+        "onclick": "",
+        "text": "Mercado"
+      },
+      {
+        "id": "",
+        "classes": [
+          "tab-btn"
+        ],
+        "onclick": "",
+        "text": "Backtest"
+      },
+      {
+        "id": "btn-resultados",
+        "classes": [
+          "tab-btn"
+        ],
+        "onclick": "",
+        "text": "Resultados"
+      },
+      {
+        "id": "btn-estadisticas",
+        "classes": [
+          "tab-btn"
+        ],
+        "onclick": "",
+        "text": "Estad\u00edsticas"
+      },
+      {
+        "id": "btn-optimizador",
+        "classes": [
+          "tab-btn"
+        ],
+        "onclick": "",
+        "text": "Optimizador"
+      },
+      {
+        "id": "btn-smart-run",
+        "classes": [
+          "btn-primary"
+        ],
+        "onclick": "",
+        "text": "\u26a1 Auto-Optimizar Estrategia"
+      },
+      {
+        "id": "",
+        "classes": [
+          "subtab-btn",
+          "active"
+        ],
+        "onclick": "",
+        "text": "\ud83d\udd35 Activo y Estrategia"
+      },
+      {
+        "id": "",
+        "classes": [
+          "subtab-btn"
+        ],
+        "onclick": "",
+        "text": "\ud83d\udfe2 Gesti\u00f3n Barbell"
+      },
+      {
+        "id": "",
+        "classes": [
+          "subtab-btn"
+        ],
+        "onclick": "",
+        "text": "\ud83d\udfe3 B\u00fasqueda Gen\u00e9tica (Rust)"
+      },
+      {
+        "id": "run-backtest-btn",
+        "classes": [
+          "btn-primary"
+        ],
+        "onclick": "",
+        "text": "\u26a1 Ejecutar Backtest"
+      },
+      {
+        "id": "save-backtest-btn",
+        "classes": [
+          "btn-secondary"
+        ],
+        "onclick": "",
+        "text": "\u2b50 Favoritos"
+      },
+      {
+        "id": "optimize-genetic-btn",
+        "classes": [
+          "btn-secondary"
+        ],
+        "onclick": "",
+        "text": "\ud83d\ude80 Ejecutar B\u00fasqueda Rust"
+      },
+      {
+        "id": "btn-clear-history",
+        "classes": [
+          "btn-secondary"
+        ],
+        "onclick": "",
+        "text": "Limpiar Historial"
+      },
+      {
+        "id": "btn-calc-streak",
+        "classes": [
+          "btn-primary"
+        ],
+        "onclick": "",
+        "text": "Calcular Plan de Rachas"
+      }
+    ],
+    "raw_length": 61962
+  },
+  "js": {
+    "app_js_len": 131419,
+    "charts_js_len": 27741,
+    "event_listeners": [
+      [
+        "backtest-form",
+        "",
+        "",
+        "submit"
+      ],
+      [
+        "opt-target-capital",
+        "",
+        "",
+        "input"
+      ],
+      [
+        "pair-selector",
+        "",
+        "",
+        "change"
+      ],
+      [
+        "interval-selector",
+        "",
+        "",
+        "change"
+      ],
+      [
+        "source-selector",
+        "",
+        "",
+        "change"
+      ]
+    ],
+    "app_dom_lookups": [
+      "backtest-bet-fraction",
+      "backtest-cycle-prob",
+      "backtest-form",
+      "backtest-n-consecutive",
+      "backtest-progress-container",
+      "backtest-progress-eta",
+      "backtest-progress-fill",
+      "backtest-progress-text",
+      "bet-ladder-container",
+      "btn-calc-streak",
+      "btn-clear-history",
+      "btn-estadisticas",
+      "btn-optimizador",
+      "btn-sim-barbell",
+      "btn-smart-run",
+      "chart-loader",
+      "cond-probs",
+      "dynamic-params",
+      "expiry-candles",
+      "gen-generations",
+      "gen-min-trades",
+      "gen-population",
+      "genetic-feedback",
+      "genetic-progress-container",
+      "genetic-progress-eta",
+      "genetic-progress-fill",
+      "genetic-progress-text",
+      "gn-chart",
+      "history-list",
+      "interval-selector",
+      "kelly-chart",
+      "live-badge",
+      "live-badge-text",
+      "markov-table",
+      "mc-chart",
+      "mc-stats",
+      "mode-advanced",
+      "mode-smart",
+      "n-table",
+      "opt-attempts",
+      "opt-base-capital",
+      "opt-payout",
+      "opt-profit-pct",
+      "opt-recommendation",
+      "opt-risk-capital",
+      "opt-target-capital",
+      "opt-winrate",
+      "optimize-genetic-btn",
+      "pair-selector",
+      "payout",
+      "run-backtest-btn",
+      "save-backtest-btn",
+      "saved-list",
+      "smart-asset-selector",
+      "smart-attempts",
+      "smart-base-capital",
+      "smart-console-box",
+      "smart-console-logs",
+      "smart-correlation-canvas",
+      "smart-generations",
+      "smart-ladder-content",
+      "smart-markov-explanation",
+      "smart-markov-table",
+      "smart-payout",
+      "smart-population",
+      "smart-preset-select",
+      "smart-profit-pct",
+      "smart-progress-bar-fill",
+      "smart-rec-content",
+      "smart-risk-capital",
+      "smart-selected-assets-body",
+      "smart-streak-length",
+      "smart-top-5-box",
+      "smart-top-5-list",
+      "smart-tv-chart",
+      "smart-tv-chart-empty",
+      "source-selector",
+      "stat-ml",
+      "stat-mw",
+      "stat-pnl",
+      "stat-trades",
+      "stat-winrate",
+      "strategy-selector",
+      "streak-alternatives-table",
+      "streak-progress-container",
+      "streak-progress-eta",
+      "streak-progress-fill",
+      "streak-progress-text",
+      "streak-recommendation-content",
+      "toast-container",
+      "tv-chart"
+    ],
+    "charts_dom_lookups": [
+      "autocorr-chart",
+      "hourly-chart",
+      "market-state-chart",
+      "streaks-chart"
+    ],
+    "chart_funcs": [
+      "createCandlestickChart",
+      "updateCandlestickChart",
+      "addSignalMarkers",
+      "formatYAxisTick",
+      "createEquityCurve",
+      "createBarChart",
+      "createGrowthRateChart",
+      "createMonteCarloChart",
+      "createCorrelationHeatmap",
+      "renderDiagnosticsCharts"
+    ],
+    "chart_window_exports": [
+      "gnChartInst",
+      "mcChartInst",
+      "createCandlestickChart",
+      "initLightweightChart",
+      "updateCandlestickChart",
+      "addSignalMarkers",
+      "formatYAxisTick",
+      "createEquityCurve",
+      "renderEquityCurve",
+      "createBarChart",
+      "createGrowthRateChart",
+      "createMonteCarloChart",
+      "renderMonteCarloCones",
+      "createCorrelationHeatmap",
+      "renderCorrelationHeatmap",
+      "renderDiagnosticsCharts"
+    ]
+  },
+  "tests": {
+    "test_files_count": 17,
+    "total_tests_detected": 369,
+    "total_asserts_detected": 967,
+    "suspicious_findings": [
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_css_adversarial_stress.py",
+        "test": "test_transitions_use_gpu_properties",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_milestone3_features.py",
+        "test": "test_optuna_strategy_optimizer_execution",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_milestone3_features.py",
+        "test": "test_wilson_lower_bound_calculation",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_milestone3_features.py",
+        "test": "test_multi_dimensional_search_space_sampling",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_milestone3_features.py",
+        "test": "test_walk_forward_engine_rolling_optuna",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_milestone3_features.py",
+        "test": "test_vectorized_binary_simulator_parity",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_milestone3_features.py",
+        "test": "test_parallel_optimizer_joblib",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_milestone3_features.py",
+        "test": "test_monte_carlo_vectorized_2d_performance",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_simulator_integrity.py",
+        "test": "test_multi_asset_tie_rule_loss",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_simulator_integrity.py",
+        "test": "test_multi_asset_tie_rule_return_stake",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_simulator_integrity.py",
+        "test": "test_multi_asset_barbell_streak_reset_no_corruption",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_simulator_integrity.py",
+        "test": "test_multi_asset_barbell_reset_in_flight_trade_accounting",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_simulator_integrity.py",
+        "test": "test_frac_diff_fixed_vectorized",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_simulator_integrity.py",
+        "test": "test_calc_hurst_nan_origin_zero_and_near_zero_std",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_simulator_integrity.py",
+        "test": "test_regime_detector_no_lookahead",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_simulator_integrity.py",
+        "test": "test_cusum_monitor_bounds_and_recovery",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_simulator_integrity.py",
+        "test": "test_meta_labeler_timestamp_parsing",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_simulator_integrity.py",
+        "test": "test_meta_filter_rolling_median",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_simulator_integrity.py",
+        "test": "test_walk_forward_engine_zero_oos_trades_not_stable",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_tier1_feature_coverage.py",
+        "test": "test_f03_frac_diff_d_zero",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_tier1_feature_coverage.py",
+        "test": "test_f03_frac_diff_d_one",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_tier1_feature_coverage.py",
+        "test": "test_f07_label_simulator_outcome_matching",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_tier1_feature_coverage.py",
+        "test": "test_f17_indicator_shift_invariance",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_tier3_cross_feature_combinations.py",
+        "test": "test_feature_scaling_zero_leakage_expanding_window",
+        "issue": "No assert or pytest.raises in test"
+      },
+      {
+        "file": "c:\\Users\\juanc\\Desktop\\prueba\\tests\\test_tier3_cross_feature_combinations.py",
+        "test": "test_feature_extraction_reproducibility_deterministic",
+        "issue": "No assert or pytest.raises in test"
+      }
+    ]
+  }
+}

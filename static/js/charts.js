@@ -1,33 +1,52 @@
-// charts.js
+// charts.js - Binary Options Quantitative Terminal Charting Engine (Milestone 3)
+
 // Default Chart.js defaults
-Chart.defaults.color = '#8b949e';
-Chart.defaults.font.family = "'Inter', sans-serif";
-Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(22, 27, 34, 0.9)';
-Chart.defaults.plugins.tooltip.titleColor = '#c9d1d9';
-Chart.defaults.plugins.tooltip.bodyColor = '#c9d1d9';
-Chart.defaults.plugins.tooltip.borderColor = '#30363d';
-Chart.defaults.plugins.tooltip.borderWidth = 1;
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.font.family = "'Inter', system-ui, -apple-system, sans-serif";
+if (Chart.defaults.plugins && Chart.defaults.plugins.tooltip) {
+    Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(20, 29, 46, 0.95)';
+    Chart.defaults.plugins.tooltip.titleColor = '#f0f6fc';
+    Chart.defaults.plugins.tooltip.bodyColor = '#94a3b8';
+    Chart.defaults.plugins.tooltip.borderColor = 'rgba(255, 255, 255, 0.08)';
+    Chart.defaults.plugins.tooltip.borderWidth = 1;
+    Chart.defaults.plugins.tooltip.padding = 10;
+    Chart.defaults.plugins.tooltip.cornerRadius = 6;
+    Chart.defaults.plugins.tooltip.titleFont = { size: 11, weight: '600', family: "'JetBrains Mono', monospace" };
+    Chart.defaults.plugins.tooltip.bodyFont = { size: 11, family: "'JetBrains Mono', monospace" };
+}
 
 function createCandlestickChart(containerId) {
     const el = document.getElementById(containerId);
+    if (!el) return null;
+
     const chart = LightweightCharts.createChart(el, {
         layout: {
             background: { type: 'solid', color: 'transparent' },
-            textColor: '#8b949e',
+            textColor: '#94a3b8',
             fontSize: 12,
             fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
         },
         grid: {
-            vertLines: { color: 'rgba(48, 54, 61, 0.3)' },
-            horzLines: { color: 'rgba(48, 54, 61, 0.3)' },
+            vertLines: { color: 'rgba(255, 255, 255, 0.03)' },
+            horzLines: { color: 'rgba(255, 255, 255, 0.03)' },
         },
         crosshair: {
             mode: LightweightCharts.CrosshairMode.Normal,
+            vertLine: {
+                color: 'rgba(56, 189, 248, 0.4)',
+                style: 3,
+                labelBackgroundColor: '#141d2e',
+            },
+            horzLine: {
+                color: 'rgba(56, 189, 248, 0.4)',
+                style: 3,
+                labelBackgroundColor: '#141d2e',
+            },
         },
         timeScale: {
             timeVisible: true,
             secondsVisible: false,
-            borderColor: '#30363d',
+            borderColor: 'rgba(255, 255, 255, 0.07)',
             rightOffset: 10,
             barSpacing: 10,
             minBarSpacing: 0.5,
@@ -35,7 +54,7 @@ function createCandlestickChart(containerId) {
             shiftVisibleRangeOnNewBar: true,
         },
         rightPriceScale: {
-            borderColor: '#30363d',
+            borderColor: 'rgba(255, 255, 255, 0.07)',
             autoScale: true,
             scaleMargins: {
                 top: 0.1,
@@ -56,11 +75,11 @@ function createCandlestickChart(containerId) {
     });
 
     const candleSeries = chart.addCandlestickSeries({
-        upColor: '#00f5a0',
-        downColor: '#ff4d4d',
+        upColor: '#10b981',
+        downColor: '#f43f5e',
         borderVisible: false,
-        wickUpColor: '#00f5a0',
-        wickDownColor: '#ff4d4d',
+        wickUpColor: '#10b981',
+        wickDownColor: '#f43f5e',
         priceFormat: {
             type: 'price',
             precision: 5,
@@ -71,7 +90,18 @@ function createCandlestickChart(containerId) {
     return { chart, candleSeries };
 }
 
+function updateCandlestickChart(series, candle) {
+    if (series && candle) {
+        try {
+            series.update(candle);
+        } catch (e) {
+            console.warn('[Chart] Error updating candlestick:', e);
+        }
+    }
+}
+
 function addSignalMarkers(series, signals) {
+    if (!series || !signals) return;
     if (typeof buildChartMarkers === 'function') {
         const markers = buildChartMarkers(signals);
         series.setMarkers(markers);
@@ -82,7 +112,7 @@ function addSignalMarkers(series, signals) {
         return {
             time: signal.time,
             position: dir === 'CALL' ? 'belowBar' : 'aboveBar',
-            color: dir === 'CALL' ? '#00f5a0' : '#ff4d4d',
+            color: dir === 'CALL' ? '#10b981' : '#f43f5e',
             shape: dir === 'CALL' ? 'arrowUp' : 'arrowDown',
             text: dir
         };
@@ -90,9 +120,8 @@ function addSignalMarkers(series, signals) {
     series.setMarkers(markers);
 }
 
-
 function formatYAxisTick(value, useLog) {
-    if (value === 0) return '$0';
+    if (value === 0) return '$0.00';
     const absVal = Math.abs(value);
     
     if (useLog) {
@@ -111,7 +140,7 @@ function formatYAxisTick(value, useLog) {
         return prefix + (absVal / 1000).toFixed(absVal % 1000 === 0 ? 0 : 1) + 'k';
     }
     if (absVal >= 1) {
-        return prefix + (absVal % 1 === 0 ? absVal.toFixed(0) : absVal.toFixed(1));
+        return prefix + (absVal % 1 === 0 ? absVal.toFixed(0) : absVal.toFixed(2));
     }
     return prefix + absVal.toFixed(2);
 }
@@ -167,13 +196,26 @@ function createEquityCurve(canvasId, equityPoints, rawLabels) {
             datasets: [{
                 label: 'Capital',
                 data: cleanedData,
-                borderColor: '#58a6ff',
-                backgroundColor: 'rgba(88, 166, 255, 0.12)',
+                borderColor: '#38bdf8',
+                backgroundColor: function(context) {
+                    const chart = context.chart;
+                    const { ctx, chartArea } = chart;
+                    if (!chartArea) {
+                        return 'rgba(56, 189, 248, 0.12)';
+                    }
+                    const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                    gradient.addColorStop(0, 'rgba(56, 189, 248, 0.22)');
+                    gradient.addColorStop(1, 'rgba(56, 189, 248, 0.00)');
+                    return gradient;
+                },
                 borderWidth: 2,
                 fill: true,
-                tension: 0.1,
+                tension: 0.15,
                 pointRadius: 0,
-                pointHoverRadius: 4
+                pointHoverRadius: 4,
+                pointHoverBackgroundColor: '#38bdf8',
+                pointHoverBorderColor: '#ffffff',
+                pointHoverBorderWidth: 2
             }]
         },
         options: {
@@ -186,27 +228,27 @@ function createEquityCurve(canvasId, equityPoints, rawLabels) {
             scales: {
                 x: { 
                     display: true,
-                    grid: { color: 'rgba(48, 54, 61, 0.3)' },
+                    grid: { color: 'rgba(255, 255, 255, 0.03)' },
                     ticks: {
-                        color: '#8b949e',
+                        color: '#94a3b8',
                         maxTicksLimit: 8,
-                        font: { size: 10 }
+                        font: { size: 10, family: "'Inter', sans-serif" }
                     },
                     title: {
                         display: true,
                         text: 'Línea de Tiempo (Fechas / Histórico)',
-                        color: '#8b949e',
-                        font: { size: 10, weight: '500' }
+                        color: '#94a3b8',
+                        font: { size: 10, weight: '500', family: "'Inter', sans-serif" }
                     }
                 },
                 y: {
                     type: useLog ? 'logarithmic' : 'linear',
-                    grid: { color: 'rgba(48, 54, 61, 0.3)' },
+                    grid: { color: 'rgba(255, 255, 255, 0.03)' },
                     min: useLog ? Math.max(1, Math.pow(10, Math.floor(Math.log10(Math.max(minVal, 1))))) : undefined,
                     ticks: {
-                        color: '#8b949e',
+                        color: '#94a3b8',
                         maxTicksLimit: 6,
-                        font: { size: 10 },
+                        font: { size: 10, family: "'JetBrains Mono', monospace" },
                         callback: function(value) {
                             return formatYAxisTick(value, useLog);
                         }
@@ -216,6 +258,15 @@ function createEquityCurve(canvasId, equityPoints, rawLabels) {
             plugins: {
                 legend: { display: false },
                 tooltip: {
+                    backgroundColor: 'rgba(20, 29, 46, 0.95)',
+                    titleColor: '#f0f6fc',
+                    bodyColor: '#94a3b8',
+                    borderColor: 'rgba(255, 255, 255, 0.08)',
+                    borderWidth: 1,
+                    padding: 10,
+                    cornerRadius: 6,
+                    titleFont: { size: 11, weight: '600', family: "'JetBrains Mono', monospace" },
+                    bodyFont: { size: 11, family: "'JetBrains Mono', monospace" },
                     callbacks: {
                         title: function(items) {
                             if (!items || !items.length) return '';
@@ -224,7 +275,8 @@ function createEquityCurve(canvasId, equityPoints, rawLabels) {
                             return `Op. #${idx + 1} (${label})`;
                         },
                         label: function(context) {
-                            return `Capital Acumulado: $${Number(context.raw).toFixed(2)}`;
+                            const val = Number(context.raw);
+                            return `Capital Acumulado: $${val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
                         }
                     }
                 }
@@ -233,10 +285,14 @@ function createEquityCurve(canvasId, equityPoints, rawLabels) {
     });
 }
 
-function createBarChart(canvasId, labels, values, title, color = '#58a6ff') {
-    const ctx = document.getElementById(canvasId).getContext('2d');
+function createBarChart(canvasId, labels, values, title, color = '#38bdf8') {
+    const el = document.getElementById(canvasId);
+    if (!el) return;
+    const ctx = el.getContext('2d');
     if (window[canvasId + 'Inst']) window[canvasId + 'Inst'].destroy();
     
+    const bgColors = Array.isArray(color) ? color : color;
+
     window[canvasId + 'Inst'] = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -244,28 +300,51 @@ function createBarChart(canvasId, labels, values, title, color = '#58a6ff') {
             datasets: [{
                 label: title,
                 data: values,
-                backgroundColor: color,
+                backgroundColor: bgColors,
                 borderRadius: 4
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
+            plugins: { 
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(20, 29, 46, 0.95)',
+                    titleColor: '#f0f6fc',
+                    bodyColor: '#94a3b8',
+                    borderColor: 'rgba(255, 255, 255, 0.08)',
+                    borderWidth: 1,
+                    padding: 10,
+                    cornerRadius: 6,
+                    titleFont: { size: 11, weight: '600', family: "'JetBrains Mono', monospace" },
+                    bodyFont: { size: 11, family: "'JetBrains Mono', monospace" }
+                }
+            },
             scales: {
-                y: { grid: { color: '#30363d' } }
+                x: {
+                    grid: { color: 'rgba(255, 255, 255, 0.03)' },
+                    ticks: { color: '#94a3b8', font: { size: 10, family: "'Inter', sans-serif" } }
+                },
+                y: { 
+                    grid: { color: 'rgba(255, 255, 255, 0.03)' },
+                    ticks: { color: '#94a3b8', font: { size: 10, family: "'JetBrains Mono', monospace" } }
+                }
             }
         }
     });
 }
 
 function createGrowthRateChart(canvasId, ns, g_values, optimal_n) {
-    const ctx = document.getElementById(canvasId).getContext('2d');
+    const el = document.getElementById(canvasId);
+    if (!el) return;
+    const ctx = el.getContext('2d');
     if (window.gnChartInst) window.gnChartInst.destroy();
+    if (window[canvasId + 'Inst']) window[canvasId + 'Inst'].destroy();
     
-    const colors = ns.map(n => n === optimal_n ? '#3fb950' : '#58a6ff');
+    const colors = ns.map(n => n === optimal_n ? '#10b981' : '#38bdf8');
     
-    window.gnChartInst = new Chart(ctx, {
+    const inst = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ns,
@@ -279,99 +358,196 @@ function createGrowthRateChart(canvasId, ns, g_values, optimal_n) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
+            plugins: { 
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(20, 29, 46, 0.95)',
+                    titleColor: '#f0f6fc',
+                    bodyColor: '#94a3b8',
+                    borderColor: 'rgba(255, 255, 255, 0.08)',
+                    borderWidth: 1,
+                    padding: 10,
+                    cornerRadius: 6,
+                    titleFont: { size: 11, weight: '600', family: "'JetBrains Mono', monospace" },
+                    bodyFont: { size: 11, family: "'JetBrains Mono', monospace" },
+                    callbacks: {
+                        label: function(context) {
+                            return `G(${context.label}): ${Number(context.raw).toFixed(4)}`;
+                        }
+                    }
+                }
+            },
             scales: {
-                y: { grid: { color: '#30363d' } }
+                x: {
+                    grid: { color: 'rgba(255, 255, 255, 0.03)' },
+                    ticks: { color: '#94a3b8', font: { size: 10, family: "'Inter', sans-serif" } }
+                },
+                y: { 
+                    grid: { color: 'rgba(255, 255, 255, 0.03)' },
+                    ticks: { color: '#94a3b8', font: { size: 10, family: "'JetBrains Mono', monospace" } }
+                }
             }
         }
     });
+
+    window.gnChartInst = inst;
+    window[canvasId + 'Inst'] = inst;
 }
 
-function createMonteCarloChart(canvasId, labels, percentiles) {
-    const ctx = document.getElementById(canvasId).getContext('2d');
+function createMonteCarloChart(canvasId, labels, percentiles, initialCapital) {
+    const el = document.getElementById(canvasId);
+    if (!el) return;
+    const ctx = el.getContext('2d');
     if (window.mcChartInst) window.mcChartInst.destroy();
+    if (window[canvasId + 'Inst']) window[canvasId + 'Inst'].destroy();
     
     // Clean arrays to avoid log(0) which stretches scale to -infinity
     const clean = arr => (arr || []).map(v => v <= 0.01 ? 0.01 : v);
     
-    const p95_clean = clean(percentiles.p95);
-    const p75_clean = clean(percentiles.p75);
-    const p50_clean = clean(percentiles.p50);
-    const p25_clean = clean(percentiles.p25);
-    const p5_clean = clean(percentiles.p5);
+    const p95_clean = clean(percentiles?.p95);
+    const p75_clean = clean(percentiles?.p75);
+    const p50_clean = clean(percentiles?.p50);
+    const p25_clean = clean(percentiles?.p25);
+    const p5_clean = clean(percentiles?.p5);
     
     // Determine whether to use log scale or linear scale
     const allValues = [...p95_clean, ...p75_clean, ...p50_clean, ...p25_clean, ...p5_clean];
-    const maxVal = Math.max(...allValues);
-    const minVal = Math.min(...allValues);
+    const maxVal = allValues.length > 0 ? Math.max(...allValues) : 1000;
+    const minVal = allValues.length > 0 ? Math.min(...allValues) : 1;
     const useLog = (maxVal / (minVal || 1)) > 50 && minVal > 0.01;
     
-    window.mcChartInst = new Chart(ctx, {
+    const datasets = [
+        {
+            label: 'P95 (Top 5%)',
+            data: p95_clean,
+            borderColor: 'rgba(16, 185, 129, 0.85)',
+            borderDash: [5, 5],
+            borderWidth: 1.5,
+            pointRadius: 0,
+            fill: false
+        },
+        {
+            label: 'P75 (Cuartil Superior)',
+            data: p75_clean,
+            borderColor: 'rgba(16, 185, 129, 0.45)',
+            borderWidth: 1,
+            pointRadius: 0,
+            fill: '+1',
+            backgroundColor: 'rgba(16, 185, 129, 0.05)'
+        },
+        {
+            label: 'Mediana (P50)',
+            data: p50_clean,
+            borderColor: '#38bdf8',
+            borderWidth: 2.5,
+            pointRadius: 0,
+            fill: false
+        },
+        {
+            label: 'P25 (Cuartil Inferior)',
+            data: p25_clean,
+            borderColor: 'rgba(244, 63, 94, 0.45)',
+            borderWidth: 1,
+            pointRadius: 0,
+            fill: '+1',
+            backgroundColor: 'rgba(244, 63, 94, 0.05)'
+        },
+        {
+            label: 'P5 (Riesgo Cola 5%)',
+            data: p5_clean,
+            borderColor: 'rgba(244, 63, 94, 0.85)',
+            borderDash: [5, 5],
+            borderWidth: 1.5,
+            pointRadius: 0,
+            fill: false
+        }
+    ];
+
+    // Add baseline for initial capital if provided or inferred
+    const initCap = initialCapital || (p50_clean.length > 0 ? p50_clean[0] : null);
+    if (initCap !== null && labels && labels.length > 0) {
+        datasets.push({
+            label: 'Capital Inicial',
+            data: Array(labels.length).fill(initCap),
+            borderColor: 'rgba(255, 255, 255, 0.25)',
+            borderDash: [6, 6],
+            borderWidth: 1,
+            pointRadius: 0,
+            fill: false
+        });
+    }
+
+    const inst = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
-            datasets: [
-                {
-                    label: 'P95',
-                    data: p95_clean,
-                    borderColor: 'rgba(63, 185, 80, 0.8)',
-                    borderDash: [5, 5],
-                    pointRadius: 0,
-                    fill: false
-                },
-                {
-                    label: 'P75',
-                    data: p75_clean,
-                    borderColor: 'rgba(63, 185, 80, 0.4)',
-                    pointRadius: 0,
-                    fill: false
-                },
-                {
-                    label: 'Mediana (P50)',
-                    data: p50_clean,
-                    borderColor: '#58a6ff',
-                    borderWidth: 3,
-                    pointRadius: 0,
-                    fill: false
-                },
-                {
-                    label: 'P25',
-                    data: p25_clean,
-                    borderColor: 'rgba(248, 81, 73, 0.4)',
-                    pointRadius: 0,
-                    fill: false
-                },
-                {
-                    label: 'P5',
-                    data: p5_clean,
-                    borderColor: 'rgba(248, 81, 73, 0.8)',
-                    borderDash: [5, 5],
-                    pointRadius: 0,
-                    fill: false
-                }
-            ]
+            datasets: datasets
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
             scales: {
-                x: { display: false },
+                x: { 
+                    display: true,
+                    grid: { color: 'rgba(255, 255, 255, 0.03)' },
+                    ticks: {
+                        color: '#94a3b8',
+                        maxTicksLimit: 8,
+                        font: { size: 10, family: "'Inter', sans-serif" }
+                    }
+                },
                 y: { 
                     type: useLog ? 'logarithmic' : 'linear', 
-                    grid: { color: '#30363d' },
+                    grid: { color: 'rgba(255, 255, 255, 0.03)' },
                     min: useLog ? Math.max(1, Math.pow(10, Math.floor(Math.log10(Math.max(minVal, 1))))) : undefined,
                     ticks: {
-                        color: '#8b949e',
+                        color: '#94a3b8',
                         maxTicksLimit: 6,
-                        font: { size: 10 },
+                        font: { size: 10, family: "'JetBrains Mono', monospace" },
                         callback: function(value) {
                             return formatYAxisTick(value, useLog);
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        color: '#94a3b8',
+                        font: { size: 10, family: "'Inter', sans-serif" },
+                        boxWidth: 12,
+                        padding: 10
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(20, 29, 46, 0.95)',
+                    titleColor: '#f0f6fc',
+                    bodyColor: '#94a3b8',
+                    borderColor: 'rgba(255, 255, 255, 0.08)',
+                    borderWidth: 1,
+                    padding: 10,
+                    cornerRadius: 6,
+                    titleFont: { size: 11, weight: '600', family: "'JetBrains Mono', monospace" },
+                    bodyFont: { size: 11, family: "'JetBrains Mono', monospace" },
+                    callbacks: {
+                        label: function(context) {
+                            const val = Number(context.raw);
+                            return `${context.dataset.label}: $${val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
                         }
                     }
                 }
             }
         }
     });
+
+    window.mcChartInst = inst;
+    window[canvasId + 'Inst'] = inst;
 }
 
 function createCorrelationHeatmap(canvasId, matrix, labels) {
@@ -382,10 +558,16 @@ function createCorrelationHeatmap(canvasId, matrix, labels) {
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
     
-    // Use container dimensions if canvas bounding rect is collapsed
-    const width = parent ? parent.clientWidth : canvas.clientWidth;
-    const height = parent ? parent.clientHeight : canvas.clientHeight;
+    // Store data on canvas for re-renders on resize
+    canvas._lastMatrix = matrix;
+    canvas._lastLabels = labels;
     
+    // Sizing
+    const width = parent ? parent.clientWidth : (canvas.clientWidth || 400);
+    const height = parent ? parent.clientHeight : (canvas.clientHeight || 280);
+    
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
     canvas.width = (width || 400) * dpr;
     canvas.height = (height || 280) * dpr;
     ctx.scale(dpr, dpr);
@@ -396,9 +578,11 @@ function createCorrelationHeatmap(canvasId, matrix, labels) {
     ctx.clearRect(0, 0, w, h);
     
     if (!matrix || matrix.length === 0 || !labels || labels.length === 0) {
-        ctx.fillStyle = '#8b949e';
-        ctx.font = '13px Inter, sans-serif';
-        ctx.fillText('Sin datos de correlación', w / 2 - 60, h / 2);
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '13px "Inter", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('Sin datos de correlación', w / 2, h / 2);
         return;
     }
     
@@ -417,41 +601,55 @@ function createCorrelationHeatmap(canvasId, matrix, labels) {
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             const val = (matrix[i] && matrix[i][j] !== undefined) ? matrix[i][j] : null;
-            let colorStr = 'rgba(22, 27, 34, 0.9)';
+            let colorStr = 'rgba(20, 29, 46, 0.95)';
 
             if (val !== null && val !== undefined && !isNaN(val)) {
                 if (val >= 0) {
-                    const intensity = Math.pow(val, 1.2);
-                    const r = Math.round(22 + intensity * (248 - 22));
-                    const g = Math.round(27 + intensity * (81 - 27));
-                    const b = Math.round(34 + intensity * (73 - 34));
+                    // Positive correlation: interpolate from base dark (#141d2e -> 20, 29, 46) to Rose Crimson (#f43f5e -> 244, 63, 94)
+                    const intensity = Math.pow(Math.abs(val), 1.2);
+                    const r = Math.round(20 + intensity * (244 - 20));
+                    const g = Math.round(29 + intensity * (63 - 29));
+                    const b = Math.round(46 + intensity * (94 - 46));
                     colorStr = `rgb(${r}, ${g}, ${b})`;
                 } else {
+                    // Negative correlation: interpolate from base dark (#141d2e -> 20, 29, 46) to Electric Sky (#38bdf8 -> 56, 189, 248)
                     const intensity = Math.pow(Math.abs(val), 1.2);
-                    const r = Math.round(22 + intensity * (88 - 22));
-                    const g = Math.round(27 + intensity * (166 - 27));
-                    const b = Math.round(34 + intensity * (255 - 34));
+                    const r = Math.round(20 + intensity * (56 - 20));
+                    const g = Math.round(29 + intensity * (189 - 29));
+                    const b = Math.round(46 + intensity * (248 - 46));
                     colorStr = `rgb(${r}, ${g}, ${b})`;
                 }
             }
             
             ctx.fillStyle = colorStr;
-            ctx.fillRect(leftMargin + j * cellW, topMargin + i * cellH, cellW - 1.5, cellH - 1.5);
+            const cellX = leftMargin + j * cellW;
+            const cellY = topMargin + i * cellH;
+            const cellWidth = cellW - 1.5;
+            const cellHeight = cellH - 1.5;
+
+            // Draw rounded cell rect if supported, else standard fillRect
+            if (typeof ctx.roundRect === 'function') {
+                ctx.beginPath();
+                ctx.roundRect(cellX, cellY, cellWidth, cellHeight, 3);
+                ctx.fill();
+            } else {
+                ctx.fillRect(cellX, cellY, cellWidth, cellHeight);
+            }
             
             if (cellW > 18 && cellH > 14 && val !== null && val !== undefined && !isNaN(val)) {
-                ctx.fillStyle = Math.abs(val) > 0.4 ? '#ffffff' : '#c9d1d9';
+                ctx.fillStyle = Math.abs(val) > 0.4 ? '#f0f6fc' : '#94a3b8';
                 const fontSize = Math.min(11, Math.max(8, Math.floor(cellH * 0.45)));
-                ctx.font = `bold ${fontSize}px Inter, sans-serif`;
+                ctx.font = `bold ${fontSize}px "JetBrains Mono", monospace`;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                ctx.fillText(val.toFixed(2), leftMargin + j * cellW + cellW / 2, topMargin + i * cellH + cellH / 2);
+                ctx.fillText(val.toFixed(2), cellX + cellW / 2, cellY + cellH / 2);
             }
         }
     }
     
     const labelFontSize = Math.min(11, Math.max(8, Math.floor(cellH * 0.45)));
-    ctx.fillStyle = '#c9d1d9';
-    ctx.font = `bold ${labelFontSize}px Inter, sans-serif`;
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = `bold ${labelFontSize}px "Inter", sans-serif`;
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
     
@@ -467,3 +665,64 @@ function createCorrelationHeatmap(canvasId, matrix, labels) {
         ctx.fillText(label, leftMargin + j * cellW + cellW / 2, h - bottomMargin + 6);
     }
 }
+
+function renderDiagnosticsCharts(statsData) {
+    if (!statsData) return;
+    
+    // Autocorrelation
+    const ac = statsData.dependency?.autocorrelation || [];
+    if (ac.length > 0 && document.getElementById('autocorr-chart')) {
+        const labels = ac.map((_, i) => `Lag ${i + 1}`);
+        const colors = ac.map(v => v >= 0 ? '#a855f7' : '#f43f5e');
+        createBarChart('autocorr-chart', labels, ac, 'Autocorrelación', colors);
+    }
+
+    // Streak distribution
+    const sd = statsData.streaks?.streak_distribution || {};
+    if (Object.keys(sd).length > 0 && document.getElementById('streaks-chart')) {
+        const sortedKeys = Object.keys(sd).map(Number).sort((a, b) => a - b);
+        createBarChart('streaks-chart', sortedKeys.map(String), sortedKeys.map(k => sd[k]), 'Frecuencia de Rachas', '#38bdf8');
+    }
+
+    // Win rate by hour
+    const bh = statsData.temporal?.by_hour || {};
+    if (Object.keys(bh).length > 0 && document.getElementById('hourly-chart')) {
+        const hours = Object.keys(bh).map(Number).sort((a, b) => a - b);
+        const values = hours.map(h => bh[h]);
+        const colors = values.map(wr => {
+            const pct = wr > 1 ? wr : wr * 100;
+            if (pct >= 58.8) return '#10b981';
+            if (pct >= 50.0) return '#38bdf8';
+            return '#f43f5e';
+        });
+        createBarChart('hourly-chart', hours.map(h => h + 'h'), values, 'Win Rate por Hora', colors);
+    }
+
+    // Market state
+    const ms = statsData.market_state || {};
+    if (Object.values(ms).some(v => v > 0) && document.getElementById('market-state-chart')) {
+        createBarChart('market-state-chart',
+            ['Alta Vol', 'Baja Vol', 'Tendencia', 'Rango'],
+            [ms.high_vol_wr || 0, ms.low_vol_wr || 0, ms.trending_wr || 0, ms.ranging_wr || 0],
+            'Win Rate por Régimen',
+            ['#f59e0b', '#38bdf8', '#10b981', '#a855f7']
+        );
+    }
+}
+
+// Global window export aliases
+window.createCandlestickChart = createCandlestickChart;
+window.initLightweightChart = createCandlestickChart;
+window.updateCandlestickChart = updateCandlestickChart;
+window.addSignalMarkers = addSignalMarkers;
+window.formatYAxisTick = formatYAxisTick;
+window.createEquityCurve = createEquityCurve;
+window.renderEquityCurve = createEquityCurve;
+window.createBarChart = createBarChart;
+window.createGrowthRateChart = createGrowthRateChart;
+window.createMonteCarloChart = createMonteCarloChart;
+window.renderMonteCarloCones = createMonteCarloChart;
+window.createCorrelationHeatmap = createCorrelationHeatmap;
+window.renderCorrelationHeatmap = createCorrelationHeatmap;
+window.renderDiagnosticsCharts = renderDiagnosticsCharts;
+

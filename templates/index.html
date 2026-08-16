@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binarias Simulator - Simulador de Opciones Binarias</title>
+    <title>Binarias Simulator - Terminal Cuantitativo Institucional</title>
+    
+    <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico">
     <link rel="apple-touch-icon" href="/static/favicon.png">
+    
+    <!-- Preconnect & Google Fonts: Inter (UI) + JetBrains Mono (Data & Tabular Numbers) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Design System Global Stylesheet -->
     <link rel="stylesheet" href="/static/css/style.css">
+    
+    <!-- Third-Party Charting Engines -->
     <script src="https://unpkg.com/lightweight-charts@4/dist/lightweight-charts.standalone.production.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar or Header for Tabs -->
+        <!-- Header Institucional Unificado -->
         <header class="app-header">
             <div class="logo">
                 <h1>Binarias <span>Simulator</span></h1>
+                <span class="badge badge-quant" style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); color: var(--accent-primary); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.05em; margin-left: 8px;">QUANT TERMINAL PRO</span>
             </div>
             
             <!-- Selector de Modo Híbrido -->
@@ -28,17 +37,31 @@
                 <button class="mode-btn" id="mode-advanced" data-mode="advanced">⚙️ Modo Avanzado (Manual)</button>
             </div>
             
-            <nav class="tabs-nav" style="display: none;">
-                <button class="tab-btn" data-tab="dashboard">Mercado</button>
-                <button class="tab-btn" data-tab="backtest">Backtest</button>
-                <button class="tab-btn" data-tab="resultados" id="btn-resultados">Resultados</button>
-                <button class="tab-btn" data-tab="estadisticas" id="btn-estadisticas" disabled>Estadísticas</button>
-                <button class="tab-btn" data-tab="optimizador" id="btn-optimizador" disabled>Optimizador</button>
-            </nav>
+            <!-- Telemetría en Vivo y Navegación Avanzada -->
+            <div class="header-right-actions" style="display: flex; align-items: center; gap: 12px;">
+                <div class="telemetry-badges-group" style="display: flex; align-items: center; gap: 8px;">
+                    <div class="status-pill rust-engine-pill" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); color: var(--accent-green); padding: 3px 10px; border-radius: var(--radius-pill); font-size: 0.72rem; font-weight: 500; display: inline-flex; align-items: center; gap: 5px;" title="Motor cuantitativo de backtesting y algoritmos genéticos en Rust">
+                        <span class="pulse-dot text-green">●</span>
+                        <span class="pill-label">Motor Cuantitativo: <strong>ACTIVO (Rust v1.82)</strong></span>
+                    </div>
+                    
+                    <span id="live-badge" class="live-badge-span" style="display: none;">
+                        <span class="pulse-dot">●</span> <span id="live-badge-text">En Vivo</span>
+                    </span>
+                </div>
+
+                <nav class="tabs-nav" style="display: none;">
+                    <button class="tab-btn" data-tab="dashboard">Mercado</button>
+                    <button class="tab-btn" data-tab="backtest">Backtest</button>
+                    <button class="tab-btn" data-tab="resultados" id="btn-resultados">Resultados</button>
+                    <button class="tab-btn" data-tab="estadisticas" id="btn-estadisticas" disabled>Estadísticas</button>
+                    <button class="tab-btn" data-tab="optimizador" id="btn-optimizador" disabled>Optimizador</button>
+                </nav>
+            </div>
         </header>
 
         <main class="content-area">
-            <!-- Pestaña 0: Tablero Inteligente (Simple Mode) -->
+            <!-- Pestaña 0: Tablero Inteligente (Smart Mode) -->
             <section id="smart-dashboard" class="tab-pane active">
                 <div class="smart-grid">
                     <!-- Control Bar Horizontal de Optimización -->
@@ -74,12 +97,12 @@
                                 </div>
                             </div>
                             
-                            <!-- Preset Selector Barbell (Punto 4) -->
-                            <div class="smart-preset-wrapper" style="grid-column: span 3; margin-bottom: 12px;">
-                                <label class="smart-input-label" style="color: #58a6ff; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                            <!-- Preset Selector Barbell -->
+                            <div class="smart-preset-wrapper">
+                                <label class="smart-input-label" style="color: var(--accent-primary); font-weight: 700; display: flex; align-items: center; gap: 6px;">
                                     🎯 Estrategia de Disparo y Presupuesto de Campaña (Configuración Óptima)
                                     <span class="tooltip">?
-                                        <span class="tooltip-text" style="width: 360px; text-align: left; padding: 10px;">
+                                        <span class="tooltip-text" style="width: 360px;">
                                             <strong>¿Por qué 6 Balas de $33.33 con Racha N=3?</strong><br>
                                             Es la estrategia matemáticamente más rápida, robusta y equilibrada.<br><br>
                                             • <strong>6 Intentos de $33.33</strong> financiada por el 20% de ganancia de arbitraje ($200).<br>
@@ -89,7 +112,7 @@
                                         </span>
                                     </span>
                                 </label>
-                                <select id="smart-preset-select" class="form-control" style="background: #161b22; color: #58a6ff; border: 1px solid #58a6ff; font-weight: bold; font-size: 0.88rem; padding: 8px; border-radius: 6px; width: 100%; cursor: pointer;">
+                                <select id="smart-preset-select" class="form-control">
                                     <option value="preset_33_6" selected>🚀 [MÁXIMA EFICIENCIA QUANT] 6 Balas de $33.33 / Mes (Rachas N=3) ➔ Meta: Duplicación +100% de Patrimonio</option>
                                     <option value="preset_25_8">⚡ [Conservador / 8 Intentos] 8 Balas de $25.00 / Mes (Rachas N=3) ➔ Meta: Duplicación +100% de Patrimonio</option>
                                     <option value="preset_200_1">🎯 [Retorno Directo / 1 Intento] 1 Bala de $200 / Mes (Racha N=3) ➔ Ganancia: +$1,066.33 (Capital Final: $2,066 USDT)</option>
@@ -137,7 +160,7 @@
                                 </div>
 
                                 <div class="control-group">
-                                    <label for="smart-generations" style="color: #a371f7;">Generaciones
+                                    <label for="smart-generations" style="color: var(--accent-purple);">Generaciones
                                         <span class="tooltip">?
                                             <span class="tooltip-text">Ciclos evolutivos que correrá el motor genético en Rust.</span>
                                         </span>
@@ -146,7 +169,7 @@
                                 </div>
 
                                 <div class="control-group">
-                                    <label for="smart-population" style="color: #a371f7;">Población
+                                    <label for="smart-population" style="color: var(--accent-purple);">Población
                                         <span class="tooltip">?
                                             <span class="tooltip-text">Cantidad de individuos procesados por generación.</span>
                                         </span>
@@ -157,28 +180,28 @@
                         </div>
                         
                         <!-- Consola de Progreso Cyberpunk -->
-                        <div class="smart-console-wrapper" id="smart-console-box" style="display: none; margin-top: 15px;">
-                            <div class="console-header" style="background: #161b22; padding: 6px 10px; display: flex; align-items: center; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom: 1px solid var(--border-color);">
-                                <span class="console-dot red" style="width: 8px; height: 8px; border-radius: 50%; background: #ff5f56; margin-right: 6px;"></span>
-                                <span class="console-dot yellow" style="width: 8px; height: 8px; border-radius: 50%; background: #ffbd2e; margin-right: 6px;"></span>
-                                <span class="console-dot green" style="width: 8px; height: 8px; border-radius: 50%; background: #27c93f; margin-right: 10px;"></span>
-                                <span class="console-title" style="font-family: monospace; font-size: 0.7rem; color: var(--text-secondary); font-weight: bold;">PROCESADOR CUANTITATIVO</span>
+                        <div class="smart-console-wrapper" id="smart-console-box" style="display: none;">
+                            <div class="console-header">
+                                <span class="console-dot red"></span>
+                                <span class="console-dot yellow"></span>
+                                <span class="console-dot green"></span>
+                                <span class="console-title">PROCESADOR CUANTITATIVO</span>
                             </div>
-                            <div class="smart-progress-bar-container" style="background: rgba(255, 255, 255, 0.05); height: 5px; border-bottom: 1px solid var(--border-color); position: relative; width: 100%;">
-                                <div class="smart-progress-bar-fill" id="smart-progress-bar-fill" style="background: linear-gradient(90deg, #a371f7, #58a6ff); width: 0%; height: 100%; transition: width 0.3s ease;"></div>
+                            <div class="smart-progress-bar-container">
+                                <div class="smart-progress-bar-fill" id="smart-progress-bar-fill"></div>
                             </div>
-                            <div class="console-body" id="smart-console-logs" style="background: #0d1117; font-family: monospace; font-size: 0.75rem; color: #39ff14; padding: 10px; height: 160px; overflow-y: auto; line-height: 1.4; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; border: 1px solid var(--border-color); border-top: none;">
+                            <div class="console-body" id="smart-console-logs">
                                 <!-- Logs dynamically added -->
                             </div>
                         </div>
                     </div>
                     
                     <!-- Tablero de Resultados -->
-                    <div class="smart-results-area" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div class="smart-results-area">
                         <!-- Selector de Ranking de Estrategias Optimizadas -->
-                        <div class="top-strategies-wrapper glass-card" id="smart-top-5-box" style="display: none; padding: 12px; border-color: rgba(163, 113, 247, 0.4); background: rgba(22, 27, 34, 0.85);">
-                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-                                <h3 style="font-size: 0.95rem; color: #a371f7; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                        <div class="top-strategies-wrapper glass-card" id="smart-top-5-box" style="display: none;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 6px;">
+                                <h3 style="font-size: 0.95rem; color: var(--accent-purple); font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 0;">
                                     🏆 Ranking de Estrategias Optimizadas
                                     <span class="tooltip">?
                                         <span class="tooltip-text">
@@ -186,28 +209,27 @@
                                         </span>
                                     </span>
                                 </h3>
-                                <span style="font-size: 0.75rem; color: var(--accent-blue); font-weight: 500;">👈 Selecciona una estrategia para alternar el tablero completo</span>
+                                <span style="font-size: 0.75rem; color: var(--accent-primary); font-weight: 500;">👈 Selecciona una estrategia para alternar el tablero completo</span>
                             </div>
-                            <div id="smart-top-5-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px;">
+                            <div id="smart-top-5-list">
                                 <!-- Dynamic pills -->
                             </div>
                         </div>
 
-
                         <!-- Recomendación y Escalera -->
-                        <div class="smart-row-top" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; align-items: start;">
-                            <div class="chart-card glass-card smart-card-rec" style="padding: 15px; min-width: 0; height: auto; min-height: auto; overflow: visible;">
-                                <h3 style="color: var(--accent-blue); font-size: 1rem; margin-bottom: 10px;">📊 Plan de Rachas Optimizado</h3>
+                        <div class="smart-row-top">
+                            <div class="chart-card glass-card smart-card-rec">
+                                <h3 style="color: var(--accent-primary); font-size: 1rem; margin-bottom: 10px;">📊 Plan de Rachas Optimizado</h3>
                                 <div id="smart-rec-content" class="smart-rec-text">
                                     <p class="empty-text">Introduce tus datos a la izquierda y presiona "Auto-Optimizar" para ver el plan.</p>
                                 </div>
                             </div>
                             
-                            <div class="chart-card glass-card smart-card-ladder" style="padding: 15px; height: auto; min-height: auto; display: flex; flex-direction: column;">
+                            <div class="chart-card glass-card smart-card-ladder">
                                 <h3 style="font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
                                     <span>🪜 Escalera de Apuestas</span>
                                     <span class="tooltip">?
-                                        <span class="tooltip-text" style="width: 290px; text-align: left; font-weight: normal; font-size: 0.74rem; line-height: 1.4;">
+                                        <span class="tooltip-text" style="width: 290px;">
                                             <strong>¿Qué es la Escalera de Apuestas?</strong><br>
                                             Es un plan de interés compuesto (Paroli) para acumular ganancias dentro de una racha.<br><br>
                                             • <strong>¿Qué es N?</strong> Es el número de victorias consecutivas necesarias para completar 1 ciclo.<br>
@@ -223,9 +245,9 @@
                         </div>
                         
                         <!-- Matriz de Correlación y Activos Seleccionados -->
-                        <div class="smart-row-correlation" style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 15px;">
-                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column; min-height: 360px;">
-                                <h3 style="font-size: 0.95rem; margin-bottom: 10px; color: var(--accent-blue); display: flex; align-items: center; gap: 6px;">
+                        <div class="smart-row-correlation">
+                            <div class="chart-card glass-card">
+                                <h3 style="font-size: 0.95rem; margin-bottom: 10px; color: var(--accent-primary); display: flex; align-items: center; gap: 6px;">
                                     🔥 Heatmap de Correlación de Retornos
                                     <span class="tooltip">?
                                         <span class="tooltip-text">
@@ -241,7 +263,7 @@
                                 </div>
                             </div>
                             
-                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column; min-height: 360px;">
+                            <div class="chart-card glass-card">
                                 <h3 style="font-size: 0.95rem; margin-bottom: 10px; color: var(--accent-green); display: flex; align-items: center; justify-content: space-between;">
                                     <span style="display: flex; align-items: center; gap: 6px;">
                                         📋 Activos Seleccionados (Filtro &lt; 0.40)
@@ -251,19 +273,19 @@
                                             </span>
                                         </span>
                                     </span>
-                                    <span style="font-size: 0.7rem; color: var(--text-secondary); font-weight: normal; background: rgba(255,255,255,0.04); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color);">📅 Muestra: 2021 - 2026</span>
+                                    <span class="badge" style="background: rgba(255,255,255,0.04); color: var(--text-secondary); border: 1px solid var(--border-subtle);">📅 Muestra: 2021 - 2026</span>
                                 </h3>
                                 <div style="flex: 1; overflow-y: auto; max-height: 290px;">
-                                    <table class="markov-table" id="smart-selected-assets-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8rem;">
+                                    <table class="markov-table" id="smart-selected-assets-table">
                                         <thead>
-                                            <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
-                                                <th style="padding: 6px 4px;">Activo</th>
-                                                <th style="padding: 6px 4px;">Estado</th>
-                                                <th style="padding: 6px 4px; text-align: right;">Win Rate OOS</th>
+                                            <tr>
+                                                <th>Activo</th>
+                                                <th>Estado</th>
+                                                <th style="text-align: right;">Win Rate OOS</th>
                                             </tr>
                                         </thead>
                                         <tbody id="smart-selected-assets-body">
-                                            <tr><td colspan="3" class="empty-text" style="text-align:center; padding: 20px 0;">Sin datos</td></tr>
+                                            <tr><td colspan="3" class="empty-text">Sin datos</td></tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -271,9 +293,9 @@
                         </div>
                         
                         <!-- Gráficas Principales -->
-                        <div class="smart-row-charts" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="smart-row-charts">
                             <!-- Curva de Capital del Backtest -->
-                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column;">
+                            <div class="chart-card glass-card">
                                 <h3 style="font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
                                     📈 Curva de Capital (Backtest Barbell Histórico)
                                     <span class="tooltip">?
@@ -283,13 +305,13 @@
                                         </span>
                                     </span>
                                 </h3>
-                                <div class="chart-wrapper" style="flex: 1; min-height: 220px; position: relative;">
+                                <div class="chart-wrapper">
                                     <canvas id="smart-equity-chart-canvas"></canvas>
                                 </div>
                             </div>
                             
                             <!-- Monte Carlo Campaña -->
-                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column;">
+                            <div class="chart-card glass-card">
                                 <h3 style="font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
                                     🎲 Proyección de Crecimiento (Monte Carlo - 1,000 caminos)
                                     <span class="tooltip">?
@@ -304,19 +326,19 @@
                                         </span>
                                     </span>
                                 </h3>
-                                <div class="chart-wrapper" style="flex: 1; min-height: 220px; position: relative;">
+                                <div class="chart-wrapper">
                                     <canvas id="smart-mc-chart-canvas"></canvas>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Gráfico de Precios con Señales y Markov -->
-                        <div class="smart-row-bottom" style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
-                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column;">
-                                <h3 style="font-size: 0.95rem; margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between;">
+                        <div class="smart-row-bottom">
+                            <div class="chart-card glass-card">
+                                <h3 style="font-size: 0.95rem; margin-bottom: 5px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
                                     <span style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
                                         🕯️ Velas de Precio con Señales:
-                                        <select id="smart-asset-selector" style="background: #161b22; color: var(--accent-blue); border: 1px solid var(--border-color); border-radius: 6px; padding: 3px 8px; font-size: 0.82rem; font-weight: bold; cursor: pointer; outline: none;"></select>
+                                        <select id="smart-asset-selector" class="form-control" style="width: auto; padding: 3px 8px; font-size: 0.82rem; font-weight: 600;"></select>
                                     </span>
                                     <span class="tooltip">?
                                         <span class="tooltip-text">
@@ -324,14 +346,14 @@
                                         </span>
                                     </span>
                                 </h3>
-                                <div class="chart-container" id="smart-tv-chart" style="flex: 1; min-height: 280px; position: relative; border-radius: 6px; overflow: hidden; margin-top: 10px;">
-                                    <div id="smart-tv-chart-empty" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; background: rgba(17, 24, 39, 0.98); z-index: 10;">
-                                        <p class="empty-text" style="color: var(--text-secondary); font-size: 0.85rem; text-align: center;">Sin datos</p>
+                                <div class="chart-container" id="smart-tv-chart" style="margin-top: 10px;">
+                                    <div id="smart-tv-chart-empty">
+                                        <p class="empty-text">Sin datos</p>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="chart-card glass-card" style="padding: 15px; display: flex; flex-direction: column;">
+                            <div class="chart-card glass-card">
                                 <h3 style="font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
                                     📊 Matriz de Markov (Estabilidad de Rachas)
                                     <span class="tooltip">?
@@ -341,19 +363,19 @@
                                     </span>
                                 </h3>
                                 <div style="flex: 1; overflow-y: auto; width: 100%;">
-                                    <table class="markov-table" id="smart-markov-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8rem; margin-top: 5px;">
+                                    <table class="markov-table" id="smart-markov-table">
                                         <thead>
-                                            <tr style="border-bottom: 1px solid var(--border-color); color: var(--text-secondary);">
-                                                <th style="padding: 6px 4px;">Resultado Anterior</th>
-                                                <th style="padding: 6px 4px; color: var(--accent-green);">Siguiente: Win (W)</th>
-                                                <th style="padding: 6px 4px; color: var(--accent-red);">Siguiente: Loss (L)</th>
+                                            <tr>
+                                                <th>Resultado Anterior</th>
+                                                <th style="color: var(--accent-green);">Siguiente: Win (W)</th>
+                                                <th style="color: var(--accent-red);">Siguiente: Loss (L)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);"><td colspan="3" class="empty-text" style="text-align:center; padding: 20px 0;">Sin datos</td></tr>
+                                            <tr><td colspan="3" class="empty-text">Sin datos</td></tr>
                                         </tbody>
                                     </table>
-                                    <div id="smart-markov-explanation" style="margin-top: 10px; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.4; padding: 6px 8px; background: rgba(255,255,255,0.02); border-radius: 4px; border: 1px solid rgba(255,255,255,0.05);">
+                                    <div id="smart-markov-explanation" style="margin-top: 10px; font-size: 0.72rem; color: var(--text-secondary); line-height: 1.4; padding: 6px 8px; background: rgba(255,255,255,0.02); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
                                         💡 <em>Muestra la probabilidad de la siguiente operación según el resultado previo.</em>
                                     </div>
                                 </div>
@@ -363,7 +385,7 @@
                 </div>
             </section>
 
-            <!-- Tab 1: Dashboard -->
+            <!-- Tab 1: Dashboard (Mercado) -->
             <section id="dashboard" class="tab-pane">
                 <div class="controls-bar glass-card">
                     <div class="control-group">
@@ -397,9 +419,6 @@
                             <span class="tooltip">?
                                 <span class="tooltip-text">Selecciona si deseas simular usando datos históricos locales estables (recomendado) o datos en vivo vía Binance API.</span>
                             </span>
-                            <span id="live-badge" class="live-badge-span" style="display: none; margin-left: 8px;">
-                                <span class="pulse-dot">●</span> <span id="live-badge-text">En Vivo</span>
-                            </span>
                         </label>
                         <select id="source-selector">
                             <option value="historical">Histórico (Local)</option>
@@ -415,20 +434,20 @@
             <!-- Tab 2: Backtest -->
             <section id="backtest" class="tab-pane">
                 <div class="backtest-grid">
-                    <div class="config-panel glass-card" style="padding: 16px; margin-bottom: 16px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+                    <div class="config-panel glass-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px;">
                             <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                                <h2 style="font-size: 1.05rem; color: var(--accent-blue); margin: 0; white-space: nowrap;">⚙️ Configuración</h2>
+                                <h2 style="font-size: 1.05rem; color: var(--accent-primary); margin: 0; white-space: nowrap;">⚙️ Configuración</h2>
                                 
                                 <!-- Sub-Tabs de Navegación -->
-                                <div class="subtabs-nav" style="display: flex; gap: 6px; background: rgba(0, 0, 0, 0.4); padding: 4px; border-radius: 8px; border: 1px solid var(--border-color);">
-                                    <button type="button" class="subtab-btn active" data-subtab="sec-strategy" style="padding: 5px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">
+                                <div class="subtabs-nav">
+                                    <button type="button" class="subtab-btn active" data-subtab="sec-strategy">
                                         🔵 Activo y Estrategia
                                     </button>
-                                    <button type="button" class="subtab-btn" data-subtab="sec-barbell" style="padding: 5px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">
+                                    <button type="button" class="subtab-btn" data-subtab="sec-barbell">
                                         🟢 Gestión Barbell
                                     </button>
-                                    <button type="button" class="subtab-btn" data-subtab="sec-genetic" style="padding: 5px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;">
+                                    <button type="button" class="subtab-btn" data-subtab="sec-genetic">
                                         🟣 Búsqueda Genética (Rust)
                                     </button>
                                 </div>
@@ -436,14 +455,14 @@
 
                             <!-- Botones de Acción Inline -->
                             <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                                <button type="submit" form="backtest-form" class="btn-primary" id="run-backtest-btn" style="padding: 7px 18px; font-size: 0.82rem; font-weight: 600;">⚡ Ejecutar Backtest</button>
-                                <button type="button" class="btn-secondary" id="save-backtest-btn" style="border-color: var(--accent-green); color: var(--accent-green); padding: 7px 14px; font-size: 0.82rem;" disabled>⭐ Favoritos</button>
+                                <button type="submit" form="backtest-form" class="btn-primary" id="run-backtest-btn" style="width: auto; padding: 7px 18px; font-size: 0.82rem;">⚡ Ejecutar Backtest</button>
+                                <button type="button" class="btn-secondary" id="save-backtest-btn" style="border-color: var(--accent-green); color: var(--accent-green); width: auto; padding: 7px 14px; font-size: 0.82rem;" disabled>⭐ Favoritos</button>
                             </div>
                         </div>
 
                         <form id="backtest-form" style="display: flex; flex-direction: column; gap: 10px;">
                             <!-- Sub-Pane 1: Activo y Estrategia -->
-                            <div id="sec-strategy" class="subtab-pane active" style="display: block;">
+                            <div id="sec-strategy" class="subtab-pane active">
                                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; align-items: end;">
                                     <div class="control-group" style="margin-bottom: 0;">
                                         <label for="strategy-selector">Estrategia
@@ -453,7 +472,7 @@
                                         </label>
                                         <select id="strategy-selector"></select>
                                     </div>
-                                    <div id="dynamic-params" class="dynamic-params" style="display: contents;">
+                                    <div id="dynamic-params" class="dynamic-params">
                                         <!-- Generated inputs go here horizontally -->
                                     </div>
                                     <div class="control-group" style="margin-bottom: 0;">
@@ -476,7 +495,7 @@
                             </div>
 
                             <!-- Sub-Pane 2: Gestión Barbell -->
-                            <div id="sec-barbell" class="subtab-pane" style="display: none;">
+                            <div id="sec-barbell" class="subtab-pane">
                                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; align-items: end;">
                                     <div class="control-group" style="margin-bottom: 0;" id="group-n-consecutive">
                                         <label for="backtest-n-consecutive">Racha N (Victorias consecutivas)
@@ -501,51 +520,51 @@
                             </div>
 
                             <!-- Sub-Pane 3: Búsqueda Genética (Rust) -->
-                            <div id="sec-genetic" class="subtab-pane" style="display: none;">
+                            <div id="sec-genetic" class="subtab-pane">
                                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; align-items: end;">
                                     <div class="control-group" style="margin-bottom: 0;">
-                                        <label for="gen-generations" style="font-size: 0.75rem;">Generaciones
+                                        <label for="gen-generations">Generaciones
                                             <span class="tooltip">?
                                                 <span class="tooltip-text">Número de ciclos evolutivos que correrá el algoritmo genético.</span>
                                             </span>
                                         </label>
-                                        <input type="number" id="gen-generations" value="50" min="5" max="200" style="padding: 4px 8px; font-size: 0.8rem;">
+                                        <input type="number" id="gen-generations" value="50" min="5" max="200">
                                     </div>
                                     <div class="control-group" style="margin-bottom: 0;">
-                                        <label for="gen-population" style="font-size: 0.75rem;">Población
+                                        <label for="gen-population">Población
                                             <span class="tooltip">?
                                                 <span class="tooltip-text">Cantidad de combinaciones aleatorias iniciales.</span>
                                             </span>
                                         </label>
-                                        <input type="number" id="gen-population" value="150" min="10" max="500" style="padding: 4px 8px; font-size: 0.8rem;">
+                                        <input type="number" id="gen-population" value="150" min="10" max="500">
                                     </div>
                                     <div class="control-group" style="margin-bottom: 0;">
-                                        <label for="gen-min-trades" style="font-size: 0.75rem;">Frecuencia Min. (trades/día)
+                                        <label for="gen-min-trades">Frecuencia Min. (trades/día)
                                             <span class="tooltip">?
                                                 <span class="tooltip-text">Número mínimo de trades al día requeridos.</span>
                                             </span>
                                         </label>
-                                        <input type="number" id="gen-min-trades" value="5.0" min="0.5" step="0.5" style="padding: 4px 8px; font-size: 0.8rem;">
+                                        <input type="number" id="gen-min-trades" value="5.0" min="0.5" step="0.5">
                                     </div>
                                     <div>
-                                        <button type="button" class="btn-secondary" id="optimize-genetic-btn" style="border-color: #a371f7; color: #a371f7; background: rgba(163, 113, 247, 0.1); font-size: 0.8rem; padding: 7px 12px; width: 100%;">🚀 Ejecutar Búsqueda Rust</button>
+                                        <button type="button" class="btn-secondary" id="optimize-genetic-btn" style="border-color: var(--accent-purple); color: var(--accent-purple); background: rgba(168, 85, 247, 0.1);">🚀 Ejecutar Búsqueda Rust</button>
                                     </div>
                                 </div>
-                                <div class="progress-container" id="genetic-progress-container" style="display: none; margin-top: 10px; padding: 8px 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px;">
-                                    <div class="progress-bar-bg" style="width: 100%; height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;">
-                                        <div class="progress-bar-fill" id="genetic-progress-fill" style="width: 0%; height: 100%; background: #a371f7; transition: width 0.1s ease;"></div>
+                                <div class="progress-container" id="genetic-progress-container" style="display: none;">
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill" id="genetic-progress-fill"></div>
                                     </div>
                                     <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 5px; display: flex; justify-content: space-between;">
                                         <span id="genetic-progress-text">Progreso: 0%</span>
                                         <span id="genetic-progress-eta">ETA: --s</span>
                                     </div>
                                 </div>
-                                <div id="genetic-feedback" style="display: none; font-size: 0.8rem; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: #010409; margin-top: 10px; line-height: 1.4;"></div>
+                                <div id="genetic-feedback" style="display: none; font-size: 0.8rem; padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background: var(--bg-canvas); margin-top: 10px; line-height: 1.4;"></div>
                             </div>
 
-                            <div class="progress-container" id="backtest-progress-container" style="display: none; margin-top: 10px; padding: 8px 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px;">
-                                <div class="progress-bar-bg" style="width: 100%; height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;">
-                                    <div class="progress-bar-fill" id="backtest-progress-fill" style="width: 0%; height: 100%; background: var(--accent-blue); transition: width 0.1s ease;"></div>
+                            <div class="progress-container" id="backtest-progress-container" style="display: none;">
+                                <div class="progress-bar-bg">
+                                    <div class="progress-bar-fill" id="backtest-progress-fill"></div>
                                 </div>
                                 <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 5px; display: flex; justify-content: space-between;">
                                     <span id="backtest-progress-text">Progreso: 0%</span>
@@ -554,6 +573,7 @@
                             </div>
                         </form>
                     </div>
+                    
                     <div class="results-panel">
                         <div class="stats-cards" id="quick-stats">
                             <div class="stat-card"><h3>Win Rate</h3><p id="stat-winrate">--</p></div>
@@ -562,14 +582,14 @@
                             <div class="stat-card"><h3>Max Win Streak</h3><p id="stat-mw">--</p></div>
                             <div class="stat-card"><h3>Max Loss Streak</h3><p id="stat-ml">--</p></div>
                         </div>
-                        <div class="equity-chart-container glass-card" style="display: flex; flex-direction: column;">
-                            <h3 style="font-size: 1rem; margin-bottom: 12px; color: var(--text-primary); display: flex; align-items: center;">
+                        <div class="equity-chart-container glass-card">
+                            <h3>
                                 Curva de Capital (Equity Curve)
                                 <span class="tooltip">?
                                     <span class="tooltip-text">Muestra cómo sube o baja tu dinero a lo largo del tiempo. Sirve para ver el rendimiento general y si la estrategia es ganadora a largo plazo.</span>
                                 </span>
                             </h3>
-                            <div class="chart-wrapper" style="flex: 1; min-height: 0;">
+                            <div class="chart-wrapper">
                                 <canvas id="equity-chart"></canvas>
                             </div>
                         </div>
@@ -579,10 +599,10 @@
                                     <tr>
                                         <th>Fecha</th>
                                         <th>Tipo</th>
-                                        <th>Precio Entrada</th>
-                                        <th>Precio Salida</th>
+                                        <th style="text-align: right;">Precio Entrada</th>
+                                        <th style="text-align: right;">Precio Salida</th>
                                         <th>Resultado</th>
-                                        <th>P&L</th>
+                                        <th style="text-align: right;">P&L</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -599,8 +619,8 @@
                 <div class="resultados-grid">
                     <!-- Izquierda: Optimizaciones Automáticas -->
                     <div class="resultados-panel glass-card">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <h2 style="font-size: 1.2rem; color: var(--accent-blue);">⚡ Optimizaciones Automáticas (Historial)</h2>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 8px;">
+                            <h2 style="font-size: 1.2rem; color: var(--accent-primary);">⚡ Optimizaciones Automáticas (Historial)</h2>
                             <button type="button" class="btn-secondary" id="btn-clear-history" style="width: auto; padding: 6px 12px; font-size: 0.8rem; border-color: var(--accent-red); color: var(--accent-red);">Limpiar Historial</button>
                         </div>
                         <div class="backtest-list" id="history-list">
@@ -715,7 +735,7 @@
                             </label>
                             <input type="number" id="opt-payout" step="0.01" value="0.85">
                         </div>
-                        <hr style="border-color: var(--border-color); margin: 15px 0;">
+                        <hr>
                         <div class="control-group">
                             <label for="opt-base-capital">💰 Capital Base (P2P Arbitraje, $)
                                 <span class="tooltip">?
@@ -738,9 +758,9 @@
                                     <span class="tooltip-text">Ganancia mensual de arbitraje que asignas a opciones binarias. Autocalculado (Base × Rendimiento%). Si pierdes todo, tu capital base sigue intacto.</span>
                                 </span>
                             </label>
-                            <input type="number" id="opt-risk-capital" value="200" readonly style="background: rgba(255,255,255,0.05); font-weight: bold; color: var(--accent-blue);">
+                            <input type="number" id="opt-risk-capital" value="200" readonly class="input-readonly">
                         </div>
-                        <hr style="border-color: var(--border-color); margin: 15px 0;">
+                        <hr>
                         <div class="control-group">
                             <label for="opt-target-capital" style="color: var(--accent-green); font-weight: 700;">🏆 Meta: Duplicar Patrimonio (Ganancia Neta Objetivo, $)
                                 <span class="tooltip">?
@@ -759,10 +779,10 @@
                             <input type="number" id="opt-attempts" value="5" min="1" max="50">
                         </div>
                         
-                        <button class="btn-primary" id="btn-calc-streak" style="background: var(--accent-green); border-color: var(--accent-green); box-shadow: 0 0 10px rgba(63, 185, 80, 0.3); width: 100%;">Calcular Plan de Rachas</button>
-                        <div class="progress-container" id="streak-progress-container" style="display: none; margin-top: 10px; padding: 8px 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 6px;">
-                            <div class="progress-bar-bg" style="width: 100%; height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden;">
-                                <div class="progress-bar-fill" id="streak-progress-fill" style="width: 0%; height: 100%; background: var(--accent-green); transition: width 0.1s ease;"></div>
+                        <button class="btn-primary" id="btn-calc-streak" style="background: linear-gradient(135deg, var(--accent-green) 0%, #059669 100%); color: #080b11; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);">Calcular Plan de Rachas</button>
+                        <div class="progress-container" id="streak-progress-container" style="display: none;">
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="streak-progress-fill" style="background: var(--accent-green);"></div>
                             </div>
                             <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 5px; display: flex; justify-content: space-between;">
                                 <span id="streak-progress-text">Progreso: 0%</span>
@@ -770,10 +790,11 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="optimizer-charts">
                         <!-- Tarjeta de Plan Recomendado -->
-                        <div class="chart-card glass-card" style="grid-column: span 2; margin-bottom: 0;">
-                            <h2 style="font-size: 1.15rem; color: var(--accent-blue); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <div class="chart-card glass-card" style="grid-column: span 2; height: auto; min-height: auto;">
+                            <h2 style="font-size: 1.15rem; color: var(--accent-primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
                                 📊 Plan de Rachas Recomendado
                             </h2>
                             <div id="streak-recommendation-content">
@@ -795,7 +816,7 @@
                         </div>
 
                         <!-- Tabla Comparativa de Alternativas -->
-                        <div class="chart-card glass-card" style="display: flex; flex-direction: column;">
+                        <div class="chart-card glass-card">
                             <h3>
                                 🔍 Tabla Comparativa por Racha (N)
                                 <span class="tooltip">?
@@ -807,16 +828,16 @@
                                     <thead>
                                         <tr>
                                             <th>Racha (N)</th>
-                                            <th>P(1 Racha)</th>
-                                            <th>M (Rachas)</th>
-                                            <th>P(Duplicación)</th>
-                                            <th>Apuesta</th>
-                                            <th>Final</th>
-                                            <th>EV (USD)</th>
+                                            <th style="text-align: right;">P(1 Racha)</th>
+                                            <th style="text-align: right;">M (Rachas)</th>
+                                            <th style="text-align: right;">P(Duplicación)</th>
+                                            <th style="text-align: right;">Apuesta</th>
+                                            <th style="text-align: right;">Final</th>
+                                            <th style="text-align: right;">EV (USD)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr><td colspan="7" class="empty-text" style="text-align:center">Sin datos</td></tr>
+                                        <tr><td colspan="7" class="empty-text">Sin datos</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -839,6 +860,8 @@
             </section>
         </main>
     </div>
+    
+    <!-- Application Scripts -->
     <script src="/static/js/charts.js"></script>
     <script src="/static/js/app.js"></script>
 </body>
