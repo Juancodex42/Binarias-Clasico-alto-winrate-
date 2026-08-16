@@ -15,6 +15,12 @@ venv/
 ENV/
 env/
 
+# Rust / Cargo build artifacts
+target/
+engine/genetic_optimizer/target/
+*.exe
+*.pdb
+
 # Scratch & temporary logs
 scratch/
 *.log
