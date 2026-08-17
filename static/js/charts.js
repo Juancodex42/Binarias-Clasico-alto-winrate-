@@ -9,10 +9,10 @@ if (Chart.defaults.plugins && Chart.defaults.plugins.tooltip) {
     Chart.defaults.plugins.tooltip.bodyColor = '#94a3b8';
     Chart.defaults.plugins.tooltip.borderColor = 'rgba(255, 255, 255, 0.08)';
     Chart.defaults.plugins.tooltip.borderWidth = 1;
-    Chart.defaults.plugins.tooltip.padding = 10;
-    Chart.defaults.plugins.tooltip.cornerRadius = 6;
-    Chart.defaults.plugins.tooltip.titleFont = { size: 11, weight: '600', family: "'JetBrains Mono', monospace" };
-    Chart.defaults.plugins.tooltip.bodyFont = { size: 11, family: "'JetBrains Mono', monospace" };
+    Chart.defaults.plugins.tooltip.padding = 12;
+    Chart.defaults.plugins.tooltip.cornerRadius = 8;
+    Chart.defaults.plugins.tooltip.titleFont = { size: 13, weight: '700', family: "'JetBrains Mono', monospace" };
+    Chart.defaults.plugins.tooltip.bodyFont = { size: 13, family: "'JetBrains Mono', monospace" };
 }
 
 function createCandlestickChart(containerId) {
@@ -23,7 +23,7 @@ function createCandlestickChart(containerId) {
         layout: {
             background: { type: 'solid', color: 'transparent' },
             textColor: '#94a3b8',
-            fontSize: 12,
+            fontSize: 13,
             fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
         },
         grid: {
@@ -637,8 +637,8 @@ function createCorrelationHeatmap(canvasId, matrix, labels) {
             }
             
             if (cellW > 18 && cellH > 14 && val !== null && val !== undefined && !isNaN(val)) {
-                ctx.fillStyle = Math.abs(val) > 0.4 ? '#f0f6fc' : '#94a3b8';
-                const fontSize = Math.min(11, Math.max(8, Math.floor(cellH * 0.45)));
+                ctx.fillStyle = Math.abs(val) > 0.35 ? '#ffffff' : '#cbd5e1';
+                const fontSize = Math.min(13, Math.max(10, Math.floor(cellH * 0.48)));
                 ctx.font = `bold ${fontSize}px "JetBrains Mono", monospace`;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
@@ -647,22 +647,22 @@ function createCorrelationHeatmap(canvasId, matrix, labels) {
         }
     }
     
-    const labelFontSize = Math.min(11, Math.max(8, Math.floor(cellH * 0.45)));
-    ctx.fillStyle = '#94a3b8';
+    const labelFontSize = Math.min(13, Math.max(10, Math.floor(cellH * 0.46)));
+    ctx.fillStyle = '#cbd5e1';
     ctx.font = `bold ${labelFontSize}px "Inter", sans-serif`;
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
     
     for (let i = 0; i < n; i++) {
         let label = labels[i].replace('USDT', '').replace('=X', '');
-        ctx.fillText(label, leftMargin - 6, topMargin + i * cellH + cellH / 2);
+        ctx.fillText(label, leftMargin - 8, topMargin + i * cellH + cellH / 2);
     }
     
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     for (let j = 0; j < n; j++) {
         let label = labels[j].replace('USDT', '').replace('=X', '');
-        ctx.fillText(label, leftMargin + j * cellW + cellW / 2, h - bottomMargin + 6);
+        ctx.fillText(label, leftMargin + j * cellW + cellW / 2, h - bottomMargin + 8);
     }
 }
 

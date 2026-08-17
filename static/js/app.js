@@ -1351,38 +1351,38 @@ async function runStreakPlanner() {
             const statusIndicator = expNetProfit >= 0 ? '🟢 Esperanza Matemática Positiva' : '⚠️ Esperanza Matemática Negativa';
             
             recDiv.innerHTML = `
-                <div style="font-size: 1rem; line-height: 1.5; color: var(--text-primary);">
+                <div style="font-size: 1.05rem; line-height: 1.6; color: var(--text-primary);">
                     Para tu capital de riesgo de <strong>$${riskCapital.toFixed(2)} USD</strong> dividido en <strong>${attempts} intentos</strong> de <strong>$${bestPlan.bet_per_attempt.toFixed(2)} USD</strong>:
-                    La racha óptima es de <strong style="color: var(--accent-green); font-size: 1.1rem;">N = ${bestN} victorias consecutivas</strong> (Requiere <strong>M = ${neededM} racha(s)</strong> para duplicación).
+                    La racha óptima es de <strong style="color: var(--accent-green); font-size: 1.2rem;">N = ${bestN} victorias consecutivas</strong> (Requiere <strong>M = ${neededM} racha(s)</strong> para duplicación).
                 </div>
-                <div class="recommendation-banner" style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(105px, 1fr)); gap: 8px;">
+                <div class="recommendation-banner" style="margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px;">
                     <div class="recommendation-stat">
                         <h4>Prob. Duplicación</h4>
                         <p class="green">${probDup}%</p>
-                        <span style="font-size: 0.72rem; color: var(--text-secondary)">Binomial (&ge; ${neededM} rachas)</span>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 500;">Binomial (&ge; ${neededM} rachas)</span>
                     </div>
                     <div class="recommendation-stat">
                         <h4>Rachas M</h4>
                         <p class="blue">${neededM}</p>
-                        <span style="font-size: 0.72rem; color: var(--text-secondary)">para meta</span>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 500;">para meta</span>
                     </div>
                     <div class="recommendation-stat">
                         <h4>Prob. &ge;1 Racha</h4>
                         <p class="green">${successProb}%</p>
-                        <span style="font-size: 0.72rem; color: var(--text-secondary)">en ${attempts} intentos</span>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 500;">en ${attempts} intentos</span>
                     </div>
                     <div class="recommendation-stat">
                         <h4>Ganancia Neta</h4>
                         <p class="${evClass}">${expNetProfit >= 0 ? '+' : ''}$${expNetProfit.toFixed(2)}</p>
-                        <span style="font-size: 0.72rem; color: var(--text-secondary)">USD esperados</span>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 500;">USD esperados</span>
                     </div>
                     <div class="recommendation-stat">
                         <h4>Patrimonio Final</h4>
                         <p class="blue">$${expPatrimony.toFixed(2)}</p>
-                        <span style="font-size: 0.72rem; color: var(--text-secondary)">USD esperados</span>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 500;">USD esperados</span>
                     </div>
                 </div>
-                <div style="margin-top: 15px; font-size: 0.82rem; padding: 10px; border-radius: 6px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); color: var(--text-secondary); line-height: 1.4;">
+                <div style="margin-top: 16px; font-size: 0.92rem; padding: 12px 14px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); color: var(--text-secondary); line-height: 1.5;">
                     ${statusIndicator}. Con un win rate de <strong>${(winRate*100).toFixed(1)}%</strong> y un payout del <strong>${(payout*100).toFixed(0)}%</strong>, la probabilidad binomial de completar las <strong>M = ${neededM} racha(s)</strong> requeridas es del <strong>${probDup}%</strong>.
                 </div>
             `;
@@ -1636,8 +1636,8 @@ function renderBacktestItemHtml(item, type) {
     const stratName = item.inputs.strategy_display || item.inputs.strategy;
     const isSmart = item.inputs.is_smart || item.id.startsWith('bt_smart_');
     const badgeHtml = isSmart 
-        ? `<span style="font-size: 0.65rem; font-weight: bold; background: rgba(168, 85, 247, 0.2); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.4); padding: 2px 6px; border-radius: 4px; margin-right: 6px;">⚡ AUTO-OPTIMIZACIÓN GENÉTICA</span>`
-        : `<span style="font-size: 0.65rem; font-weight: bold; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 6px; border-radius: 4px; margin-right: 6px;">⚙️ BACKTEST MANUAL</span>`;
+        ? `<span style="font-size: 0.82rem; font-weight: 700; background: rgba(192, 132, 252, 0.2); color: var(--accent-purple); border: 1.5px solid rgba(192, 132, 252, 0.4); padding: 3px 8px; border-radius: 6px; margin-right: 6px;">⚡ AUTO-OPTIMIZACIÓN GENÉTICA</span>`
+        : `<span style="font-size: 0.82rem; font-weight: 700; background: rgba(56, 189, 248, 0.18); color: var(--accent-primary); border: 1.5px solid rgba(56, 189, 248, 0.4); padding: 3px 8px; border-radius: 6px; margin-right: 6px;">⚙️ BACKTEST MANUAL</span>`;
 
     let actionsHtml = '';
     if (type === 'history') {
@@ -2245,40 +2245,40 @@ async function runSmartOptimization() {
                             }
 
                             recContent.innerHTML = `
-                                <div style="font-size: 0.9rem; line-height: 1.5; color: var(--text-primary);">
-                                    La racha óptima sugerida para <strong style="color: #a855f7;">${strat.name}</strong> es de <strong style="color: var(--accent-green); font-size: 1.1rem;">N = ${bestN} victorias consecutivas</strong>.
-                                    Se requiere un número de <strong style="color: var(--accent-blue);">M = ${needed_streaks} racha(s)</strong> para la <strong>Duplicación de Patrimonio (+100%)</strong> de <strong>$${base_capital_val.toFixed(2)}</strong> a <strong>$${target_patrimony_val.toFixed(2)} USD</strong> (Probabilidad Binomial: <strong style="color: var(--accent-green);">${prob_duplication_pct.toFixed(1)}%</strong> en ${attempts} intentos).
+                                <div style="font-size: 1.05rem; line-height: 1.6; color: var(--text-primary);">
+                                    La racha óptima sugerida para <strong style="color: var(--accent-purple);">${strat.name}</strong> es de <strong style="color: var(--accent-green); font-size: 1.25rem;">N = ${bestN} victorias consecutivas</strong>.
+                                    Se requiere un número de <strong style="color: var(--accent-primary);">M = ${needed_streaks} racha(s)</strong> para la <strong>Duplicación de Patrimonio (+100%)</strong> de <strong>$${base_capital_val.toFixed(2)}</strong> a <strong>$${target_patrimony_val.toFixed(2)} USD</strong> (Probabilidad Binomial: <strong style="color: var(--accent-green);">${prob_duplication_pct.toFixed(1)}%</strong> en ${attempts} intentos).
                                 </div>
-                                <div style="margin-top: 10px; font-size: 0.8rem; padding: 10px; border-radius: 6px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); color: var(--text-primary); line-height: 1.4;">
+                                <div style="margin-top: 14px; font-size: 0.95rem; padding: 14px 16px; border-radius: 8px; background: rgba(56, 189, 248, 0.08); border: 1.5px solid rgba(56, 189, 248, 0.3); color: var(--text-primary); line-height: 1.55;">
                                     📖 <strong>Explicación Dinámica de la Estrategia:</strong><br>
                                     ${strat.natural_description || 'Estrategia cuantitativa optimizada mediante algoritmo genético en Rust.'}<br>
-                                    <span style="font-size: 0.75rem; color: var(--accent-blue); display: inline-block; margin-top: 4px;">Filtros activos: ${genomeStr}</span>
+                                    <span style="font-size: 0.88rem; color: var(--accent-primary); display: inline-block; margin-top: 6px; font-weight: 600;">Filtros activos: ${genomeStr}</span>
                                     
-                                    <div style="margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                                        <span style="font-size: 0.75rem; padding: 4px 10px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #10b981; border-radius: 4px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;" title="Win Rate OOS (Out-Of-Sample) es el resultado real en datos de prueba no vistos. IS (In-Sample) es en datos de entrenamiento.">
+                                    <div style="margin-top: 12px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                                        <span style="font-size: 0.85rem; padding: 6px 12px; background: rgba(0, 245, 160, 0.15); border: 1.5px solid rgba(0, 245, 160, 0.4); color: var(--accent-green); border-radius: 6px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;" title="Win Rate OOS (Out-Of-Sample) es el resultado real en datos de prueba no vistos. IS (In-Sample) es en datos de entrenamiento.">
                                             🛡️ Win Rate OOS: ${(strat.win_rate_oos ? (strat.win_rate_oos * 100).toFixed(1) : '0.0')}% | IS: ${(strat.win_rate_is ? (strat.win_rate_is * 100).toFixed(1) : '0.0')}% | WFE: 100%+
                                         </span>
-                                        <button type="button" class="btn-secondary" style="font-size: 0.75rem; padding: 5px 12px; background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #a855f7; cursor: pointer; border-radius: 4px; font-weight: 600;" onclick="togglePineScriptModal(${stratId})">
+                                        <button type="button" class="btn-secondary" style="font-size: 0.85rem; padding: 6px 14px; background: rgba(192, 132, 252, 0.18); border: 1.5px solid rgba(192, 132, 252, 0.45); color: var(--accent-purple); cursor: pointer; border-radius: 6px; font-weight: 700;" onclick="togglePineScriptModal(${stratId})">
                                             📜 Exportar a Pine Script (TradingView v5) / Prompt IA
                                         </button>
                                     </div>
 
-                                    <div id="pinescript-box-${stratId}" style="display: none; margin-top: 10px; padding: 12px; border-radius: 6px; background: #0e1420; border: 1px solid var(--border-color);">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                            <h4 style="font-size: 0.85rem; color: #a855f7; margin: 0;">🌲 Pine Script v5 / Especificación para IA</h4>
-                                            <div style="display: flex; gap: 6px;">
-                                                <button type="button" class="btn-secondary" style="font-size: 0.7rem; padding: 3px 8px;" onclick="copyPineScript(${stratId})">📋 Copiar PineScript v5</button>
-                                                <button type="button" class="btn-secondary" style="font-size: 0.7rem; padding: 3px 8px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.4);" onclick="copyAIPrompt(${stratId})">🤖 Copiar Prompt IA</button>
+                                    <div id="pinescript-box-${stratId}" style="display: none; margin-top: 14px; padding: 14px; border-radius: 8px; background: #060a16; border: 1.5px solid var(--border-subtle);">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                            <h4 style="font-size: 0.95rem; color: var(--accent-purple); margin: 0; font-weight: 700;">🌲 Pine Script v5 / Especificación para IA</h4>
+                                            <div style="display: flex; gap: 8px;">
+                                                <button type="button" class="btn-secondary" style="font-size: 0.82rem; padding: 5px 10px; font-weight: 600;" onclick="copyPineScript(${stratId})">📋 Copiar PineScript v5</button>
+                                                <button type="button" class="btn-secondary" style="font-size: 0.82rem; padding: 5px 10px; background: rgba(56, 189, 248, 0.18); color: var(--accent-primary); border-color: rgba(56, 189, 248, 0.45); font-weight: 600;" onclick="copyAIPrompt(${stratId})">🤖 Copiar Prompt IA</button>
                                             </div>
                                         </div>
-                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                                             <div>
-                                                <label style="font-size: 0.7rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Código PineScript (TradingView v5)</label>
-                                                <textarea id="pinescript-code-${stratId}" style="width: 100%; height: 170px; font-family: monospace; font-size: 0.7rem; background: #161b22; color: #79c0ff; border: 1px solid var(--border-color); border-radius: 4px; padding: 8px; resize: vertical;" readonly>${pineCode}</textarea>
+                                                <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 6px; font-weight: 600;">Código PineScript (TradingView v5)</label>
+                                                <textarea id="pinescript-code-${stratId}" style="width: 100%; height: 180px; font-family: var(--font-mono); font-size: 0.85rem; background: #0c1322; color: #79c0ff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 10px; resize: vertical;" readonly>${pineCode}</textarea>
                                             </div>
                                             <div>
-                                                <label style="font-size: 0.7rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Prompt Estructurado para IA (ChatGPT / Claude / DeepSeek)</label>
-                                                <textarea id="ai-prompt-${stratId}" style="width: 100%; height: 170px; font-family: monospace; font-size: 0.7rem; background: #161b22; color: #7ee787; border: 1px solid var(--border-color); border-radius: 4px; padding: 8px; resize: vertical;" readonly>${aiPromptText}</textarea>
+                                                <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 6px; font-weight: 600;">Prompt Estructurado para IA (ChatGPT / Claude / DeepSeek)</label>
+                                                <textarea id="ai-prompt-${stratId}" style="width: 100%; height: 180px; font-family: var(--font-mono); font-size: 0.85rem; background: #0c1322; color: #7ee787; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 10px; resize: vertical;" readonly>${aiPromptText}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -2287,27 +2287,27 @@ async function runSmartOptimization() {
                                 <div class="smart-rec-grid">
                                     <div class="smart-rec-item">
                                         <h4>Prob. Duplicación (+100%)</h4>
-                                        <p style="color: var(--accent-green);">${prob_duplication_pct.toFixed(1)}%</p>
+                                        <p style="color: var(--accent-green); font-size: 1.35rem;">${prob_duplication_pct.toFixed(1)}%</p>
                                         <span>Binomial (&ge; ${needed_streaks} rachas)</span>
                                     </div>
                                     <div class="smart-rec-item">
                                         <h4>Rachas Necesarias (M)</h4>
-                                        <p style="color: var(--accent-blue);">${needed_streaks} M</p>
+                                        <p style="color: var(--accent-primary); font-size: 1.35rem;">${needed_streaks} M</p>
                                         <span>de N=${bestN} victorias</span>
                                     </div>
                                     <div class="smart-rec-item">
                                         <h4>Prob. &ge; 1 Racha</h4>
-                                        <p style="color: var(--accent-green);">${prob_at_least_1_streak_pct.toFixed(1)}%</p>
+                                        <p style="color: var(--accent-green); font-size: 1.35rem;">${prob_at_least_1_streak_pct.toFixed(1)}%</p>
                                         <span>en ${attempts} intentos</span>
                                     </div>
                                     <div class="smart-rec-item">
                                         <h4>Ganancia Neta Esperada</h4>
-                                        <p style="color: ${expected_monthly_net_profit >= 0 ? 'var(--accent-green)' : 'var(--accent-red)'};">${expected_monthly_net_profit >= 0 ? '+' : ''}$${expected_monthly_net_profit.toFixed(2)}</p>
+                                        <p style="color: ${expected_monthly_net_profit >= 0 ? 'var(--accent-green)' : 'var(--accent-red)'}; font-size: 1.35rem;">${expected_monthly_net_profit >= 0 ? '+' : ''}$${expected_monthly_net_profit.toFixed(2)}</p>
                                         <span>USD Mensuales</span>
                                     </div>
                                     <div class="smart-rec-item">
                                         <h4>Patrimonio Esperado</h4>
-                                        <p style="color: var(--accent-purple);">$${expected_final_patrimony.toFixed(2)}</p>
+                                        <p style="color: var(--accent-purple); font-size: 1.35rem;">$${expected_final_patrimony.toFixed(2)}</p>
                                         <span>Capital Base + Profit</span>
                                     </div>
                                 </div>
@@ -2318,8 +2318,8 @@ async function runSmartOptimization() {
                         const ladderContent = document.getElementById('smart-ladder-content');
                         if (ladderContent) {
                             let ladderHtml = `
-                                <div style="font-size: 0.72rem; color: var(--text-secondary); margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 5px; line-height: 1.3;">
-                                    📌 Racha sugerida para esta estrategia: <strong style="color: var(--accent-green);">N = ${bestN} victorias consecutivas</strong>
+                                <div style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; line-height: 1.4; font-weight: 500;">
+                                    📌 Racha sugerida para esta estrategia: <strong style="color: var(--accent-green); font-weight: 700;">N = ${bestN} victorias consecutivas</strong>
                                 </div>
                                 <div class="streak-ladder">
                             `;
@@ -2328,34 +2328,34 @@ async function runSmartOptimization() {
                                 const stepPayout = step.payout_return || 0;
                                 const totalNext = stepBet + stepPayout;
                                 ladderHtml += `
-                                    <div class="ladder-step" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.03);">
-                                        <div style="display: flex; align-items: center; gap: 10px;">
-                                            <div class="ladder-step-number" style="width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--border-color); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: var(--text-secondary);">${step.step}</div>
-                                            <div style="font-size: 0.8rem;">
-                                                <div style="font-weight: 600;">Operación ${step.step} de ${bestN}</div>
-                                                <div style="font-size: 0.7rem; color: var(--text-secondary);">Entrada: $${stepBet.toFixed(2)} | Beneficio: +$${stepPayout.toFixed(2)}</div>
+                                    <div class="ladder-step" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04);">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div class="ladder-step-number" style="width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 800; color: var(--text-secondary);">${step.step}</div>
+                                            <div>
+                                                <div style="font-weight: 700; font-size: 0.95rem;">Operación ${step.step} de ${bestN}</div>
+                                                <div style="font-size: 0.82rem; color: var(--text-secondary);">Entrada: $${stepBet.toFixed(2)} | Beneficio: +$${stepPayout.toFixed(2)}</div>
                                             </div>
                                         </div>
-                                        <div style="font-family: monospace; font-weight: bold; color: var(--accent-blue); font-size: 0.95rem;">$${totalNext.toFixed(2)}</div>
+                                        <div style="font-family: var(--font-mono); font-weight: 800; color: var(--accent-primary); font-size: 1.15rem;">$${totalNext.toFixed(2)}</div>
                                     </div>
                                 `;
                             });
                             const profitPerRacha = (bestPlan.final_capital || 185) - (bestPlan.bet_per_attempt || 100);
 
                             ladderHtml += `
-                                <div class="ladder-step completed" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: rgba(63,185,80,0.05); border-radius: 4px; border: 1px dashed var(--accent-green); margin-top: 5px;">
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <div class="ladder-step-number" style="width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--accent-green); background: rgba(63, 185, 80, 0.1); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: var(--accent-green);">✓</div>
-                                        <div style="font-size: 0.8rem;">
-                                            <div style="font-weight: bold; color: var(--accent-green);">Racha N=${bestN} Completada</div>
-                                            <div style="font-size: 0.7rem; color: var(--text-secondary);">Retira $${profitPerRacha.toFixed(2)} e inicia nuevo ciclo</div>
+                                <div class="ladder-step completed" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: rgba(0,245,160,0.1); border-radius: 6px; border: 1.5px dashed var(--accent-green); margin-top: 8px;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div class="ladder-step-number" style="width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--accent-green); background: rgba(0, 245, 160, 0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 800; color: var(--accent-green);">✓</div>
+                                        <div>
+                                            <div style="font-weight: 800; font-size: 0.95rem; color: var(--accent-green);">Racha N=${bestN} Completada</div>
+                                            <div style="font-size: 0.82rem; color: var(--text-secondary);">Retira $${profitPerRacha.toFixed(2)} e inicia nuevo ciclo</div>
                                         </div>
                                     </div>
-                                    <div style="font-family: monospace; font-weight: bold; color: var(--accent-green); font-size: 0.95rem;">$${bestPlan.final_capital?.toFixed(2)}</div>
+                                    <div style="font-family: var(--font-mono); font-weight: 800; color: var(--accent-green); font-size: 1.25rem;">$${bestPlan.final_capital?.toFixed(2)}</div>
                                 </div>
-                                <div style="font-size: 0.72rem; color: var(--accent-blue); margin-top: 8px; padding: 8px; background: rgba(88, 166, 255, 0.06); border-radius: 4px; border: 1px solid rgba(88, 166, 255, 0.2); text-align: center; line-height: 1.4;">
+                                <div style="font-size: 0.85rem; color: var(--accent-primary); margin-top: 10px; padding: 10px 12px; background: rgba(56, 189, 248, 0.08); border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.25); text-align: center; line-height: 1.5;">
                                     🎯 <strong>Meta Campaña Duplicación:</strong> $${base_capital_val.toFixed(2)} ➔ $${target_patrimony_val.toFixed(2)} USD<br>
-                                    <span style="color: var(--text-secondary); font-size: 0.68rem;">Requiere M = ${needed_streaks} racha(s) de N=${bestN} (Prob. Duplicación: ${prob_duplication_pct.toFixed(1)}% | Patrimonio Esperado: $${expected_final_patrimony.toFixed(2)} USD).</span>
+                                    <span style="color: var(--text-secondary); font-size: 0.82rem;">Requiere M = ${needed_streaks} racha(s) de N=${bestN} (Prob. Duplicación: ${prob_duplication_pct.toFixed(1)}% | Patrimonio Esperado: $${expected_final_patrimony.toFixed(2)} USD).</span>
                                 </div>
                             `;
                             ladderHtml += '</div>';
@@ -2504,15 +2504,15 @@ async function runSmartOptimization() {
                             const pPlan = strat.streak_plan || {};
                             const dupProb = pPlan.prob_duplication_pct !== undefined ? pPlan.prob_duplication_pct.toFixed(1) : '0.0';
                             const streakProb = pPlan.prob_at_least_1_streak_pct !== undefined ? pPlan.prob_at_least_1_streak_pct.toFixed(1) : '85.0';
-                            const sampleWarning = tradeCnt < 15 ? `<span title="Muestra pequeña de datos" style="color: #e3b341; font-size: 0.62rem; margin-left: 2px;">⚠️</span>` : '';
+                            const sampleWarning = tradeCnt < 15 ? `<span title="Muestra pequeña de datos" style="color: #e3b341; font-size: 0.8rem; margin-left: 3px;">⚠️</span>` : '';
                             const rankBadge = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : (rank === 3 ? '🥉' : `#${rank}`));
                             pillsHtml += `
-                                <button type="button" class="top-strat-pill ${isActive ? 'active' : ''}" data-strat-idx="${index}" style="background: ${isActive ? 'rgba(168, 85, 247, 0.25)' : 'rgba(255, 255, 255, 0.03)'}; border: 1px solid ${isActive ? '#a855f7' : 'var(--border-color)'}; color: ${isActive ? '#ffffff' : 'var(--text-secondary)'}; border-radius: 8px; padding: 8px 10px; cursor: pointer; text-align: left; transition: all 0.2s ease;">
-                                    <div style="font-weight: bold; font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: ${isActive ? '#a855f7' : 'var(--text-primary)'};">${rankBadge} ${strat.name}</div>
-                                    <div style="font-size: 0.65rem; display: flex; justify-content: space-between; align-items: center; margin-top: 4px; gap: 4px; flex-wrap: wrap;">
-                                        <span style="color: var(--accent-green); font-weight: bold;" title="Win Rate Out-Of-Sample (Validación sin sobreajuste)">${wrPct}% OOS</span>
-                                        <span style="color: var(--text-secondary);" title="Total de trades evaluados">${tradeCnt} ops${sampleWarning}</span>
-                                        <span style="color: #38bdf8; font-weight: bold;" title="Probabilidad de al menos 1 racha">Racha: ${streakProb}%</span>
+                                <button type="button" class="top-strat-pill ${isActive ? 'active' : ''}" data-strat-idx="${index}" style="background: ${isActive ? 'rgba(192, 132, 252, 0.22)' : 'rgba(255, 255, 255, 0.04)'}; border: 1.5px solid ${isActive ? 'var(--accent-purple)' : 'var(--border-subtle)'}; color: ${isActive ? '#ffffff' : 'var(--text-secondary)'}; border-radius: 10px; padding: 10px 12px; cursor: pointer; text-align: left; transition: all 0.2s ease;">
+                                    <div style="font-weight: 800; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: ${isActive ? '#ffffff' : 'var(--text-primary)'};">${rankBadge} ${strat.name}</div>
+                                    <div style="font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; margin-top: 6px; gap: 6px; flex-wrap: wrap;">
+                                        <span style="color: var(--accent-green); font-weight: 800;" title="Win Rate Out-Of-Sample (Validación sin sobreajuste)">${wrPct}% OOS</span>
+                                        <span style="color: var(--text-secondary); font-weight: 600;" title="Total de trades evaluados">${tradeCnt} ops${sampleWarning}</span>
+                                        <span style="color: var(--accent-primary); font-weight: 800;" title="Probabilidad de al menos 1 racha">Racha: ${streakProb}%</span>
                                     </div>
                                 </button>
                             `;
@@ -2529,12 +2529,12 @@ async function runSmartOptimization() {
                                 
                                 topList.querySelectorAll('.top-strat-pill').forEach((p, i) => {
                                     if (i === idx) {
-                                        p.style.background = 'rgba(168, 85, 247, 0.25)';
-                                        p.style.borderColor = '#a855f7';
+                                        p.style.background = 'rgba(192, 132, 252, 0.25)';
+                                        p.style.borderColor = 'var(--accent-purple)';
                                         p.style.color = '#ffffff';
                                     } else {
-                                        p.style.background = 'rgba(255, 255, 255, 0.03)';
-                                        p.style.borderColor = 'var(--border-color)';
+                                        p.style.background = 'rgba(255, 255, 255, 0.04)';
+                                        p.style.borderColor = 'var(--border-subtle)';
                                         p.style.color = 'var(--text-secondary)';
                                     }
                                 });
@@ -2566,7 +2566,7 @@ async function runSmartOptimization() {
                             if (typeof raw === 'object' && raw !== null) {
                                 const pct = (raw.win_rate * 100).toFixed(1);
                                 const ops = raw.trades !== undefined ? ` (${raw.wins}/${raw.trades} ops)` : '';
-                                wrDisplay = `${pct}%<span style="font-size:0.65rem; font-weight:normal; color:var(--text-secondary); display:block;">${ops}</span>`;
+                                wrDisplay = `${pct}%<span style="font-size:0.82rem; font-weight:normal; color:var(--text-secondary); display:block;">${ops}</span>`;
                             } else {
                                 wrDisplay = `${(parseFloat(raw) * 100).toFixed(1)}%`;
                             }
@@ -2579,13 +2579,13 @@ async function runSmartOptimization() {
                         const hoverTitle = info ? info.period_str : 'Jul 2021 - Jul 2026 (1,250 velas)';
 
                         html += `
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);" title="${hoverTitle}">
-                                <td style="padding: 6px 4px; font-weight: bold; color: var(--text-primary);">
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);" title="${hoverTitle}">
+                                <td style="padding: 8px 6px; font-weight: 700; color: var(--text-primary);">
                                     ${asset}
-                                    <div style="font-size: 0.65rem; color: var(--text-secondary); font-weight: normal; margin-top: 1px;">📅 ${periodSubtitle}</div>
+                                    <div style="font-size: 0.82rem; color: var(--text-secondary); font-weight: normal; margin-top: 2px;">📅 ${periodSubtitle}</div>
                                 </td>
-                                <td style="padding: 6px 4px; color: var(--accent-green); vertical-align: middle;">No Correlacionado</td>
-                                <td style="padding: 6px 4px; text-align: right; font-weight: bold; color: var(--accent-blue); vertical-align: middle;">${wrDisplay}</td>
+                                <td style="padding: 8px 6px; color: var(--accent-green); vertical-align: middle; font-weight: 600;">No Correlacionado</td>
+                                <td style="padding: 8px 6px; text-align: right; font-weight: 800; color: var(--accent-primary); vertical-align: middle; font-family: var(--font-mono); font-size: 0.95rem;">${wrDisplay}</td>
                             </tr>
                         `;
                     });
@@ -2594,13 +2594,13 @@ async function runSmartOptimization() {
                         const info = (data.asset_info && data.asset_info[asset]) ? data.asset_info[asset] : null;
                         const periodSubtitle = info ? `${info.start} - ${info.end}` : '2021 - 2026';
                         html += `
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); opacity: 0.5;">
-                                <td style="padding: 6px 4px; font-weight: bold; color: var(--text-secondary);">
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); opacity: 0.55;">
+                                <td style="padding: 8px 6px; font-weight: 700; color: var(--text-secondary);">
                                     ${asset}
-                                    <div style="font-size: 0.65rem; color: var(--text-secondary); font-weight: normal; margin-top: 1px;">📅 ${periodSubtitle}</div>
+                                    <div style="font-size: 0.82rem; color: var(--text-secondary); font-weight: normal; margin-top: 2px;">📅 ${periodSubtitle}</div>
                                 </td>
-                                <td style="padding: 6px 4px; color: var(--accent-red); vertical-align: middle;">Descartado (Correlacionado)</td>
-                                <td style="padding: 6px 4px; text-align: right; vertical-align: middle;">--</td>
+                                <td style="padding: 8px 6px; color: var(--accent-red); vertical-align: middle; font-weight: 600;">Descartado (Correlacionado)</td>
+                                <td style="padding: 8px 6px; text-align: right; vertical-align: middle; font-family: var(--font-mono);">--</td>
                             </tr>
                         `;
                     });
